@@ -146,6 +146,17 @@ if (burger && navWrap){
     io.observe(card);
   });
 })();
+// 과정 카드 영상: 뷰포트 진입 시 재생 (모바일 autoplay 보강)
+(function () {
+  var vids = document.querySelectorAll('.process__img');
+  if (!vids.length) return;
+  function go(v) { v.muted = true; v.play().catch(function () {}); }
+  if (!('IntersectionObserver' in window)) { vids.forEach(go); return; }
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (e.isIntersecting) go(e.target); else e.target.pause(); });
+  }, { threshold: 0.2 });
+  Array.prototype.forEach.call(vids, function (v) { io.observe(v); });
+})();
 // 상호 변경 안내 토스트 — 방문자당 1회, 8초 후 자동 닫힘
 (function () {
   try { if (localStorage.getItem('rebrandSeen')) return; } catch (e) {}
