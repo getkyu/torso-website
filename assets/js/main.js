@@ -26,7 +26,7 @@ if (burger && navWrap){
     '<g class="bl bl-a"><line x1="11" y1="12" x2="24" y2="10.1"/></g>' +
     '<g class="bl bl-b"><line x1="11" y1="12" x2="24" y2="13.9"/></g>' +
     '<circle class="pivot" cx="11" cy="12" r="0.9"/>' +
-    '</svg>';
+    '</svg><span class="nav__burger-txt">메뉴</span>';
   burger.addEventListener('click', () => {
     const open = document.body.classList.toggle('menu-open');
     burger.setAttribute('aria-expanded', open ? 'true' : 'false');
