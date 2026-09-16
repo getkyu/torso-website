@@ -906,8 +906,28 @@ document.querySelectorAll('a[href]').forEach(a => {
     ba.addEventListener('pointercancel', end);
   });
 })();
-// before/after — 자동 왕복 스윕은 CSS 애니메이션(baSweep)이 담당.
-// 드래그하면 .is-touched가 붙어 애니메이션이 꺼지고 수동 조작으로 전환된다 (위 drag 핸들러 참조).
+// before/after — 자동 왕복 스윕 (rAF로 --pos 갱신: iOS 포함 전 기기 호환)
+// 드래그하면 .is-touched → 해당 카드만 수동 전환. 데스크탑은 호버 중 일시정지.
+(function () {
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  if (reduce) return;
+  var bas = Array.prototype.slice.call(document.querySelectorAll('.rev--ba .ba'));
+  if (!bas.length) return;
+  var hoverCap = window.matchMedia && window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+  var PERIOD = 4000, AMP = 28; // 4초 왕복 · 22%~78%
+  bas.forEach(function (ba, i) { ba.__phase = (i % 3) * (PERIOD / 3); });
+  function frame(now) {
+    for (var i = 0; i < bas.length; i++) {
+      var ba = bas[i];
+      if (ba.classList.contains('is-touched')) continue;
+      if (hoverCap && ba.matches(':hover')) continue;
+      var p = 50 + AMP * Math.sin(((now + ba.__phase) % PERIOD) / PERIOD * Math.PI * 2);
+      ba.style.setProperty('--pos', p.toFixed(2) + '%');
+    }
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
 
 // ===== GA4 이벤트 트래킹: 예약 버튼 클릭 =====
 // booking_click = 네이버 예약 링크 클릭(실질 전환 지표), reserve_click = 사이트 내 예약 유도 버튼
