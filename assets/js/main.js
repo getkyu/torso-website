@@ -932,9 +932,24 @@ document.querySelectorAll('a[href]').forEach(a => {
     }
     requestAnimationFrame(frame);
   }
-  if (!('IntersectionObserver' in window)) { bas.forEach(sweep); return; }
+  // 두 사진이 실제로 로드된 뒤에만 스윕 — 로딩 전에 몰래 끝나버리는 것 방지
+  function whenReady(ba, cb) {
+    var pending = Array.prototype.filter.call(ba.querySelectorAll('img.ba__img'), function (im) { return !im.complete; });
+    if (!pending.length) { cb(); return; }
+    var left = pending.length;
+    pending.forEach(function (im) {
+      var done = function () { if (--left === 0) cb(); };
+      im.addEventListener('load', done, { once: true });
+      im.addEventListener('error', done, { once: true });
+    });
+  }
+  if (!('IntersectionObserver' in window)) { bas.forEach(function (ba) { whenReady(ba, function () { sweep(ba); }); }); return; }
   var io = new IntersectionObserver(function (es) {
-    es.forEach(function (e) { if (e.isIntersecting) { io.unobserve(e.target); sweep(e.target); } });
+    es.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      io.unobserve(e.target);
+      whenReady(e.target, function () { setTimeout(function () { sweep(e.target); }, 120); });
+    });
   }, { threshold: 0.45 });
   bas.forEach(function (ba) { io.observe(ba); });
 })();
