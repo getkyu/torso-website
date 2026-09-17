@@ -162,15 +162,22 @@ if (burger && navWrap){
   try { if (localStorage.getItem('rebrandSeen')) return; } catch (e) {}
   var t = document.createElement('div');
   t.className = 'rebrand-toast';
-  t.innerHTML = 'TORSO for MEN이 <b>토르소 맨즈헤어</b>로 새롭게 단장했습니다 <button aria-label="닫기">×</button>';
+  t.innerHTML = 'TORSO for MEN이<br><b>토르소 맨즈헤어</b>로 새롭게 단장했습니다 <button aria-label="닫기">×</button>';
   document.body.appendChild(t);
   requestAnimationFrame(function () { t.classList.add('on'); });
+  var closed = false;
   function close() {
+    if (closed) return;
+    closed = true;
     t.classList.remove('on');
     setTimeout(function () { t.remove(); }, 400);
     try { localStorage.setItem('rebrandSeen', '1'); } catch (e) {}
   }
   t.querySelector('button').addEventListener('click', close);
+  // 등장 직후 브라우저 스크롤 복원에 의한 즉시 닫힘 방지 → 잠시 뒤부터 스크롤 감지
+  setTimeout(function () {
+    window.addEventListener('scroll', close, { once: true, passive: true });
+  }, 600);
   setTimeout(close, 8000);
 })();
 // ── 추구미 미디어 공용 데이터 (홈 패널 + 스타일 페이지 공용) ──
@@ -681,14 +688,23 @@ document.querySelectorAll('a[href]').forEach(a => {
     var q = document.querySelector('.hero__q');
     if (!q) return;
     var a = document.querySelector('.hero__a');
+    var hk = document.querySelector('.hero__hook--cta');
     var qSegs = collectSegs(q);
     var aSegs = a ? collectSegs(a) : null;
+    var hkSegs = hk ? collectSegs(hk) : null;
     if (reduce) return;
     q.style.animation = 'none'; q.style.minHeight = q.offsetHeight + 'px'; q.innerHTML = ''; q.style.opacity = '1';
     if (a) { a.style.animation = 'none'; a.style.minHeight = a.offsetHeight + 'px'; a.innerHTML = ''; a.style.opacity = '0'; }
+    if (hk) { hk.style.animation = 'none'; hk.style.minHeight = hk.offsetHeight + 'px'; hk.innerHTML = ''; hk.style.opacity = '0'; }
     setTimeout(function () {
       typeSegs(q, qSegs, function () {
-        if (a) setTimeout(function () { a.style.opacity = '1'; typeSegs(a, aSegs); }, 220);
+        if (a) setTimeout(function () {
+          a.style.opacity = '1';
+          typeSegs(a, aSegs, function () {
+            // 마지막 훅("…조각하니까요.")까지 이어서 타이핑
+            if (hk) setTimeout(function () { hk.style.opacity = '1'; typeSegs(hk, hkSegs, null, 0.8); }, 200);
+          });
+        }, 220);
       });
     }, 150);
   })();
@@ -748,31 +764,6 @@ document.querySelectorAll('a[href]').forEach(a => {
     }, { threshold: 0.2 });
     els.forEach(function (el) { io.observe(el); });
   } else { els.forEach(type); }
-})();
-// before / after — scroll-driven wipe (Before → After as you scroll)
-(function () {
-  var bas = Array.prototype.slice.call(document.querySelectorAll('[data-ba]'));
-  if (!bas.length) return;
-  var raf = false;
-  function apply() {
-    raf = false;
-    var vh = window.innerHeight || document.documentElement.clientHeight;
-    bas.forEach(function (ba) {
-      var r = ba.getBoundingClientRect();
-      // hold on Before until the photo is well into view, then wipe to After by the time
-      // it reaches the viewport center (After stays fully revealed while still on screen)
-      var startTop = vh * 0.58;            // p=0 — transition begins here (later start)
-      var endTop = vh / 2 - r.height / 2;  // p=1 — fully After when centered
-      var p = (startTop - r.top) / (startTop - endTop);
-      p = Math.max(0, Math.min(1, p));
-      // start showing Before (100%), end on After (0%)
-      ba.style.setProperty('--pos', ((1 - p) * 100).toFixed(1) + '%');
-    });
-  }
-  function onScroll() { if (!raf) { raf = true; requestAnimationFrame(apply); } }
-  apply();
-  window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', onScroll);
 })();
 // archive category filter
 (function () {
