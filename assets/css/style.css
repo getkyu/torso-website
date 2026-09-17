@@ -460,10 +460,8 @@ body.menu-open .nav__burger-txt{color:var(--ink)!important}
   .dz-mini span{font-size:13px;margin:0 15px}
   .dz-mini em{font-size:14px;margin:8px 15px 0}
   .dz-mini__go{margin:9px 15px 15px!important}
-  /* 담당 디자이너 카드: 왼쪽 → 오른쪽으로 흘러 들어오는 리빌 */
-  .dz-mini.reveal{transform:translateX(-46px)}
-  .dz-mini.reveal.in{transform:none}
 }
+/* 담당 디자이너 카드: 아래 → 위로 순차 등장 (기본 리빌 + 스태거) */
 .dz-mini b{font-size:15px;margin:11px 13px 1px}
 .dz-mini span{font-size:12px;color:var(--mut);margin:0 13px}
 .dz-mini em{font-style:normal;font-size:13px;font-weight:700;margin:7px 13px 0}
