@@ -430,7 +430,7 @@ document.querySelectorAll('a[href]').forEach(a => {
     el.classList.add('reveal');
     // light stagger inside card grids
     var p = el.parentElement;
-    if (p && (p.classList.contains('feature-grid') || p.classList.contains('desg-grid') || p.classList.contains('gal') || p.classList.contains('corephoto-grid') || p.classList.contains('stat-grid'))) {
+    if (p && (p.classList.contains('feature-grid') || p.classList.contains('desg-grid') || p.classList.contains('gal') || p.classList.contains('corephoto-grid') || p.classList.contains('stat-grid') || p.classList.contains('dz-grid'))) {
       var idx = Array.prototype.indexOf.call(p.children, el);
       el.style.transitionDelay = Math.min(idx * 0.14, 0.7) + 's';
     }
@@ -987,4 +987,39 @@ document.querySelectorAll('a[href]').forEach(a => {
       gtag('event', 'reserve_click', { button_location: btnLocation(a), page_name: page });
     }
   }, true);
+})();
+
+// FAQ: 열림/닫힘을 높이 트랜지션으로 부드럽게
+(function () {
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('details.faq').forEach(function (d) {
+    var sum = d.querySelector('summary');
+    if (!sum) return;
+    var body = document.createElement('div');
+    body.className = 'faq__body';
+    while (sum.nextSibling) body.appendChild(sum.nextSibling);
+    d.appendChild(body);
+    if (reduce) return;
+    var busy = false;
+    sum.addEventListener('click', function (e) {
+      e.preventDefault();
+      if (busy) return;
+      busy = true;
+      if (d.open) {
+        body.style.height = body.scrollHeight + 'px';
+        requestAnimationFrame(function () {
+          body.style.height = '0px';
+          setTimeout(function () { d.open = false; body.style.height = ''; busy = false; }, 390);
+        });
+      } else {
+        d.open = true;
+        var h = body.scrollHeight;
+        body.style.height = '0px';
+        requestAnimationFrame(function () {
+          body.style.height = h + 'px';
+          setTimeout(function () { body.style.height = ''; busy = false; }, 400);
+        });
+      }
+    });
+  });
 })();
