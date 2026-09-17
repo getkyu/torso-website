@@ -935,7 +935,7 @@ body.menu-open .nav__burger-txt{color:var(--ink)!important}
 /* home — 추구미 cores (image-forward overlay) */
 .corephoto-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:3px;
   width:min(1400px,calc(100vw - 36px));margin-left:50%;transform:translateX(-50%)}
-.corephoto{position:relative;display:block;overflow:hidden;aspect-ratio:2/3;background:var(--char-2);cursor:default}
+.corephoto{position:relative;display:block;overflow:hidden;aspect-ratio:9/16;background:var(--char-2);cursor:default}
 .corephoto__img{position:absolute;inset:0;z-index:0}
 .corephoto__img img,.corephoto__img video{width:100%;height:100%;object-fit:cover;object-position:center top;
   display:block;filter:grayscale(1) contrast(1.05) brightness(.92);
