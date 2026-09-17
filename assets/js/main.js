@@ -908,11 +908,35 @@ document.querySelectorAll('a[href]').forEach(a => {
     ba.addEventListener('pointercancel', end);
   });
 })();
-// before/after — 자동 모션 없음: 좌 Before / 우 After 반반 고정, 드래그로만 비교
+// before/after — 스크롤로 카드가 보이면 1회만 Before→After 스윕 (반복 없음, 드래그 시 즉시 중단)
 (function () {
-  document.querySelectorAll('.rev--ba .ba').forEach(function (ba) {
-    ba.style.setProperty('--pos', '50%');
-  });
+  var bas = Array.prototype.slice.call(document.querySelectorAll('.rev--ba .ba'));
+  if (!bas.length) return;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  bas.forEach(function (ba) { ba.style.setProperty('--pos', reduce ? '50%' : '100%'); });
+  if (reduce) return;
+  function sweep(ba) {
+    if (ba.classList.contains('is-touched') || ba.dataset.swept) return;
+    ba.dataset.swept = '1';
+    var t0 = null, HOLD = 400, D = 1700;
+    function frame(ts) {
+      if (ba.classList.contains('is-touched')) return;      // 사용자가 잡으면 자동 스윕 중단
+      if (t0 === null) t0 = ts;
+      var t = ts - t0;
+      if (t < HOLD) { requestAnimationFrame(frame); return; } // Before를 잠깐 보여주고
+      var p = Math.min(1, (t - HOLD) / D);
+      var e = 1 - Math.pow(1 - p, 3);                        // easeOutCubic
+      ba.style.setProperty('--pos', (100 - e * 100).toFixed(1) + '%');
+      if (p < 1) { requestAnimationFrame(frame); }
+      else { var r = ba.querySelector('.ba__range'); if (r) r.value = 0; }
+    }
+    requestAnimationFrame(frame);
+  }
+  if (!('IntersectionObserver' in window)) { bas.forEach(sweep); return; }
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (e.isIntersecting) { io.unobserve(e.target); sweep(e.target); } });
+  }, { threshold: 0.45 });
+  bas.forEach(function (ba) { io.observe(ba); });
 })();
 
 // ===== GA4 이벤트 트래킹: 예약 버튼 클릭 =====
