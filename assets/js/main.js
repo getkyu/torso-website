@@ -415,24 +415,40 @@ document.querySelectorAll('a[href]').forEach(a => {
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var sel = '.shead, .feature, .price-card, .price-tabs, .split > div, .split .slideshow,' +
             ' .split img, .band > *, .info-row, .gal img, .map-links, .loc-map, #reserve,' +
-            ' .corephoto, .stat, .tocademy, .styleblock, .process, .dz-mini, .faq, .rev--home';
+            ' .corephoto, .stat, .tocademy, .styleblock, .process, .dz-mini, .faq, .rev--home, .fv-card';
   var els = Array.prototype.slice.call(document.querySelectorAll(sel));
   if (!els.length) return;
   if (reduce || !('IntersectionObserver' in window)) { els.forEach(function (e) { e.classList.add('in'); }); return; }
   var io = new IntersectionObserver(function (entries) {
     entries.forEach(function (e) {
-      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      if (!e.isIntersecting) return;
+      var el = e.target;
+      el.classList.add('in');
+      io.unobserve(el);
+      // 리빌 끝나면 스태거 딜레이 제거 (호버 등 이후 트랜지션이 지연되지 않게)
+      if (el.style.transitionDelay) {
+        el.addEventListener('transitionend', function te() {
+          el.style.transitionDelay = '';
+          el.removeEventListener('transitionend', te);
+        });
+      }
     });
   }, { threshold: 0.05, rootMargin: '0px 0px 8% 0px' });
+  var GRIDS = ['feature-grid', 'desg-grid', 'gal', 'corephoto-grid', 'stat-grid', 'dz-grid', 'ba-trio', 'fv-grid'];
   els.forEach(function (el) {
     var r = el.getBoundingClientRect();
     if (r.top < window.innerHeight * 0.92) { el.classList.add('in'); return; } // already in view
     el.classList.add('reveal');
-    // light stagger inside card grids
+    // 카드 그리드는 순서대로, FAQ·인포 행은 잔잔하게 계단식으로
     var p = el.parentElement;
-    if (p && (p.classList.contains('feature-grid') || p.classList.contains('desg-grid') || p.classList.contains('gal') || p.classList.contains('corephoto-grid') || p.classList.contains('stat-grid') || p.classList.contains('dz-grid'))) {
+    if (p && GRIDS.some(function (c) { return p.classList.contains(c); })) {
       var idx = Array.prototype.indexOf.call(p.children, el);
-      el.style.transitionDelay = Math.min(idx * 0.14, 0.7) + 's';
+      el.style.transitionDelay = Math.min(idx * 0.11, 0.55) + 's';
+    } else if (el.classList.contains('faq') || el.classList.contains('info-row')) {
+      var kind = el.classList.contains('faq') ? 'faq' : 'info-row';
+      var sibs = p ? Array.prototype.filter.call(p.children, function (c) { return c.classList && c.classList.contains(kind); }) : [];
+      var i2 = sibs.indexOf(el);
+      if (i2 > 0) el.style.transitionDelay = Math.min(i2 * 0.08, 0.4) + 's';
     }
     io.observe(el);
   });
@@ -918,14 +934,14 @@ document.querySelectorAll('a[href]').forEach(a => {
   function sweep(ba) {
     if (ba.classList.contains('is-touched') || ba.dataset.swept) return;
     ba.dataset.swept = '1';
-    var t0 = null, HOLD = 400, D = 1700;
+    var t0 = null, HOLD = 500, D = 1900;
     function frame(ts) {
       if (ba.classList.contains('is-touched')) return;      // 사용자가 잡으면 자동 스윕 중단
       if (t0 === null) t0 = ts;
       var t = ts - t0;
       if (t < HOLD) { requestAnimationFrame(frame); return; } // Before를 잠깐 보여주고
       var p = Math.min(1, (t - HOLD) / D);
-      var e = 1 - Math.pow(1 - p, 3);                        // easeOutCubic
+      var e = p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2; // easeInOutCubic — 와이프가 더 부드럽게
       ba.style.setProperty('--pos', (100 - e * 100).toFixed(1) + '%');
       if (p < 1) { requestAnimationFrame(frame); }
       else { var r = ba.querySelector('.ba__range'); if (r) r.value = 0; }
