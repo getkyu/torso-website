@@ -950,7 +950,7 @@ document.querySelectorAll('a[href]').forEach(a => {
       io.unobserve(e.target);
       whenReady(e.target, function () { setTimeout(function () { sweep(e.target); }, 120); });
     });
-  }, { threshold: 0.45 });
+  }, { threshold: 0.7 });
   bas.forEach(function (ba) { io.observe(ba); });
 })();
 
