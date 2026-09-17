@@ -428,16 +428,21 @@ body.menu-open .nav__burger-txt{color:var(--ink)!important}
 .ba-trio__cap{margin:10px 2px 0;font-size:13.5px;line-height:1.55;color:var(--ink-soft)}
 @media(max-width:760px){.ba-trio{grid-template-columns:1fr;gap:26px;max-width:440px;margin:0 auto}}
 /* 과정 3단계 */
-.process-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.process-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
 .process{background:#fff;border:1px solid var(--line);border-radius:16px;padding:24px 22px}
+.process:hover{box-shadow:0 20px 44px -20px rgba(20,18,15,.28)}
 .process__img{width:calc(100% + 44px);margin:-24px -22px 16px;aspect-ratio:4/5;object-fit:cover;
-  border-radius:16px 16px 0 0;display:block;filter:grayscale(1) contrast(1.02)}
+  border-radius:16px 16px 0 0;display:block;filter:grayscale(1) contrast(1.02);
+  transition:filter .45s var(--ease)}
+/* 호버하면 컬러로 */
+.process:hover .process__img{filter:grayscale(0) contrast(1.02)}
 .process__step{position:relative;height:30px;margin-bottom:12px}
 .process__n{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:9px;
   background:#fff;border:1.5px solid var(--ink);color:var(--ink);font-weight:800;font-size:14px;
   position:relative;z-index:1}
 /* 과정 카드: 스크롤 리빌을 더 느긋하게 + 1→2→3 순차 등장 */
-.process.reveal{transition:opacity 1.7s var(--ease),transform 1.8s var(--ease),filter 1.6s var(--ease)}
+.process.reveal{transition:opacity 1.7s var(--ease),transform 1.8s var(--ease),filter 1.6s var(--ease),box-shadow .3s var(--ease)}
+.process{transition:box-shadow .3s var(--ease)}
 .process-grid .process:nth-child(2){transition-delay:.22s}
 .process-grid .process:nth-child(3){transition-delay:.44s}
 .process h3{font-size:16.5px;margin:0 0 8px;display:flex;align-items:center;gap:8px}
