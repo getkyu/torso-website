@@ -626,7 +626,7 @@ document.querySelectorAll('a[href]').forEach(a => {
     if (!reduce && 'IntersectionObserver' in window) {
       var io = new IntersectionObserver(function (es) {
         es.forEach(function (e) { if (e.isIntersecting) { renderCard(e.target, true); io.unobserve(e.target); } });
-      }, { threshold: 0.2 });
+      }, { threshold: 0.05 });
       io.observe(active);
     }
   }

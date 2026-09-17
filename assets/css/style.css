@@ -87,7 +87,7 @@ h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.14;text-wrap:balanc
 .nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:100;display:flex;align-items:center;
   background:transparent;border-bottom:1px solid transparent;
   transition:background .4s var(--ease),border-color .4s var(--ease)}
-.nav.solid{background:rgba(247,246,243,.9);
+.nav.solid{background:rgba(247,246,243,.96);
   -webkit-backdrop-filter:blur(16px) saturate(140%);backdrop-filter:blur(16px) saturate(140%);
   border-bottom:1px solid var(--line)}
 @media(prefers-reduced-motion:reduce){.nav{animation:none}}
@@ -436,22 +436,13 @@ body.menu-open .nav__burger-txt{color:var(--ink)!important}
 .process__n{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:9px;
   background:#fff;border:1.5px solid var(--ink);color:var(--ink);font-weight:800;font-size:14px;
   position:relative;z-index:1}
-/* 1→2→3 연결선: 번호 중앙에서 다음 카드 번호까지 (데스크탑 가로) */
-.process:not(:last-child) .process__step::after{content:"";position:absolute;top:50%;transform:translateY(-50%);
-  left:15px;right:-59px;height:1.5px;background:var(--line-d)}
-.process:not(:first-child) .process__step::before{content:"";position:absolute;top:50%;transform:translateY(-50%);
-  left:-23px;right:calc(100% - 15px);height:1.5px;background:var(--line-d)}
+/* 과정 카드: 스크롤 리빌을 더 느긋하게 + 1→2→3 순차 등장 */
+.process.reveal{transition:opacity 1.7s var(--ease),transform 1.8s var(--ease),filter 1.6s var(--ease)}
+.process-grid .process:nth-child(2){transition-delay:.22s}
+.process-grid .process:nth-child(3){transition-delay:.44s}
 .process h3{font-size:16.5px;margin:0 0 8px}
 .process p{margin:0;font-size:14.5px;line-height:1.65;color:var(--ink-soft)}
-@media(max-width:760px){
-  .process-grid{grid-template-columns:1fr}
-  .process{position:relative}
-  /* 모바일(세로 적층): 가로선 대신 카드 사이 세로 연결선 */
-  .process:not(:last-child) .process__step::after{display:none}
-  .process:not(:first-child) .process__step::before{display:none}
-  .process:not(:last-child)::after{content:"";position:absolute;left:36px;bottom:-15px;width:1.5px;height:16px;
-    background:var(--line-d)}
-}
+@media(max-width:760px){.process-grid{grid-template-columns:1fr}}
 /* 디자이너 미니 */
 .dz-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
 .dz-mini{display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:14px;
@@ -506,7 +497,7 @@ body.menu-open .nav__burger-txt{color:var(--ink)!important}
   border-bottom:1px solid rgba(205,201,191,.5);transition:background .2s var(--ease)}
 .price-row:hover{background:rgba(140,156,131,.05)}
 .price-row:last-child{border-bottom:0}
-.price-row .name{font-weight:600}
+.price-row .name{font-weight:600;word-break:keep-all}
 .price-row .reg{color:var(--mut);text-align:right;min-width:96px}
 .price-row .pay{font-weight:800;text-align:right;min-width:120px}
 .price-row .pay s{color:var(--mut-l);font-weight:500;margin-right:8px;font-size:13px}
@@ -581,11 +572,13 @@ body.menu-open .nav__burger-txt{color:var(--ink)!important}
   transition:opacity .4s ease .16s,transform .4s var(--ease) .16s}
 .price-row .pay.is-disc .pay__new{opacity:1;transform:none}
 .price-row .pay__new--npay{color:#03c75a}
+.price-row .pay__new--flat{color:var(--ink)}
 .price-row .pay__new--first{color:var(--accent-d)}
 .price-row .pay__new--first30{color:var(--accent-d)}
 .price-row .pay--tba{font-weight:600;font-size:14px;color:var(--mut)}
 .price-row .pay__lbl{display:inline-block;vertical-align:middle;margin-left:7px;
   font-size:9.5px;font-weight:800;letter-spacing:.01em;line-height:1;white-space:nowrap;
+  min-width:88px;text-align:center;box-sizing:border-box;
   padding:3px 6px;border-radius:999px;
   opacity:0;transform:translateY(2px);transition:opacity .4s ease .22s,transform .4s var(--ease) .22s}
 .price-row .pay.is-disc .pay__lbl{opacity:1;transform:none}
@@ -750,7 +743,7 @@ body.menu-open .nav__burger-txt{color:var(--ink)!important}
   body.menu-open .nav__menu a::after{display:none!important}
   /* Reserve renders as a filled pill at the foot of the overlay */
   body.menu-open .nav__cta-li{margin-left:0;margin-top:20px;border-bottom:0!important}
-  body.menu-open .nav__cta{display:block;border:1.5px solid var(--ink)!important;border-radius:100px;
+  body.menu-open .nav__menu .nav__cta{display:block;border:1.5px solid var(--ink)!important;border-radius:100px;
     padding:15px 30px;font-size:14px;letter-spacing:.2em;text-align:center;
     color:var(--paper)!important;background:var(--ink)!important;
     box-shadow:0 10px 24px rgba(0,0,0,.18)}
