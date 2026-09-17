@@ -914,12 +914,13 @@ document.querySelectorAll('a[href]').forEach(a => {
         decided = true;
         try { ba.setPointerCapture(e.pointerId); } catch (err) {}
         ba.classList.add('is-touched');
+        ba.classList.add('is-dragging');       // 잡는 동안 그립 확대
         apply(posFromX(startX));               // snap to where the drag began
       }
       e.preventDefault();
       apply(posFromX(e.clientX));
     }, { passive: false });
-    function end() { active = false; decided = false; }
+    function end() { active = false; decided = false; ba.classList.remove('is-dragging'); }
     ba.addEventListener('pointerup', end);
     ba.addEventListener('pointercancel', end);
   });

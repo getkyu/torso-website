@@ -20,6 +20,10 @@
   --ease:cubic-bezier(.16,.84,.44,1);
   --ease-soft:cubic-bezier(.22,.61,.36,1);
 }
+/* 한국어 오펀 방지: 단어 단위 줄바꿈 (긴 영문/URL은 안전하게 꺾임) */
+body{word-break:keep-all;overflow-wrap:break-word}
+:root{
+}
 
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -214,14 +218,19 @@ body.menu-open .nav__burger-txt{color:var(--ink)!important}
 .ba__label--b{left:14px;--g:var(--b-glow,0);--o:left}
 .ba__label--a{right:14px;--g:var(--a-glow,0);--o:right}
 .ba__handle{position:absolute;top:0;bottom:0;left:var(--pos);width:2px;z-index:4;
-  background:linear-gradient(rgba(255,255,255,.96),rgba(255,255,255,.8));transform:translateX(-1px);pointer-events:none;
-  box-shadow:0 0 12px rgba(255,255,255,.45),0 0 14px rgba(0,0,0,.3)}
-.ba__grip{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-  width:48px;height:48px;border-radius:50%;
-  background:linear-gradient(150deg,rgba(255,255,255,.62),rgba(255,255,255,.16));
-  -webkit-backdrop-filter:blur(9px) saturate(150%);backdrop-filter:blur(9px) saturate(150%);
+  background:linear-gradient(to bottom,rgba(255,255,255,.98) 0%,rgba(255,255,255,.85) 42%,rgba(255,255,255,.28) 78%,rgba(255,255,255,0) 100%);
+  transform:translateX(-1px);pointer-events:none;
+  box-shadow:0 0 12px rgba(255,255,255,.35)}
+.ba__grip{position:absolute;top:42%;left:50%;transform:translate(-50%,-50%);
+  width:50px;height:44px;border-radius:15px;
+  background:linear-gradient(150deg,rgba(255,255,255,.55),rgba(255,255,255,.14));
+  -webkit-backdrop-filter:blur(10px) saturate(150%);backdrop-filter:blur(10px) saturate(150%);
   border:1px solid rgba(255,255,255,.75);
-  box-shadow:0 10px 26px -8px rgba(20,18,15,.55),inset 0 1px 1px rgba(255,255,255,.9),inset 0 -3px 8px rgba(20,18,15,.14)}
+  box-shadow:0 10px 26px -8px rgba(20,18,15,.5),inset 0 1px 1px rgba(255,255,255,.9),inset 0 -3px 8px rgba(20,18,15,.12);
+  transition:transform .3s var(--ease-soft),box-shadow .3s var(--ease-soft)}
+/* 잡고 있는 동안 살짝 커짐 */
+.ba.is-dragging .ba__grip{transform:translate(-50%,-50%) scale(1.16);
+  box-shadow:0 14px 32px -8px rgba(20,18,15,.55),inset 0 1px 1px rgba(255,255,255,.95),inset 0 -3px 8px rgba(20,18,15,.12)}
 .ba__grip::before,.ba__grip::after{content:"";position:absolute;top:50%;width:6px;height:6px;
   border-top:2px solid var(--ink);border-right:2px solid var(--ink)}
 .ba__grip::before{left:15px;transform:translateY(-50%) rotate(-135deg)}
@@ -713,7 +722,8 @@ body.menu-open .nav__burger-txt{color:var(--ink)!important}
 .info-row .v{font-size:15px}
 .socials{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap}
 /* 예약 버튼 줄: 크기 통일 (세션 예약 안내 등) */
-.socials--uni{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:12px;max-width:760px}
+.socials--uni{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(215px,100%),1fr));gap:12px;max-width:760px}
+.loc-grid>div{min-width:0}
 .socials--uni .btn{width:100%;justify-content:center;min-height:52px;padding:14px 16px;
   white-space:nowrap;box-sizing:border-box}
 
