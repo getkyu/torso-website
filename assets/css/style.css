@@ -142,7 +142,7 @@ h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.14;text-wrap:balanc
 .home-film .nav.solid .nav__word{filter:brightness(0)}
 .nav__burger{display:none;background:none;border:0;cursor:pointer;padding:0;width:34px;height:40px;line-height:0;flex-direction:column;align-items:center;justify-content:center;gap:2px}
 .nav__burger-txt{font-size:9px;font-weight:700;letter-spacing:.14em;color:var(--ink);line-height:1}
-body.menu-open .nav__burger-txt{color:#fff}
+body.menu-open .nav__burger-txt{color:var(--ink)!important}
 .nav__burger svg{width:30px;height:30px;display:block}
 .nav__burger svg *{stroke:var(--ink);stroke-width:1.5;fill:none;stroke-linecap:round;stroke-linejoin:round}
 .nav__burger .pivot{fill:var(--ink);stroke:none}
@@ -737,18 +737,23 @@ body.menu-open .nav__burger-txt{color:#fff}
   body.home-film:not(.menu-open) .nav:not(.solid) .nav__burger .pivot{fill:#fff!important}
   /* full-screen overlay menu (concrete paper): the .nav__nav wrapper expands */
   body.menu-open .nav__nav{display:flex;position:fixed;inset:0;z-index:90;flex-direction:column;
-    justify-content:center;align-items:center;gap:2px;background:var(--paper);padding:0;border:0;
+    justify-content:center;align-items:center;gap:0;padding:0;border:0;
+    background:rgba(240,239,236,.82);-webkit-backdrop-filter:blur(18px) saturate(1.1);backdrop-filter:blur(18px) saturate(1.1);
     transform-origin:top;animation:menuDrop .42s var(--ease) both}
-  body.menu-open .nav__menu{flex-direction:column;align-items:center;gap:2px}
-  body.menu-open .nav__menu a{padding:15px 24px;opacity:1;color:var(--ink)!important;font-size:19px;
-    letter-spacing:.18em;text-transform:uppercase;font-weight:600;border:0}
+  body.menu-open .nav__menu{flex-direction:column;align-items:stretch;gap:0;width:min(320px,80vw)}
+  body.menu-open .nav__menu li{border-bottom:1px solid rgba(51,49,44,.16)}
+  body.menu-open .nav__menu--r li:last-child{border-bottom:0}
+  body.menu-open .nav__menu a{padding:13px 10px;opacity:1;color:var(--ink)!important;font-size:18px;
+    letter-spacing:.18em;text-transform:uppercase;font-weight:600;border:0;text-align:center}
   body.menu-open .nav__menu a.active{color:var(--accent-d)!important}
   /* kill the accent underline inside the overlay (stray :hover/active bars) */
   body.menu-open .nav__menu a::after{display:none!important}
-  /* Reserve renders as a pill at the foot of the overlay */
-  body.menu-open .nav__cta-li{margin-left:0;margin-top:14px}
-  body.menu-open .nav__cta{border:1.5px solid var(--ink)!important;border-radius:100px;
-    padding:13px 30px;font-size:14px;color:var(--ink)!important;background:transparent!important}
+  /* Reserve renders as a filled pill at the foot of the overlay */
+  body.menu-open .nav__cta-li{margin-left:0;margin-top:20px;border-bottom:0!important}
+  body.menu-open .nav__cta{display:block;border:1.5px solid var(--ink)!important;border-radius:100px;
+    padding:15px 30px;font-size:14px;letter-spacing:.2em;text-align:center;
+    color:var(--paper)!important;background:var(--ink)!important;
+    box-shadow:0 10px 24px rgba(0,0,0,.18)}
   /* list items drop in with a stagger across both columns */
   body.menu-open .nav__menu li{opacity:0;animation:menuItem .5s var(--ease) forwards}
   body.menu-open .nav__menu--l li:nth-of-type(1){animation-delay:.10s}
