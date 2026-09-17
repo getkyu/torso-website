@@ -917,50 +917,11 @@ document.querySelectorAll('a[href]').forEach(a => {
     ba.addEventListener('pointercancel', end);
   });
 })();
-// before/after — 자동 스윕
-// 데스크탑: 사인파 왕복 (호버 시 일시정지) · 터치 기기: 스크롤과 연동해 함께 움직임
+// before/after — 자동 모션 없음: 좌 Before / 우 After 반반 고정, 드래그로만 비교
 (function () {
-  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches;
-  if (reduce) return;
-  var bas = Array.prototype.slice.call(document.querySelectorAll('.rev--ba .ba'));
-  if (!bas.length) return;
-  var hoverCap = window.matchMedia && window.matchMedia('(hover:hover) and (pointer:fine)').matches;
-  function setPos(ba, v) { ba.style.setProperty('--pos', v.toFixed(2) + '%'); }
-  if (hoverCap) {
-    var PERIOD = 4000, AMP = 28;
-    bas.forEach(function (ba, i) { ba.__phase = (i % 3) * (PERIOD / 3); });
-    (function frame(now) {
-      for (var i = 0; i < bas.length; i++) {
-        var ba = bas[i];
-        if (ba.classList.contains('is-touched')) continue;
-        if (ba.matches(':hover')) continue;
-        setPos(ba, 50 + AMP * Math.sin(((now + ba.__phase) % PERIOD) / PERIOD * Math.PI * 2));
-      }
-      requestAnimationFrame(frame);
-    })(0);
-  } else {
-    // 스크롤 연동: 카드가 화면 아래에서 위로 지나는 동안 Before(22%) → After(78%)
-    var raf = false;
-    function apply() {
-      raf = false;
-      var vh = window.innerHeight || document.documentElement.clientHeight;
-      for (var i = 0; i < bas.length; i++) {
-        var ba = bas[i];
-        if (ba.classList.contains('is-touched')) continue;
-        var r = ba.getBoundingClientRect();
-        if (r.bottom < 0 || r.top > vh) continue;
-        var centre = r.top + r.height / 2;
-        var p = (vh * 0.88 - centre) / (vh * 0.72);
-        p = Math.max(0, Math.min(1, p));
-        setPos(ba, 22 + 56 * p);
-      }
-      requestAnimationFrame ? null : 0;
-    }
-    function onScroll() { if (!raf) { raf = true; requestAnimationFrame(apply); } }
-    apply();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
-  }
+  document.querySelectorAll('.rev--ba .ba').forEach(function (ba) {
+    ba.style.setProperty('--pos', '50%');
+  });
 })();
 
 // ===== GA4 이벤트 트래킹: 예약 버튼 클릭 =====

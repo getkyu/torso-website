@@ -421,7 +421,7 @@ body.menu-open .nav__burger-txt{color:#fff}
 /* 과정 3단계 */
 .process-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
 .process{background:#fff;border:1px solid var(--line);border-radius:16px;padding:24px 22px}
-.process__img{width:calc(100% + 44px);margin:-24px -22px 16px;aspect-ratio:8/5;object-fit:cover;
+.process__img{width:calc(100% + 44px);margin:-24px -22px 16px;aspect-ratio:4/3;object-fit:cover;
   border-radius:16px 16px 0 0;display:block;filter:grayscale(1) contrast(1.02)}
 .process__n{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:9px;
   background:var(--accent);color:#fff;font-weight:800;font-size:14px;margin-bottom:12px}
@@ -452,8 +452,10 @@ body.menu-open .nav__burger-txt{color:#fff}
 .faq p{margin:0;padding:0 2px 18px;font-size:14.5px;line-height:1.7;color:var(--ink-soft)}
 .price-row .name .name__sub{display:block;font-size:12px;color:var(--mut);font-weight:500;margin-top:2px}
 .stat-note{margin-top:14px;font-size:12.5px;color:var(--mut);letter-spacing:.02em}
-.home-price__btns{display:flex;gap:10px;padding:6px 22px 22px}
-.home-price__btns .btn{flex:1;text-align:center;padding:12px 10px;font-size:12.5px;letter-spacing:.06em;border-radius:12px}
+.home-price__btns{display:flex;gap:10px;padding:10px 22px 22px}
+.home-price__btns .btn{flex:1;display:flex;align-items:center;justify-content:center;min-height:46px;
+  padding:0 10px;font-size:12.5px;letter-spacing:.06em;border-radius:12px;line-height:1.3}
+.price-card .price-hint{text-align:left;padding-top:14px}
 /* 상호 변경 안내 토스트 */
 .rebrand-toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom));transform:translate(-50%,16px);
   z-index:400;width:min(460px,calc(100vw - 28px));background:#1c1b19;color:#fff;font-size:13.5px;line-height:1.5;
@@ -931,7 +933,7 @@ body.menu-open .nav__burger-txt{color:#fff}
 
 /* 추구미 인라인 확장 패널 (코어 카드 클릭 → 스타일별 영상 전체 나열) */
 .corephoto--click{cursor:pointer}
-.corephoto--click .corephoto__img video{object-position:center 2%}
+.corephoto--click .corephoto__img video{object-position:center 35%}
 .corephoto--click.sel{outline:3px solid var(--accent);outline-offset:-3px}
 .corephoto__hint{display:block;margin-top:10px;font-size:11.5px;letter-spacing:.04em;color:rgba(255,255,255,.66)}
 .corephoto--click:hover .corephoto__hint{color:#fff}
