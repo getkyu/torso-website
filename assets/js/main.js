@@ -878,97 +878,35 @@ document.querySelectorAll('a[href]').forEach(a => {
   function onScroll() { if (!raf) { raf = true; requestAnimationFrame(upd); } }
   upd(); window.addEventListener('scroll', onScroll, { passive: true }); window.addEventListener('resize', onScroll);
 })();
-// before/after comparison slider — drag anywhere on the image (touch + mouse + pen) plus keyboard via the range
+
+// before/after — 자동 크로스페이드: 화면에 보일 때만 2.5초 간격으로 전↔후 교차
 (function () {
-  document.querySelectorAll('.ba').forEach(function (ba) {
-    var range = ba.querySelector('.ba__range');
-    function apply(v) {
-      v = Math.max(0, Math.min(100, v));
-      ba.style.setProperty('--pos', v + '%');
-      // pill glow: handle to the right reveals more "before", lighting the BEFORE pill; left lights AFTER
-      ba.style.setProperty('--b-glow', Math.max(0, (v - 50) / 50).toFixed(3));
-      ba.style.setProperty('--a-glow', Math.max(0, (50 - v) / 50).toFixed(3));
-      if (range && +range.value !== v) range.value = v;
-    }
-    function posFromX(clientX) {
-      var r = ba.getBoundingClientRect();
-      return ((clientX - r.left) / r.width) * 100;
-    }
-    if (range) {
-      range.addEventListener('input', function () { apply(+range.value); ba.classList.add('is-touched'); });
-      apply(+range.value);
-    } else {
-      apply(50);
-    }
-    // pointer drag from anywhere on the image; decide horizontal vs vertical so the page can still scroll
-    var active = false, decided = false, startX = 0, startY = 0;
-    ba.addEventListener('pointerdown', function (e) {
-      active = true; decided = false; startX = e.clientX; startY = e.clientY;
-    });
-    ba.addEventListener('pointermove', function (e) {
-      if (!active) return;
-      if (!decided) {
-        var dx = Math.abs(e.clientX - startX), dy = Math.abs(e.clientY - startY);
-        if (dx < 5 && dy < 5) return;          // too small to judge yet
-        if (dy > dx) { active = false; return; } // vertical intent -> let the page scroll
-        decided = true;
-        try { ba.setPointerCapture(e.pointerId); } catch (err) {}
-        ba.classList.add('is-touched');
-        ba.classList.add('is-dragging');       // 잡는 동안 그립 확대
-        apply(posFromX(startX));               // snap to where the drag began
-      }
-      e.preventDefault();
-      apply(posFromX(e.clientX));
-    }, { passive: false });
-    function end() { active = false; decided = false; ba.classList.remove('is-dragging'); }
-    ba.addEventListener('pointerup', end);
-    ba.addEventListener('pointercancel', end);
-  });
-})();
-// before/after — 스크롤로 카드가 보이면 1회만 Before→After 스윕 (반복 없음, 드래그 시 즉시 중단)
-(function () {
-  var bas = Array.prototype.slice.call(document.querySelectorAll('.rev--ba .ba'));
-  if (!bas.length) return;
+  var boxes = document.querySelectorAll('.ba--fade');
+  if (!boxes.length) return;
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  bas.forEach(function (ba) { ba.style.setProperty('--pos', reduce ? '50%' : '100%'); });
-  if (reduce) return;
-  function sweep(ba) {
-    if (ba.classList.contains('is-touched') || ba.dataset.swept) return;
-    ba.dataset.swept = '1';
-    var t0 = null, HOLD = 500, D = 1900;
-    function frame(ts) {
-      if (ba.classList.contains('is-touched')) return;      // 사용자가 잡으면 자동 스윕 중단
-      if (t0 === null) t0 = ts;
-      var t = ts - t0;
-      if (t < HOLD) { requestAnimationFrame(frame); return; } // Before를 잠깐 보여주고
-      var p = Math.min(1, (t - HOLD) / D);
-      var e = p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2; // easeInOutCubic — 와이프가 더 부드럽게
-      ba.style.setProperty('--pos', (100 - e * 100).toFixed(1) + '%');
-      if (p < 1) { requestAnimationFrame(frame); }
-      else { var r = ba.querySelector('.ba__range'); if (r) r.value = 0; }
+  Array.prototype.forEach.call(boxes, function (ba) {
+    var b = ba.querySelector('.ba__pic--b'), a = ba.querySelector('.ba__pic--a');
+    var lb = ba.querySelector('.ba__label--b'), la = ba.querySelector('.ba__label--a');
+    if (!b || !a) return;
+    a.classList.add('off');
+    if (la) la.classList.add('dim');
+    if (reduce) return;                     // 모션 최소화 설정이면 Before 고정
+    var showA = false, timer = null;
+    function tick() {
+      showA = !showA;
+      a.classList.toggle('off', !showA);
+      b.classList.toggle('off', showA);
+      if (lb) lb.classList.toggle('dim', showA);
+      if (la) la.classList.toggle('dim', !showA);
     }
-    requestAnimationFrame(frame);
-  }
-  // 두 사진이 실제로 로드된 뒤에만 스윕 — 로딩 전에 몰래 끝나버리는 것 방지
-  function whenReady(ba, cb) {
-    var pending = Array.prototype.filter.call(ba.querySelectorAll('img.ba__img'), function (im) { return !im.complete; });
-    if (!pending.length) { cb(); return; }
-    var left = pending.length;
-    pending.forEach(function (im) {
-      var done = function () { if (--left === 0) cb(); };
-      im.addEventListener('load', done, { once: true });
-      im.addEventListener('error', done, { once: true });
-    });
-  }
-  if (!('IntersectionObserver' in window)) { bas.forEach(function (ba) { whenReady(ba, function () { sweep(ba); }); }); return; }
-  var io = new IntersectionObserver(function (es) {
-    es.forEach(function (e) {
-      if (!e.isIntersecting) return;
-      io.unobserve(e.target);
-      whenReady(e.target, function () { setTimeout(function () { sweep(e.target); }, 120); });
-    });
-  }, { threshold: 0.7 });
-  bas.forEach(function (ba) { io.observe(ba); });
+    function start() { if (!timer) timer = setInterval(tick, 2500); }
+    function stop() { if (timer) { clearInterval(timer); timer = null; } }
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (es) {
+        es.forEach(function (e) { if (e.isIntersecting) start(); else stop(); });
+      }, { threshold: 0.3 }).observe(ba);
+    } else { start(); }
+  });
 })();
 
 // ===== GA4 이벤트 트래킹: 예약 버튼 클릭 =====
