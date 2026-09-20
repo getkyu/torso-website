@@ -207,21 +207,12 @@ body.menu-open .nav__burger-txt{color:var(--ink)!important}
   box-shadow:0 26px 64px -36px rgba(20,18,15,.6);
   touch-action:pan-y;user-select:none;-webkit-user-select:none}
 .ba__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
-/* 전후 — 자동 크로스페이드 v2
-   밑장(Before)은 항상 불투명 고정, 윗장(After)만 페이드 → 전환 중간에 배경이 비치는 플래시 없음.
-   상태는 컨테이너의 .show-after 클래스 하나로만 제어 (JS는 토글 타이머 1개) */
+/* 전후 — 기본이 반반 분할(좌 Before / 우 After), 드래그로 비교
+   CSS만으로 50% 분할이 기본값 → JS가 없어도 항상 전·후가 동시에 보임 */
+.ba--fade{touch-action:pan-y}
 .ba--fade .ba__pic{position:absolute;inset:0}
 .ba--fade .ba__pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
-.ba--fade .ba__pic--a{opacity:0;transition:opacity .9s ease-in-out}
-.ba--fade.show-after .ba__pic--a{opacity:1}
-.ba--fade .ba__label{transition:opacity .45s ease}
-.ba--fade .ba__label--a{opacity:.4}
-.ba--fade.show-after .ba__label--a{opacity:1}
-.ba--fade.show-after .ba__label--b{opacity:.4}
-/* ── 중간 슬라이드(드래그 비교) — 가로로 잡아끌면 그 카드만 슬라이더 모드 ── */
-.ba--fade{touch-action:pan-y}
-.ba--fade.is-slide .ba__pic--a{opacity:1;transition:none;clip-path:inset(0 0 0 var(--pos,50%))}
-.ba--fade.is-slide .ba__label--a,.ba--fade.is-slide .ba__label--b{opacity:1}
+.ba--fade .ba__pic--a{clip-path:inset(0 0 0 var(--pos,50%))}
 .ba__divider{position:absolute;top:0;bottom:0;left:var(--pos,50%);width:2px;transform:translateX(-1px);z-index:3;
   background:linear-gradient(to bottom,rgba(255,255,255,.98),rgba(255,255,255,.85) 55%,rgba(255,255,255,0));
   pointer-events:none;opacity:.95}

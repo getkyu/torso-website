@@ -879,27 +879,10 @@ document.querySelectorAll('a[href]').forEach(a => {
   upd(); window.addEventListener('scroll', onScroll, { passive: true }); window.addEventListener('resize', onScroll);
 })();
 
-// before/after — 자동 크로스페이드 + 중간 슬라이드 하이브리드
-// 기본: 전 카드 동기 크로스페이드(밑장 고정+윗장 페이드) / 가로 드래그: 그 카드만 슬라이더 모드로 전환
+// before/after — 반반 분할 기본(50%, CSS 기본값), 가로 드래그로만 비교선 이동
 (function () {
   var boxes = document.querySelectorAll('.ba--fade');
   if (!boxes.length) return;
-  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  // 1) 자동 크로스페이드 — is-slide(슬라이더 모드) 카드는 건너뜀
-  if (!reduce) {
-    var showA = false;
-    setTimeout(function () {
-      setInterval(function () {
-        showA = !showA;
-        Array.prototype.forEach.call(boxes, function (ba) {
-          if (!ba.classList.contains('is-slide')) ba.classList.toggle('show-after', showA);
-        });
-      }, 2600);
-    }, 1400);
-  }
-
-  // 2) 중간 슬라이드 — 가로 의도 판정 후 진입, 세로 스와이프는 페이지 스크롤로
   Array.prototype.forEach.call(boxes, function (ba) {
     var active = false, decided = false, sx = 0, sy = 0;
     function setPos(x) {
@@ -915,12 +898,10 @@ document.querySelectorAll('a[href]').forEach(a => {
       if (!decided) {
         var dx = Math.abs(e.clientX - sx), dy = Math.abs(e.clientY - sy);
         if (dx < 6 && dy < 6) return;
-        if (dy > dx) { active = false; return; }   // 세로 → 스크롤에 양보
+        if (dy > dx) { active = false; return; }   // 세로 → 페이지 스크롤에 양보
         decided = true;
         try { ba.setPointerCapture(e.pointerId); } catch (err) {}
-        ba.classList.add('is-slide');
         ba.classList.add('is-dragging');
-        ba.classList.remove('show-after');
       }
       e.preventDefault();
       setPos(e.clientX);
