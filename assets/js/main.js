@@ -879,34 +879,18 @@ document.querySelectorAll('a[href]').forEach(a => {
   upd(); window.addEventListener('scroll', onScroll, { passive: true }); window.addEventListener('resize', onScroll);
 })();
 
-// before/after — 자동 크로스페이드: 화면에 보일 때만 2.5초 간격으로 전↔후 교차
+// before/after — 자동 크로스페이드 v2: 전 카드 동기, 컨테이너 클래스 토글만 (밑장 고정 + 윗장 페이드)
 (function () {
   var boxes = document.querySelectorAll('.ba--fade');
   if (!boxes.length) return;
-  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  Array.prototype.forEach.call(boxes, function (ba) {
-    var b = ba.querySelector('.ba__pic--b'), a = ba.querySelector('.ba__pic--a');
-    var lb = ba.querySelector('.ba__label--b'), la = ba.querySelector('.ba__label--a');
-    if (!b || !a) return;
-    a.classList.add('off');
-    if (la) la.classList.add('dim');
-    if (reduce) return;                     // 모션 최소화 설정이면 Before 고정
-    var showA = false, timer = null;
-    function tick() {
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var showA = false;
+  setTimeout(function () {
+    setInterval(function () {
       showA = !showA;
-      a.classList.toggle('off', !showA);
-      b.classList.toggle('off', showA);
-      if (lb) lb.classList.toggle('dim', showA);
-      if (la) la.classList.toggle('dim', !showA);
-    }
-    function start() { if (!timer) timer = setInterval(tick, 2500); }
-    function stop() { if (timer) { clearInterval(timer); timer = null; } }
-    if ('IntersectionObserver' in window) {
-      new IntersectionObserver(function (es) {
-        es.forEach(function (e) { if (e.isIntersecting) start(); else stop(); });
-      }, { threshold: 0.3 }).observe(ba);
-    } else { start(); }
-  });
+      Array.prototype.forEach.call(boxes, function (ba) { ba.classList.toggle('show-after', showA); });
+    }, 2600);
+  }, 1400);
 })();
 
 // ===== GA4 이벤트 트래킹: 예약 버튼 클릭 =====
