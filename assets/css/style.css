@@ -819,6 +819,10 @@ body.menu-open .nav__burger-txt{color:var(--ink)!important}
   .nav.solid{background:rgba(247,246,243,.96);
     -webkit-backdrop-filter:blur(16px) saturate(140%);backdrop-filter:blur(16px) saturate(140%);
     border-bottom:1px solid rgba(205,201,191,.45)}
+  /* 메뉴 열림 중엔 네비의 블러·배경 해제 — iOS에서 backdrop-filter가 fixed 오버레이를
+     네비 안에 가둬 메뉴가 깨지는 문제 방지 (오버레이가 전면이라 바 스타일은 안 보임) */
+  body.menu-open .nav,body.menu-open .nav.solid{background:transparent;
+    -webkit-backdrop-filter:none;backdrop-filter:none;border-bottom-color:transparent;transform:none}
   body.home-film:not(.menu-open) .nav:not(.solid){background:transparent;border-bottom-color:transparent}
   /* the nav's transform intro animation makes it a containing block, trapping the
      fixed full-screen menu — disable it on mobile so the overlay fills the viewport */
@@ -853,12 +857,13 @@ body.menu-open .nav__burger-txt{color:var(--ink)!important}
     box-shadow:0 10px 24px rgba(0,0,0,.18)}
   /* list items drop in with a stagger across both columns */
   body.menu-open .nav__menu li{opacity:0;animation:menuItem .5s var(--ease) forwards}
-  body.menu-open .nav__menu--l li:nth-of-type(1){animation-delay:.10s}
-  body.menu-open .nav__menu--l li:nth-of-type(2){animation-delay:.16s}
-  body.menu-open .nav__menu--l li:nth-of-type(3){animation-delay:.22s}
-  body.menu-open .nav__menu--r li:nth-of-type(1){animation-delay:.28s}
-  body.menu-open .nav__menu--r li:nth-of-type(2){animation-delay:.34s}
-  body.menu-open .nav__menu--r li:nth-of-type(3){animation-delay:.40s}
+  body.menu-open .nav__menu--l li:nth-of-type(1){animation-delay:.22s}
+  body.menu-open .nav__menu--l li:nth-of-type(2){animation-delay:.28s}
+  body.menu-open .nav__menu--l li:nth-of-type(3){animation-delay:.34s}
+  body.menu-open .nav__menu--r li:nth-of-type(1){animation-delay:.40s}
+  body.menu-open .nav__menu--r li:nth-of-type(2){animation-delay:.46s}
+  body.menu-open .nav__menu--r li:nth-of-type(3){animation-delay:.52s}
+  body.menu-open .nav__menu--r li:nth-of-type(4){animation-delay:.60s}  /* 예약하기 — 마지막에 등장 */
   @keyframes menuDrop{from{transform:translateY(-100%)}to{transform:translateY(0)}}
   @keyframes menuItem{from{opacity:0;transform:translateY(-16px)}to{opacity:1;transform:translateY(0)}}
   @media(prefers-reduced-motion:reduce){
