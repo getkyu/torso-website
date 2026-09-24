@@ -190,8 +190,8 @@ var TORSO_MEDIA = (function () {
     sharp: { idx: '02', key: 'Sharp Core', name: '샤프 코어', styles: [
       { code: '2-1', name: '슬릭댄디', n: 3, photos: ['junyoung','junyoung','junyoung','jinhoon','jinhoon'],
         groups: [[1,2,3],[4,5]] },
-      { code: '2-2', name: '필러스', n: 3, photos: ['junyoung','junyoung','junyoung','junghoon'],
-        groups: [[1],[2,3],[4]] },
+      { code: '2-2', name: '필러스', n: 3, photos: ['junyoung','junyoung','junyoung'],
+        groups: [[1],[2,3]] },
       { code: '2-3', name: '드롭 · 아이비 · 크롭', n: 4, photos: ['jinhoon','jinhoon','jinhoon','jinhoon'],
         groups: [[1,2,3],[4]] }
     ]},
@@ -206,7 +206,7 @@ var TORSO_MEDIA = (function () {
     classic: { idx: '04', key: 'Classic Core', name: '클래식 코어', styles: [
       { code: '4-1', name: '슬릭백', n: 4, photos: ['junyoung','junyoung'],
         groups: [[1,2]] },
-      { code: '4-2', name: '가일', n: 1, photos: ['junghoon'] },
+      { code: '4-2', name: '가일', n: 1 },
       { code: '4-3', name: '포마드', n: 2 }
     ]},
     archive: { idx: '01', key: 'Archive Core', name: '아카이브 코어', styles: [
@@ -223,7 +223,6 @@ var TORSO_MEDIA = (function () {
     jinsung:  { name: '진성',  url: BOOK + '3696795' },
     junyoung: { name: '준영',  url: BOOK + '6961265' },
     jinhoon:  { name: '진훈',  url: BOOK + '6826157' },
-    junghoon: { name: '정훈',  url: BOOK + '7652510' },
     yongun:   { name: '용운',  url: BOOK + '7942111' }, // 주니어
     shop:     { name: '예약하기', url: 'https://booking.naver.com/booking/13/bizes/242540' } // 매장 메인 예약
   };
@@ -522,7 +521,7 @@ document.querySelectorAll('a[href]').forEach(a => {
       }, base + i * 45);
     });
   }
-  // 날짜 기반 할인 전환: 정훈 펌 패키지 첫방문 30% → 2026-11-01부터 20%
+  // 날짜 기반 할인 전환 (2026-11-01)
   var LATE_FIRST = new Date() >= new Date(2026, 10, 1); // month 10 = 11월
   function firstPctOf(el) {
     var pct = el.dataset.first !== undefined ? parseInt(el.dataset.first, 10) : 50;
@@ -582,7 +581,7 @@ document.querySelectorAll('a[href]').forEach(a => {
     updateWho(card);
   }
 
-  // 다운펌 추가 옵션 + 정훈 펌 첫방문 안내 — 날짜 기반 표기 전환
+  // 다운펌 추가 옵션 — 날짜 기반 표기 전환
   (function () {
     var oct = new Date() >= new Date(2026, 9, 1);   // 2026-10-01부터 인상가
     document.querySelectorAll('.addon-pay').forEach(function (el) {
@@ -915,7 +914,7 @@ document.querySelectorAll('a[href]').forEach(a => {
 // ===== GA4 이벤트 트래킹: 예약 버튼 클릭 =====
 // booking_click = 네이버 예약 링크 클릭(실질 전환 지표), reserve_click = 사이트 내 예약 유도 버튼
 (function () {
-  var BOOK_NAMES = { '3696795': '진성', '6961265': '준영', '6826157': '진훈', '7652510': '정훈', '6970009': '매장공용' };
+  var BOOK_NAMES = { '3696795': '진성', '6961265': '준영', '6826157': '진훈', '6970009': '매장공용' };
   var page = (location.pathname.split('/').pop() || 'index.html').replace('.html', '') || 'index';
   function btnLocation(a) {
     if (a.classList.contains('vitem__book')) return 'style_tile';
