@@ -559,15 +559,12 @@ document.querySelectorAll('a[href]').forEach(a => {
     updateWho(card);
   }
 
-  // 다운펌 추가 옵션 — 날짜 기반 표기 전환
+  // 다운펌 추가 옵션 — 2026-10-01 확정 적용가
   (function () {
-    var addonIncreaseActive = Date.now() >= Date.parse('2026-11-01T00:00:00+09:00'); // 한국시간 11월 1일부터 인상가
     document.querySelectorAll('.addon-pay').forEach(function (el) {
-      var v = parseInt(addonIncreaseActive ? el.dataset.later : el.dataset.now, 10);
+      var v = parseInt(el.dataset.now, 10);
       el.textContent = '+' + v.toLocaleString('en-US');
     });
-    var note = document.querySelector('[data-addon-note]');
-    if (note && addonIncreaseActive) note.remove();
     if (LATE_FIRST) {                                // 2026-11-01부터 펌 첫방문 20%
       var pct = document.querySelector('[data-perm-pct]');
       var pnote = document.querySelector('[data-perm-note]');
