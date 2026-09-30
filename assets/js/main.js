@@ -1023,37 +1023,51 @@ document.querySelectorAll('a[href]').forEach(a => {
   });
 })();
 
-// Consultation clips play silently when visible; keep native controls available.
+// Consultation clips play silently when visible, with explicit tap-to-play fallback.
 (function () {
   var videos = Array.from(document.querySelectorAll('.j-process-grid video'));
   if (!videos.length) return;
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
   var visible = new Set();
+  function silence(video) {
+    video.muted = true; video.defaultMuted = true; video.playsInline = true;
+    video.setAttribute('muted', ''); video.setAttribute('playsinline', '');
+  }
   function start(video) {
-    if (reduced.matches || document.hidden || video.dataset.userPaused === 'true') return;
-    video.muted = true; video.playsInline = true;
+    if ((reduced.matches && video.dataset.motionAllowed !== 'true') || document.hidden || video.dataset.userPaused === 'true' || video.dataset.autoplayBlocked === 'true') return;
+    silence(video);
     var playing = video.play();
-    if (playing && playing.catch) playing.catch(function () {});
+    if (playing && playing.catch) playing.catch(function (error) {
+      if ((error && error.name === 'AbortError') || !visible.has(video) || document.hidden || video.dataset.userPaused === 'true') return;
+      video.dataset.autoplayBlocked = 'true';
+      video.dispatchEvent(new Event('torso:playbackchange'));
+    });
   }
   videos.forEach(function (video) {
-    video.muted = true; video.playsInline = true;
+    silence(video);
     if (reduced.matches) { video.removeAttribute('autoplay'); video.pause(); }
   });
   if ('IntersectionObserver' in window) {
     var observer = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
-        if (entry.isIntersecting) { visible.add(entry.target); start(entry.target); }
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.15) { visible.add(entry.target); start(entry.target); }
         else { visible.delete(entry.target); entry.target.pause(); }
       });
-    }, {threshold:0.15});
+    }, {threshold:[0, 0.15]});
     videos.forEach(function (video) { observer.observe(video); });
   } else { videos.forEach(function (video) { visible.add(video); start(video); }); }
   document.addEventListener('visibilitychange', function () {
     if (document.hidden) videos.forEach(function (video) { video.pause(); });
     else visible.forEach(start);
   });
-  reduced.addEventListener('change', function () {
-    if (reduced.matches) videos.forEach(function (video) { video.removeAttribute('autoplay'); video.pause(); });
-    else visible.forEach(start);
-  });
+  window.addEventListener('pageshow', function () { visible.forEach(start); });
+  function motionChanged() {
+    videos.forEach(function (video) {
+      delete video.dataset.motionAllowed;
+      if (reduced.matches) { video.removeAttribute('autoplay'); video.pause(); }
+    });
+    if (!reduced.matches) visible.forEach(start);
+  }
+  if (reduced.addEventListener) reduced.addEventListener('change', motionChanged);
+  else reduced.addListener(motionChanged);
 })();

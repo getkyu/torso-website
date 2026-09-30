@@ -15,14 +15,21 @@
     bar.appendChild(toggle);
     frame.insertAdjacentElement('afterend', bar);
     function updateButton() {
-      toggle.textContent = video.paused ? '▶ 재생하기' : 'Ⅱ 멈춰 보기';
+      toggle.textContent = video.dataset.autoplayBlocked === 'true' ? '▶ 영상 재생하기' : video.paused ? '▶ 재생하기' : 'Ⅱ 멈춰 보기';
       toggle.setAttribute('aria-pressed', String(video.paused));
       toggle.setAttribute('aria-label', video.getAttribute('aria-label') + (video.paused ? ' 재생하기' : ' 멈춰 보기'));
     }
     toggle.addEventListener('click', function () {
       if (video.paused) {
         delete video.dataset.userPaused;
-        video.play().catch(function () {});
+        delete video.dataset.autoplayBlocked;
+        video.dataset.motionAllowed = 'true';
+        video.muted = true; video.defaultMuted = true; video.playsInline = true;
+        video.play().then(updateButton).catch(function (error) {
+          if (error && error.name === 'AbortError') return;
+          video.dataset.autoplayBlocked = 'true';
+          updateButton();
+        });
       } else {
         video.dataset.userPaused = 'true';
         video.pause();
@@ -30,6 +37,7 @@
     });
     video.addEventListener('play', updateButton);
     video.addEventListener('pause', updateButton);
+    video.addEventListener('torso:playbackchange', updateButton);
     updateButton();
   });
 })();
