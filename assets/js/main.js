@@ -157,29 +157,7 @@ if (burger && navWrap){
   }, { threshold: 0.2 });
   Array.prototype.forEach.call(vids, function (v) { io.observe(v); });
 })();
-// 상호 변경 안내 토스트 — 방문자당 1회, 8초 후 자동 닫힘
-(function () {
-  try { if (localStorage.getItem('rebrandSeen')) return; } catch (e) {}
-  var t = document.createElement('div');
-  t.className = 'rebrand-toast';
-  t.innerHTML = 'TORSO for MEN이<br><b>토르소 맨즈헤어</b>로 새롭게 단장했습니다 <button aria-label="닫기">×</button>';
-  document.body.appendChild(t);
-  requestAnimationFrame(function () { t.classList.add('on'); });
-  var closed = false;
-  function close() {
-    if (closed) return;
-    closed = true;
-    t.classList.remove('on');
-    setTimeout(function () { t.remove(); }, 400);
-    try { localStorage.setItem('rebrandSeen', '1'); } catch (e) {}
-  }
-  t.querySelector('button').addEventListener('click', close);
-  // 등장 직후 브라우저 스크롤 복원에 의한 즉시 닫힘 방지 → 잠시 뒤부터 스크롤 감지
-  setTimeout(function () {
-    window.addEventListener('scroll', close, { once: true, passive: true });
-  }, 600);
-  setTimeout(close, 8000);
-})();
+// 상호 안내는 고정 브랜드 표기로 통합했습니다.
 // ── 추구미 미디어 공용 데이터 (홈 패널 + 스타일 페이지 공용) ──
 var TORSO_MEDIA = (function () {
   var V = 'assets/video/styles/';
@@ -563,8 +541,8 @@ document.querySelectorAll('a[href]').forEach(a => {
       var neu = document.createElement('span'); neu.className = 'pay__new pay__new--' + (effMode === 'first20' ? 'first30' : effMode);
       var nn = buildNum(fmt(discounted(base, effMode, el))); neu.appendChild(nn.wrap); el.appendChild(neu);
       var lbl = document.createElement('span'); lbl.className = 'pay__lbl pay__lbl--' + (effMode === 'first20' ? 'first30' : effMode);
-      var lblText = { npay: 'N페이 10%', first20: '첫방문 20%', first30: '첫방문 30%' }[effMode];
-      if (effMode === 'first') lblText = '첫방문 ' + firstPctOf(el) + '%';
+      var lblText = { npay: 'N페이 10%', first20: '첫 방문 · Npay 20%', first30: '첫 방문 · Npay 30%' }[effMode];
+      if (effMode === 'first') lblText = '첫 방문 · Npay ' + firstPctOf(el) + '%';
       lbl.textContent = lblText || ''; el.appendChild(lbl);
       if (doAnim && !reduce) roll(nn.digits, 60); else settle(nn.digits);
       void el.offsetHeight;
@@ -583,13 +561,13 @@ document.querySelectorAll('a[href]').forEach(a => {
 
   // 다운펌 추가 옵션 — 날짜 기반 표기 전환
   (function () {
-    var oct = new Date() >= new Date(2026, 9, 1);   // 2026-10-01부터 인상가
+    var addonIncreaseActive = Date.now() >= Date.parse('2026-11-01T00:00:00+09:00'); // 한국시간 11월 1일부터 인상가
     document.querySelectorAll('.addon-pay').forEach(function (el) {
-      var v = parseInt(oct ? el.dataset.later : el.dataset.now, 10);
+      var v = parseInt(addonIncreaseActive ? el.dataset.later : el.dataset.now, 10);
       el.textContent = '+' + v.toLocaleString('en-US');
     });
     var note = document.querySelector('[data-addon-note]');
-    if (note && oct) note.remove();
+    if (note && addonIncreaseActive) note.remove();
     if (LATE_FIRST) {                                // 2026-11-01부터 펌 첫방문 20%
       var pct = document.querySelector('[data-perm-pct]');
       var pnote = document.querySelector('[data-perm-note]');
@@ -797,18 +775,7 @@ document.querySelectorAll('a[href]').forEach(a => {
     });
   });
 })();
-// 리뷰 수 자동 증가: 기준일(data-reviews-from)의 기준값에서 하루 data-reviews-per-day건씩 반영
-(function () {
-  var el = document.querySelector('.stat__num[data-reviews-base]');
-  if (!el) return;
-  var base = parseInt(el.dataset.reviewsBase, 10);
-  var perDay = parseFloat(el.dataset.reviewsPerDay || '2');
-  var from = new Date(el.dataset.reviewsFrom + 'T00:00:00+09:00');
-  var days = Math.max(0, Math.floor((Date.now() - from.getTime()) / 86400000));
-  var n = base + Math.floor(days * perDay);
-  el.dataset.count = n;
-  el.textContent = n.toLocaleString('en-US');
-})();
+// 리뷰 수는 실제 확인값만 사용합니다. 날짜에 따른 자동 가산 없음.
 // authority stats — slot digit-roll (same as program prices) when scrolled into view
 (function () {
   var nums = Array.prototype.slice.call(document.querySelectorAll('.stat__num'));
@@ -978,5 +945,118 @@ document.querySelectorAll('a[href]').forEach(a => {
         });
       }
     });
+  });
+})();
+
+// Consultation journey: readable questions, keyboard-accessible choices, genuine before/after media.
+(function () {
+  var tabs = Array.from(document.querySelectorAll('.concern-tab'));
+  function select(tab) {
+    tabs.forEach(function(t) {
+      var on = t === tab;
+      t.setAttribute('aria-selected', String(on)); t.tabIndex = on ? 0 : -1;
+      document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+    });
+  }
+  tabs.forEach(function(tab, i) {
+    tab.addEventListener('click', function() { select(tab); });
+    tab.addEventListener('keydown', function(e) {
+      var next = i;
+      if (e.key === 'ArrowDown' || e.key === 'ArrowRight') next = (i + 1) % tabs.length;
+      else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') next = (i + tabs.length - 1) % tabs.length;
+      else if (e.key === 'Home') next = 0;
+      else if (e.key === 'End') next = tabs.length - 1;
+      else return;
+      e.preventDefault(); select(tabs[next]); tabs[next].focus();
+    });
+  });
+  var dock = document.querySelector('.consult-dock');
+  if (dock) {
+    function showDock() {
+      var booking = document.getElementById('reserve');
+      var inBooking = booking && booking.getBoundingClientRect().top < innerHeight && booking.getBoundingClientRect().bottom > 0;
+      var nearEnd = innerHeight + scrollY > document.documentElement.scrollHeight - 700;
+      dock.classList.toggle('is-visible', scrollY > 460 && !inBooking && !nearEnd);
+    }
+    window.addEventListener('scroll', showDock, {passive:true}); showDock();
+  }
+  if (burger) {
+    burger.setAttribute('aria-label', '메뉴 열기');
+    burger.setAttribute('aria-expanded', 'false');
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && document.body.classList.contains('menu-open')) {
+        document.body.classList.remove('menu-open'); burger.setAttribute('aria-expanded','false'); burger.focus();
+      }
+    });
+  }
+})();
+
+// Automatic before/after dissolve. Motion is optional and stops off screen.
+(function () {
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var cases = Array.from(document.querySelectorAll('.case-compare--auto'));
+  var observer = 'IntersectionObserver' in window ? new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) { entry.target.classList.toggle('is-in-view', entry.isIntersecting); });
+  }, {threshold:.25}) : null;
+  cases.forEach(function(box) {
+    var toggle = box.querySelector('.case-compare__toggle');
+    var label = box.getAttribute('aria-label').replace(' 시술 전후 자동 비교', '');
+    function configure() {
+      box.classList.toggle('is-reduced', reduced.matches);
+      box.classList.remove('is-paused', 'show-before');
+      toggle.setAttribute('aria-pressed','false');
+      toggle.innerHTML = reduced.matches ? '시술 전 보기' : '<span aria-hidden="true">Ⅱ</span> 멈춰 보기';
+      toggle.setAttribute('aria-label', label + (reduced.matches ? ' 시술 전 보기' : ' 자동 비교 일시정지'));
+    }
+    configure(); reduced.addEventListener('change', configure);
+    if (observer) observer.observe(box); else box.classList.add('is-in-view');
+    toggle.addEventListener('click', function() {
+      if (reduced.matches) {
+        var before = box.classList.toggle('show-before');
+        toggle.textContent = before ? '시술 후 보기' : '시술 전 보기';
+        toggle.setAttribute('aria-label',label + ' ' + toggle.textContent);
+        toggle.setAttribute('aria-pressed',String(before));
+      } else {
+        var paused = box.classList.toggle('is-paused');
+        toggle.innerHTML = paused ? '<span aria-hidden="true">▶</span> 다시 보기' : '<span aria-hidden="true">Ⅱ</span> 멈춰 보기';
+        toggle.setAttribute('aria-label',label + (paused ? ' 자동 비교 재생' : ' 자동 비교 일시정지'));
+        toggle.setAttribute('aria-pressed',String(paused));
+      }
+    });
+  });
+})();
+
+// Consultation clips play silently when visible; keep native controls available.
+(function () {
+  var videos = Array.from(document.querySelectorAll('.j-process-grid video'));
+  if (!videos.length) return;
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var visible = new Set();
+  function start(video) {
+    if (reduced.matches || document.hidden || video.dataset.userPaused === 'true') return;
+    video.muted = true; video.playsInline = true;
+    var playing = video.play();
+    if (playing && playing.catch) playing.catch(function () {});
+  }
+  videos.forEach(function (video) {
+    video.muted = true; video.playsInline = true;
+    if (reduced.matches) { video.removeAttribute('autoplay'); video.pause(); }
+  });
+  if ('IntersectionObserver' in window) {
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) { visible.add(entry.target); start(entry.target); }
+        else { visible.delete(entry.target); entry.target.pause(); }
+      });
+    }, {threshold:0.15});
+    videos.forEach(function (video) { observer.observe(video); });
+  } else { videos.forEach(function (video) { visible.add(video); start(video); }); }
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) videos.forEach(function (video) { video.pause(); });
+    else visible.forEach(start);
+  });
+  reduced.addEventListener('change', function () {
+    if (reduced.matches) videos.forEach(function (video) { video.removeAttribute('autoplay'); video.pause(); });
+    else visible.forEach(start);
   });
 })();
