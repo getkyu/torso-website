@@ -9,7 +9,7 @@
 .j-core-grid .home-core-media>video{opacity:0;pointer-events:none;transition:opacity .32s ease-in-out}
 .j-core-grid .home-core-media>video.is-visible{opacity:1}
 @media(max-width:760px){.home-core-controls{margin:-8px 0 12px}.j-core-grid .home-core-media{margin-bottom:14px}}
-@media(prefers-reduced-motion:reduce){.home-core-controls{display:none}.j-core-grid .home-core-media>video{display:none;transition:none}}
+@media(prefers-reduced-motion:reduce){.j-core-grid .home-core-media>video{transition:none}.j-core-grid .home-core-media:not(.motion-enabled)>video{display:none}}
 
 /* The same head envelope is used for every source, without distorting the image. */
 .j-core-grid .home-core-media::before{content:"";position:absolute;inset:-15%;background-image:var(--core-background);background-position:center;background-size:cover;filter:blur(18px) brightness(.75);opacity:.65;pointer-events:none}
@@ -17,4 +17,9 @@
 .j-core-grid .home-core-media>video{inset:auto;left:50%;top:50%;height:auto;max-width:none;object-fit:contain;transform-origin:0 0;will-change:transform,width}
 .core-stage-label{position:absolute;bottom:10px;left:10px;padding:4px 8px;color:#fff;background:rgba(0,0,0,.65);font-size:11px;line-height:1.4;pointer-events:none;z-index:2}
 .core-stage-label[hidden]{display:none}
-@media(prefers-reduced-motion:reduce){.j-core-grid .home-core-media.has-active>img{opacity:1}.home-core-media::before,.core-stage-label{display:none!important}}
+@media(prefers-reduced-motion:reduce){.j-core-grid .home-core-media.has-active:not(.motion-enabled)>img{opacity:1}.home-core-media:not(.motion-enabled)::before,.home-core-media:not(.motion-enabled) .core-stage-label{display:none!important}.home-core-media:not(.motion-enabled)>.rotation-hold{display:none}}
+
+/* Hold the outgoing frame while one persistent media element changes source. */
+.j-core-grid .home-core-media>.rotation-hold{position:absolute;left:50%;top:50%;height:auto;max-width:none;object-fit:contain;transform-origin:0 0;opacity:0;pointer-events:none}
+.j-core-grid .home-core-media>.rotation-hold.is-visible{opacity:1}
+.j-core-grid .home-core-media>video.is-loading{opacity:0;transition:none}

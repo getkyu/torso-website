@@ -24,4 +24,9 @@
 .designer-puzzle .designer-work-media>video{position:absolute;left:50%;top:50%;height:auto;max-width:none;object-fit:contain;opacity:0;pointer-events:none;transition:opacity .32s ease-in-out;transform-origin:0 0;will-change:transform,width}
 .designer-puzzle .designer-work-media>video.is-visible{opacity:1}
 .designer-puzzle .designer-work-media .core-stage-label{display:none}
-@media(prefers-reduced-motion:reduce){.designer-puzzle .designer-work-media>video{display:none;transition:none}.designer-puzzle .designer-work-media.has-active>img{opacity:1}}
+@media(prefers-reduced-motion:reduce){.designer-puzzle .designer-work-media>video{transition:none}.designer-puzzle .designer-work-media:not(.motion-enabled)>video{display:none}.designer-puzzle .designer-work-media.has-active:not(.motion-enabled)>img{opacity:1}.designer-puzzle .designer-work-media:not(.motion-enabled)>.rotation-hold{display:none}}
+
+/* Keep a still of the outgoing frame underneath the next clip. */
+.designer-puzzle .designer-work-media>.rotation-hold{position:absolute;left:50%;top:50%;height:auto;max-width:none;object-fit:contain;transform-origin:0 0;opacity:0;pointer-events:none}
+.designer-puzzle .designer-work-media>.rotation-hold.is-visible{opacity:1}
+.designer-puzzle .designer-work-media>video.is-loading{opacity:0;transition:none}

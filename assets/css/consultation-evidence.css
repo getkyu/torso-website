@@ -1,0 +1,16 @@
+/* Real Torso source frames support each answer without cropping the consultation. */
+.concern-evidence{margin:0 0 24px}
+.concern-evidence__media{display:flex;justify-content:center;align-items:center;height:280px;overflow:hidden;background:#d1d5cb}
+.concern-evidence__media>img{display:block;width:auto;height:100%;max-width:100%;object-fit:contain}
+.concern-evidence figcaption{margin-top:9px;color:#59614f;font-size:11px;line-height:1.65;letter-spacing:.01em;word-break:keep-all}
+.concern-evidence__pair{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.concern-evidence__pair>div{min-width:0;background:#d1d5cb}
+.concern-evidence__pair img{display:block;width:100%;height:auto;aspect-ratio:1;object-fit:contain}
+.concern-evidence__pair span{display:block;padding:7px 10px;color:#45503d;font-size:10px;line-height:1.4;letter-spacing:.08em}
+@media(max-width:760px){
+ .concern-evidence{margin-bottom:21px}
+ .concern-evidence__media{height:260px}
+ .concern-evidence figcaption{font-size:10px}
+ .concern-evidence__pair{gap:5px}
+ .concern-evidence__pair span{padding:6px 8px}
+}
