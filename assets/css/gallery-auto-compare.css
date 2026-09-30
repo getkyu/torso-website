@@ -1,0 +1,30 @@
+/* Kept separate so the homepage comparison and other review cards are unaffected. */
+.rev--ba .gallery-compare.is-enhanced{cursor:default;touch-action:pan-y}
+.gallery-compare.is-enhanced .ba__pic{position:absolute;inset:0;overflow:hidden}
+.gallery-compare.is-enhanced .ba__pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;transform-origin:center;transition:none}
+.rev--ba .gallery-compare.is-enhanced .ba__pic--b img{filter:saturate(.8);transform:translate(var(--before-x,0%),var(--before-y,0%)) scale(var(--before-scale,1))}
+.rev--ba .gallery-compare.is-enhanced .ba__pic--a img{filter:none;transform:translate(var(--after-x,0%),var(--after-y,0%)) scale(var(--after-scale,1))}
+.gallery-compare.is-enhanced .ba__pic--a{clip-path:none;opacity:0;animation:gallery-after-reveal 5s ease-in-out infinite paused}
+.gallery-compare__controls{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:52px;padding:5px 14px;background:transparent;border:0;color:#47553e}
+.gallery-compare__state{display:grid;min-width:40px;font-size:11px;line-height:1.5}
+.gallery-compare__state>span{grid-area:1/1;white-space:nowrap;animation:gallery-before-label 5s linear infinite paused}
+.gallery-compare__state>.gallery-state--after{opacity:0;animation-name:gallery-after-label}
+.gallery-compare__choices{display:flex;align-items:center;gap:2px;margin-left:auto}
+.gallery-compare__controls button{appearance:none;min-height:44px;padding:8px 5px;background:transparent;border:1px solid transparent;border-radius:0;color:inherit;font:inherit;font-size:11px;line-height:1.4;cursor:pointer;white-space:nowrap}
+.gallery-compare__controls button:hover{text-decoration:underline;text-underline-offset:4px}
+.gallery-compare__controls button:focus-visible{outline:2px solid #536849;outline-offset:2px}
+.gallery-compare__choices button[aria-pressed="true"]{font-weight:700;text-decoration:underline;text-underline-offset:4px}
+.gallery-compare__toggle span{margin-right:4px}
+.gallery-compare__controls button[hidden]{display:none}
+.gallery-compare.is-in-view:not(.is-paused):not(.is-page-hidden) .ba__pic--a{animation-play-state:running}
+.rev__media:has(.gallery-compare.is-in-view:not(.is-paused):not(.is-page-hidden))+.gallery-compare__controls .gallery-compare__state>span{animation-play-state:running}
+.gallery-compare.show-before .ba__pic--a{animation:none;opacity:0}
+.gallery-compare.show-after .ba__pic--a{animation:none;opacity:1}
+.gallery-compare__controls.show-before .gallery-compare__state>span,.gallery-compare__controls.show-after .gallery-compare__state>span{animation:none}
+.gallery-compare__controls.show-before .gallery-state--before,.gallery-compare__controls.show-after .gallery-state--after{opacity:1}
+.gallery-compare__controls.show-before .gallery-state--after,.gallery-compare__controls.show-after .gallery-state--before{opacity:0}
+@keyframes gallery-after-reveal{0%,18%{opacity:0}36%,82%{opacity:1}100%{opacity:0}}
+@keyframes gallery-before-label{0%,26%,91%,100%{opacity:1}27%,90%{opacity:0}}
+@keyframes gallery-after-label{0%,26%,91%,100%{opacity:0}27%,90%{opacity:1}}
+@media(prefers-reduced-motion:reduce){.gallery-compare.is-enhanced .ba__pic--a,.gallery-compare__state>span{animation:none!important}}
+@media(max-width:400px){.gallery-compare__controls{padding-inline:10px;gap:5px}.gallery-compare__controls button{font-size:11px;padding-inline:4px}}

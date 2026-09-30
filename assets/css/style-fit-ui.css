@@ -1,0 +1,19 @@
+/* Selection cues remain outside the moving image and never cover a face. */
+.j-core-grid .has-style-fit h3{min-height:78px;margin-bottom:0}
+.j-core-grid .has-style-fit h3 small{display:block;font-size:11px;line-height:1.5;font-weight:400;letter-spacing:0;color:#66705d;margin-bottom:7px}
+.j-core-grid .has-style-fit h3 strong{font:inherit;display:block}
+.j-core-grid .has-style-fit .j-core-note{min-height:42px}
+.designer-puzzle .has-style-fit .designer-work-media{bottom:118px}
+.designer-puzzle .has-style-fit>span{bottom:94px}
+.designer-puzzle .style-fit-caption{position:absolute;left:12px;right:12px;bottom:7px;height:82px;color:#fff;overflow:hidden}
+.designer-puzzle .style-fit-caption small{display:block;font-size:10px;font-weight:400;margin:0 0 2px;opacity:.7;line-height:1.4}
+.designer-puzzle .style-fit-caption strong{display:block;font-size:14px;line-height:1.5;font-weight:650;letter-spacing:-.02em}
+.designer-puzzle .style-fit-caption p{font-size:11px;line-height:1.5;margin:4px 0 0;color:#c1c9ba;word-break:keep-all}
+@media(max-width:1000px){.consult-hero__photo--designer{min-height:610px}}
+@media(max-width:700px){
+ .consult-hero__photo--designer{aspect-ratio:1/1.78;min-height:0;max-height:none}
+ .designer-puzzle .style-fit-caption{left:9px;right:9px}
+ .designer-puzzle .style-fit-caption strong{font-size:14px}
+ .designer-puzzle .style-fit-caption p{font-size:11px}
+ .j-core-grid .has-style-fit h3{min-height:93px}
+}
