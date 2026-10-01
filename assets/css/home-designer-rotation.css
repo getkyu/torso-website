@@ -21,7 +21,7 @@
 /* Finished-work videos: keep the outgoing frame during the dissolve. */
 .designer-puzzle .designer-work-media>img{inset:0;width:100%;height:100%;opacity:1;object-fit:contain}
 .designer-puzzle .designer-work-media.has-active>img{opacity:0}
-.designer-puzzle .designer-work-media>video{position:absolute;left:50%;top:50%;height:auto;max-width:none;object-fit:contain;opacity:0;pointer-events:none;transition:opacity .32s ease-in-out;transform-origin:0 0;will-change:transform,width}
+.designer-puzzle .designer-work-media>video{position:absolute;left:50%;top:50%;height:auto;max-width:none;object-fit:contain;opacity:0;pointer-events:none;transition:opacity .66s cubic-bezier(.22,.61,.36,1);transform-origin:0 0;will-change:transform,width}
 .designer-puzzle .designer-work-media>video.is-visible{opacity:1}
 .designer-puzzle .designer-work-media .core-stage-label{display:none}
 @media(prefers-reduced-motion:reduce){.designer-puzzle .designer-work-media>video{transition:none}.designer-puzzle .designer-work-media:not(.motion-enabled)>video{display:none}.designer-puzzle .designer-work-media.has-active:not(.motion-enabled)>img{opacity:1}.designer-puzzle .designer-work-media:not(.motion-enabled)>.rotation-hold{display:none}}

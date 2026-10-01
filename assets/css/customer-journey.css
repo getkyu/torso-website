@@ -78,10 +78,20 @@
 .customer-journey .j-booking-paths__grid{margin:28px 0}
 .customer-journey .j-booking-paths__grid p{font-size:13px;line-height:1.85}
 .customer-journey .j-closing--film{min-height:450px}
-.case-compare--auto .case-compare__media>img,.case-compare--auto .case-compare__state>span{animation-duration:6s}
-@keyframes case-after-reveal{0%,42%{opacity:0}50%,92%{opacity:1}100%{opacity:0}}
-@keyframes case-before-focus{0%,42%,100%{filter:saturate(.8)}50%,92%{filter:saturate(.8)}}
-@keyframes case-before-label{0%,46%,96%,100%{opacity:1}47%,95%{opacity:0}}
+/* JavaScript changes real photo states; reduced motion only removes the dissolve. */
+.case-compare--auto[data-compare-state] .case-compare__media>img,
+.case-compare--auto[data-compare-state] .case-compare__state>span{animation:none!important;transition:opacity .65s ease}
+.case-compare--auto[data-compare-state] .case-compare__before{filter:saturate(.8)}
+.case-compare--auto[data-compare-state="before"] .case-compare__after,
+.case-compare--auto[data-compare-state="before"] .case-state--after,
+.case-compare--auto[data-compare-state="after"] .case-state--before{opacity:0}
+.case-compare--auto[data-compare-state="after"] .case-compare__after,
+.case-compare--auto[data-compare-state="after"] .case-state--after,
+.case-compare--auto[data-compare-state="before"] .case-state--before{opacity:1}
+@media(prefers-reduced-motion:reduce){
+ .case-compare--auto[data-compare-state] .case-compare__media>img,
+ .case-compare--auto[data-compare-state] .case-compare__state>span{transition:none}
+}
 @media(max-width:1000px){
  .customer-journey .concern-layout{grid-template-columns:1fr;gap:20px}
  .customer-journey .concern-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}

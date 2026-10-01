@@ -988,45 +988,80 @@ document.querySelectorAll('a[href]').forEach(a => {
   }
 })();
 
-// Automatic before/after dissolve, with an optional pause for closer inspection.
+// Change the actual photo state every three seconds. CSS animations can be
+// disabled by iOS Reduce Motion (or a global stylesheet) without stopping this.
 (function () {
   var cases = Array.from(document.querySelectorAll('.case-compare--auto'));
   if (!cases.length) return;
   var states = [];
+  var refreshPending = false;
   function inViewport(box) {
     var rect = box.getBoundingClientRect();
-    return rect.width > 0 && rect.bottom > 0 && rect.top < (window.innerHeight || document.documentElement.clientHeight);
+    return rect.width > 0 && rect.height > 0 && rect.bottom > 0 && rect.top < (window.innerHeight || document.documentElement.clientHeight);
   }
-  function sync(state) { state.box.classList.toggle('is-in-view', state.inView && !document.hidden); }
-  var observer = 'IntersectionObserver' in window ? new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      var state = states.find(function(item) { return item.box === entry.target; });
-      if (state) { state.inView = entry.isIntersecting && entry.intersectionRatio >= .1; sync(state); }
-    });
-  }, {threshold:[0,.1]}) : null;
-  cases.forEach(function(box) {
-    var toggle = box.querySelector('.case-compare__toggle');
-    var label = (box.getAttribute('aria-label') || '시술 사례').replace(' 시술 전후 자동 비교', '');
-    var state = {box:box, inView:observer ? inViewport(box) : true};
-    // The requested automatic comparison also runs with reduced-motion enabled.
-    box.classList.remove('is-reduced', 'is-paused', 'show-before');
-    function updateToggle() {
-      if (!toggle) return;
-      var paused = box.classList.contains('is-paused');
-      toggle.setAttribute('aria-pressed', String(paused));
-      toggle.innerHTML = paused ? '<span aria-hidden="true">▶</span> 다시 보기' : '<span aria-hidden="true">Ⅱ</span> 멈춰 보기';
-      toggle.setAttribute('aria-label', label + (paused ? ' 자동 비교 재생' : ' 자동 비교 일시정지'));
+  function render(state) {
+    state.box.setAttribute('data-compare-state', state.current);
+    state.box.classList.toggle('is-paused', state.paused);
+    // Inline opacity also keeps the photo and its caption in sync if an older
+    // cached stylesheet is served. Explicitly disable its old keyframe loop.
+    state.after.style.opacity = state.current === 'after' ? '1' : '0';
+    state.beforeLabel.style.opacity = state.current === 'before' ? '1' : '0';
+    state.afterLabel.style.opacity = state.current === 'after' ? '1' : '0';
+    if (state.toggle) {
+      state.toggle.setAttribute('aria-pressed', String(state.paused));
+      state.toggle.innerHTML = state.paused ? '<span aria-hidden="true">▶</span> 다시 보기' : '<span aria-hidden="true">Ⅱ</span> 멈춰 보기';
+      state.toggle.setAttribute('aria-label', state.label + (state.paused ? ' 자동 비교 재생' : ' 자동 비교 일시정지'));
     }
-    updateToggle();
-    if (toggle) toggle.addEventListener('click', function() {
-      box.classList.toggle('is-paused'); updateToggle();
+  }
+  function sync(state) {
+    var active = inViewport(state.box) && !document.hidden && !state.paused;
+    state.box.classList.toggle('is-in-view', active);
+    if (!active) {
+      clearTimeout(state.timer); state.timer = null;
+    } else if (state.timer === null) {
+      state.timer = setTimeout(function () {
+        state.timer = null;
+        if (inViewport(state.box) && !document.hidden && !state.paused) {
+          state.current = state.current === 'before' ? 'after' : 'before';
+          render(state);
+        }
+        sync(state);
+      }, 3000);
+    }
+  }
+  function refresh() { states.forEach(sync); }
+  function requestRefresh() {
+    if (refreshPending) return;
+    refreshPending = true;
+    requestAnimationFrame(function () { refreshPending = false; refresh(); });
+  }
+  var observer = 'IntersectionObserver' in window ? new IntersectionObserver(refresh, {threshold:0}) : null;
+  cases.forEach(function(box) {
+    var after = box.querySelector('.case-compare__after');
+    var beforeLabel = box.querySelector('.case-state--before');
+    var afterLabel = box.querySelector('.case-state--after');
+    if (!after || !beforeLabel || !afterLabel) return;
+    var state = {box:box, after:after, beforeLabel:beforeLabel, afterLabel:afterLabel,
+      toggle:box.querySelector('.case-compare__toggle'), current:'before', paused:false, timer:null,
+      label:(box.getAttribute('aria-label') || '시술 사례').replace(' 시술 전후 자동 비교', '')};
+    box.classList.remove('is-reduced', 'is-paused', 'show-before');
+    box.querySelectorAll('.case-compare__media>img,.case-compare__state>span').forEach(function(node) {
+      node.style.setProperty('animation', 'none', 'important');
     });
-    states.push(state); sync(state);
+    if (state.toggle) state.toggle.addEventListener('click', function() {
+      state.paused = !state.paused; render(state); sync(state);
+    });
+    states.push(state); render(state); sync(state);
     if (observer) observer.observe(box);
   });
-  document.addEventListener('visibilitychange', function() { states.forEach(sync); });
-  window.addEventListener('pageshow', function() {
-    states.forEach(function(state) { state.inView = observer ? inViewport(state.box) : true; sync(state); });
+  // Scroll is also a fallback for delayed IntersectionObserver delivery in
+  // mobile browsers; repeated events never restart an already running timer.
+  window.addEventListener('scroll', requestRefresh, {passive:true});
+  window.addEventListener('resize', requestRefresh);
+  document.addEventListener('visibilitychange', refresh);
+  window.addEventListener('pageshow', refresh);
+  window.addEventListener('pagehide', function() {
+    states.forEach(function(state) { clearTimeout(state.timer); state.timer = null; });
   });
 })();
 
