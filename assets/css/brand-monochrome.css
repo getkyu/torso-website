@@ -1,0 +1,267 @@
+/* TORSO — white, black and restrained silver.
+   Load last. This layer changes colour and finish only, never media geometry. */
+:root,
+.home-consult{
+  --paper:#ffffff;
+  --paper-2:#f2f2f2;
+  --char:#151515;
+  --char-2:#0b0b0b;
+  --ink:#161616;
+  --ink-soft:#404040;
+  --mut:#626262;
+  --mut-l:#707070;
+  --line:#d0d0d0;
+  --line-d:#424242;
+  --accent:#555555;
+  --accent-d:#333333;
+  --sage:#e9e9e9;
+  --lime:#ededed;
+  --silver:#d6d6d6;
+  --silver-dark:#a3a3a3;
+  --on-dark:#f8f8f8;
+  --mut-on-dark:#c2c2c2;
+  --metal-surface:linear-gradient(135deg,#fafafa 0%,#e4e4e4 100%);
+  --metal-border:#bcbcbc;
+}
+body{background:var(--paper);color:var(--ink)}
+body::before{background-image:none}
+::selection{background:var(--ink);color:#fff}
+::-moz-selection{background:var(--ink);color:#fff}
+:focus-visible,.home-consult :focus-visible{outline-color:currentColor}
+#scrollprog{background:var(--silver-dark)}
+
+/* Shared navigation, buttons and footer. */
+.nav,.nav.solid{background:rgba(255,255,255,.96);border-bottom-color:var(--line)}
+body.menu-open .nav__nav{background:rgba(255,255,255,.97)}
+body.menu-open .nav__menu li{border-bottom-color:var(--line)}
+body.home-film:not(.menu-open) .nav:not(.solid),
+.home-cinema:not(.menu-open) .nav:not(.solid){
+  background:linear-gradient(180deg,rgba(0,0,0,.86),rgba(0,0,0,.5));
+  border-bottom-color:rgba(255,255,255,.16);
+}
+.btn--fill,.j-btn--dark{background:var(--ink);border-color:var(--ink);color:#fff}
+.btn--fill:hover,.j-btn--dark:hover,.desg__book:hover{
+  background:var(--ink-soft);border-color:var(--ink-soft);color:#fff;
+  box-shadow:0 8px 22px rgba(0,0,0,.12);
+}
+.btn--ghost-w{border-color:var(--silver);color:var(--on-dark)}
+.btn--ghost-w:hover{background:var(--paper);border-color:var(--paper);color:var(--ink)}
+.j-btn--light,.consult-hero--cinema .j-btn--dark{
+  background:var(--metal-surface);border-color:var(--metal-border);color:var(--ink);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.85);
+}
+.j-btn--light:hover,.consult-hero--cinema .j-btn--dark:hover{
+  background:#fff;border-color:#fff;color:var(--ink);
+  box-shadow:0 7px 20px rgba(0,0,0,.16);
+}
+.fab-reserve{color:var(--ink);background:var(--metal-surface);border-color:var(--metal-border)}
+.fab-reserve::before{background:none}
+/* Keep existing timing hooks but remove the old green decorative pulse. */
+@keyframes fabPulse{
+  0%,100%{box-shadow:0 7px 22px rgba(0,0,0,.16),inset 0 1px 0 #fff}
+}
+@keyframes perkInvite{0%,100%{box-shadow:none}}
+@keyframes perkInviteHot{0%,100%{box-shadow:none}}
+.sec--soft{background:var(--paper-2)}
+.sec--dark,.band{background:var(--char);color:var(--on-dark)}
+.sec--dark .eyebrow,.band .eyebrow,.banner--film .eyebrow,.banner--photo .eyebrow{color:var(--silver)}
+.sec--dark .shead p,.feature p,.band p{color:var(--mut-on-dark)}
+.feature .n{color:var(--silver-dark)}
+.feature h3{color:var(--on-dark)}
+.feature__ico{color:var(--silver)}
+.foot{background:var(--char-2);color:var(--mut-on-dark)}
+.foot__top{border-bottom-color:var(--line-d)}
+.foot__logo p,.foot__col a,.foot__col span{color:var(--mut-on-dark)}
+.foot__col h4,.foot__col a:hover{color:#fff}
+.foot__bottom{color:var(--silver-dark)}
+.rebrand-toast{background:var(--char)}
+.rebrand-toast b{color:#fff}
+.skip-link{background:var(--ink);color:#fff}
+
+/* Neutral film scrims retain the original footage's colour. */
+.film-surface,.home-cinema .consult-hero--cinema{background:var(--char);color:var(--on-dark)}
+.cinema-scrim{
+  background:linear-gradient(90deg,rgba(0,0,0,.85),rgba(0,0,0,.55) 43%,rgba(0,0,0,.06) 76%),
+    linear-gradient(0deg,rgba(0,0,0,.48),transparent 45%);
+}
+.consult-hero h1 em{color:var(--ink-soft)}
+.consult-hero--cinema h1 em{color:var(--silver)}
+.consult-hero--cinema .consult-brand,.cinema-bottom{color:var(--silver)}
+.consult-hero__intro{color:var(--mut)}
+.consult-hero--cinema .consult-hero__intro,.consult-hero--cinema .j-link{color:var(--on-dark)}
+.film-toggle{background:rgba(0,0,0,.55);border-color:rgba(255,255,255,.45);color:#fff}
+.film-toggle:hover{background:var(--ink-soft)}
+.film-toggle:focus-visible{outline-color:#fff}
+.consulting-film .cinema-scrim{
+  background:linear-gradient(90deg,rgba(0,0,0,.9),rgba(0,0,0,.65) 46%,rgba(0,0,0,.1) 78%),
+    linear-gradient(0deg,rgba(0,0,0,.55),transparent 70%);
+}
+.j-closing--film .cinema-scrim{
+  background:linear-gradient(90deg,rgba(0,0,0,.9),rgba(0,0,0,.66) 46%,rgba(0,0,0,.1) 80%),
+    linear-gradient(0deg,rgba(0,0,0,.5),transparent 75%);
+}
+.banner--photo .banner__scrim{
+  background:linear-gradient(180deg,rgba(0,0,0,.4),rgba(0,0,0,.32) 45%,rgba(0,0,0,.8));
+}
+.banner--film .banner__scrim{
+  background:linear-gradient(180deg,rgba(0,0,0,.45),rgba(0,0,0,.25) 40%,rgba(0,0,0,.78) 82%,rgba(0,0,0,.98));
+}
+.philosophy-page .ph-banner--film .banner__scrim{
+  background:linear-gradient(90deg,rgba(0,0,0,.92),rgba(0,0,0,.7) 44%,rgba(0,0,0,.1) 78%);
+}
+.filmband__scrim{
+  background:linear-gradient(90deg,rgba(0,0,0,.86),rgba(0,0,0,.5) 52%,rgba(0,0,0,.22));
+}
+.filmband--hero .filmband__scrim{
+  background:linear-gradient(180deg,rgba(0,0,0,.4),rgba(0,0,0,.35) 38%,rgba(0,0,0,.85));
+}
+.filmband__text p,.filmframe__label{color:var(--silver)}
+.filmband__text .eyebrow,.stance__close b{color:var(--silver)}
+.filmframe__ph{color:var(--silver-dark)}
+.stance__p{color:var(--mut-on-dark)}
+.stance__p b,.stance__p--lead{color:var(--on-dark)}
+
+/* Homepage copy, real-case controls and consultation surfaces. */
+.home-cinema .j-promise{background:var(--metal-surface);color:var(--ink-soft)}
+.j-promise,.consult-credential,.portfolio-showcase .consult-credential{border-color:var(--line)}
+.j-promise span+span:before{color:var(--mut)}
+.portfolio-showcase,.j-results,.j-benefits{background:var(--paper-2)}
+.j-concerns,.j-styles,.j-booking{background:var(--paper)}
+.j-kicker,.j-heading>p:last-child:not(.j-kicker),.j-heading--row>p{color:var(--mut)}
+.consult-credential strong{color:var(--ink)}
+.consult-credential>span{color:var(--mut)}
+.portfolio-showcase .consult-hero__photo figcaption{color:var(--ink-soft)}
+.consult-hero__photo{background:var(--paper-2)}
+.consult-hero__photo:after{background:linear-gradient(transparent,rgba(0,0,0,.72))}
+.concern-tab{border-bottom-color:var(--line);color:var(--ink-soft)}
+.concern-tab span:first-child{color:var(--mut)}
+.concern-tab[aria-selected=true]{background:var(--ink);border-bottom-color:var(--ink);color:#fff}
+.concern-tab[aria-selected=true] span:first-child{color:var(--silver)}
+.concern-answers{background:var(--paper-2)}
+.concern-answer>p:not(.j-kicker){color:var(--ink-soft)}
+.concern-answer .concern-principle{color:var(--ink);border-top-color:var(--line)}
+.concern-evidence__media,.concern-evidence__pair>div{background:#e3e3e3}
+.concern-evidence figcaption,.concern-evidence__pair span{color:var(--ink-soft)}
+.case-compare__label{background:rgba(0,0,0,.7);color:#fff}
+.case-compare input{accent-color:var(--silver)}
+.case-compare__media{background:#dedede}
+.case-compare__state,.case-compare__toggle,.gallery-compare__controls{color:var(--ink-soft)}
+.case-compare__toggle:hover{color:var(--ink)}
+.case-compare__toggle:focus-visible{outline-color:var(--ink)}
+.gallery-compare__controls button:focus-visible{outline-color:var(--ink)}
+.j-case__num,.j-case__body p,.j-section-end{color:var(--mut)}
+.j-section-end,.j-core-grid>a,.j-faq{border-color:var(--line)}
+.j-consulting,.j-undecided,.j-closing{background:var(--char);color:var(--on-dark)}
+.j-consulting .j-kicker,.j-consulting .j-step,.consulting-film .j-kicker,.j-closing .j-kicker{color:var(--silver)}
+.j-consulting .j-heading>p:last-child:not(.j-kicker),.j-process-grid p,
+.consulting-film p,.j-undecided p,.j-closing>p:last-child,.closing-film__copy>p:last-child{color:var(--mut-on-dark)}
+.j-consulting>.j-wrap>.j-link{color:var(--on-dark);border-bottom-color:var(--line-d)}
+.j-process-grid video,.j-process-grid .process-frame{background:var(--char-2)}
+.process-playback button{color:var(--silver)}
+.process-playback button:focus-visible{outline-color:#fff}
+.j-core-grid span,.j-core-grid p,.j-core-grid .j-core-note,
+.j-core-grid .has-style-fit h3 small{color:var(--mut)}
+.j-core-grid .j-core-mood{color:var(--ink-soft)}
+.j-core-grid .home-core-media{background:#e3e3e3}
+.home-core-toggle{color:var(--ink-soft)}
+.home-core-toggle:hover{color:var(--ink)}
+.home-core-toggle:focus-visible{outline-color:var(--ink)}
+.j-benefit-grid,.j-benefit-grid article+article{border-color:var(--line)}
+.j-benefit-grid article{
+  background:var(--paper);border-top-color:var(--metal-border);
+  box-shadow:0 10px 24px rgba(0,0,0,.025);
+}
+.j-benefit-grid article>p,.j-benefit-note{color:var(--mut)}
+.j-designer img{background:var(--paper-2)}
+.j-designer h3 small,.j-designer p,.j-designer .j-designer-reason,.j-designer .j-designer-meta{color:var(--mut)}
+.j-designer span,.j-designer .j-designer-focus{color:var(--ink)}
+.j-designer .j-designer-meta,.booking-choice-list p{border-top-color:var(--line)}
+.j-booking-paths__grid>div{border-top-color:var(--line-d)}
+.j-booking-paths__grid strong{color:var(--on-dark)}
+.consult-dock{background:rgba(255,255,255,.97);border-top-color:var(--line)}
+.consult-dock>span{color:var(--mut)}
+.consult-dock b{color:var(--ink)}
+.consult-dock>a{background:var(--ink);color:#fff}
+.consult-hero__photo--puzzle,.designer-puzzle .core-puzzle__tile{background:var(--char)}
+.core-puzzle__tile,.designer-puzzle .designer-work-media{background:#dedede}
+.core-puzzle__tile:after{background:linear-gradient(transparent,rgba(0,0,0,.75))}
+.portfolio-showcase .style-fit-caption,.designer-puzzle .style-fit-caption p{color:var(--silver)}
+.consult-questions__hint,.consult-question p{color:var(--mut-on-dark)}
+.consult-question{border-color:var(--line-d);background:#222}
+.consult-question summary>span,.consult-questions>.j-link{color:var(--on-dark)}
+.consult-question[open]{border-color:var(--silver-dark);background:#2b2b2b}
+.consult-question summary:focus-visible{outline-color:#fff}
+
+/* Price and benefit states remain distinguishable without green. */
+.price-card,.fv-card{background:var(--paper);border-color:var(--line);box-shadow:0 10px 30px rgba(0,0,0,.045)}
+.fv-card:hover{box-shadow:0 12px 32px rgba(0,0,0,.08)}
+.price-tabs{background:var(--paper-2);box-shadow:inset 0 1px 0 #fff}
+.price-row{border-bottom-color:var(--line)}
+.price-row:hover{background:#f7f7f7}
+.price-card__h .npay{background:var(--ink);color:#fff}
+.price-perks .perk__pct--npay,.price-row .pay__new--npay{color:var(--ink)}
+.price-perks .perk--hot,.price-perks .perk--btn,.price-perks .perk--btn.perk--hot{
+  background:var(--metal-surface);border-color:var(--metal-border);color:var(--ink);
+}
+.perk--btn::after,.perk--btn.perk--hot::after{background:var(--ink);color:#fff;box-shadow:0 2px 6px rgba(0,0,0,.16)}
+.price-perks .perk--btn[aria-pressed="true"],.price-perks .perk--btn.perk--hot[aria-pressed="true"]{
+  background:var(--ink);border-color:var(--ink);color:#fff;box-shadow:none;
+}
+.price-perks .perk--btn[aria-pressed="true"] .perk__pct{color:#fff}
+.price-who .price-who__pct,.pay__lbl--npay,.pay__lbl--first,.pay__lbl--first30,
+.faq__tag,.desg__promo,.privilege,.desg__b .desg__disc{
+  background:var(--paper-2);color:var(--ink-soft);border-color:var(--line);
+}
+.faq__links a{border-color:var(--metal-border)}
+.faq__links a:hover{background:var(--ink);border-color:var(--ink);color:#fff}
+.desg__sns a:hover{background:var(--paper-2)}
+.desg{background:var(--paper)}
+.rev__tag--in,.rev__kw span{background:var(--paper-2);color:var(--ink-soft);border-color:var(--line)}
+.rev__tag{background:rgba(0,0,0,.65);color:#fff}
+.ba__label{background:rgba(0,0,0,.65);box-shadow:0 0 0 1px rgba(255,255,255,.3)}
+.ba__hint{background:rgba(0,0,0,.55)}
+.stat__yt{color:var(--ink)}
+.map-ico--naver,.map-ico--kakao{background:var(--ink);color:#fff}
+/* Only interface icons change; photographs and video pixels are untouched. */
+.desg__sns .sns-ico>rect:first-child{fill:var(--ink)}
+
+/* Archive panels and philosophy-page detail colours. */
+.core-panel,.core-panel__head,.smedia .vitem{background:var(--char)}
+.corephoto__key,.corephoto__ex,.core-panel__core,
+.core-panel .stitle small,.core-panel .vsep small,.core:hover .core__key{color:var(--silver)}
+.vitem__book{background:rgba(255,255,255,.94)}
+.styleblock__head{border-bottom-color:var(--line)}
+.core:hover{color:var(--on-dark)}
+.core:hover .core__idx,.core:hover .core__line,.core:hover .core__ex{color:var(--silver-dark)}
+.core:hover .core__desc{color:var(--silver)}
+.collage .c-gray{background:#bcbcbc}
+.collage__img{background:var(--metal-surface)}
+.collage__img span{background:rgba(242,242,242,.86)}
+.philosophy-page .ph-banner__note{color:var(--on-dark)}
+.philosophy-page .ph-media__stage{background:#e2e2e2}
+.philosophy-page .sec--dark .ph-copy>p:not(.eyebrow),
+.philosophy-page .sec--dark .ph-media figcaption,
+.philosophy-page .ph-choice p,.philosophy-page .ph-copy>p.ph-small-note,
+.philosophy-page .ph-reserve-options p{color:var(--mut-on-dark)}
+.philosophy-page .sec--dark .ph-copy strong,
+.philosophy-page .sec--dark .ph-media figcaption b,
+.philosophy-page .ph-choice h3,.philosophy-page .ph-reserve-options h3{color:var(--on-dark)}
+.philosophy-page .sec--dark .ph-play-toggle:hover,
+.philosophy-page .ph-reserve-actions .ph-text-link{color:#fff}
+.philosophy-page .ph-choice,.philosophy-page .ph-choice article,
+.philosophy-page .ph-reserve-options>div{border-color:var(--line-d)}
+
+@media(max-width:700px){
+  .consult-hero--cinema .cinema-scrim{
+    background:linear-gradient(0deg,#151515 3%,rgba(21,21,21,.98) 25%,rgba(21,21,21,.72) 40%,transparent 70%,rgba(0,0,0,.3));
+  }
+  .consulting-film .cinema-scrim,.j-closing--film .cinema-scrim{
+    background:linear-gradient(0deg,rgba(21,21,21,.98),rgba(21,21,21,.94) 29%,rgba(21,21,21,.66) 43%,rgba(21,21,21,.08) 66%,transparent 85%);
+  }
+  .philosophy-page .ph-banner--film .banner__scrim{
+    background:linear-gradient(0deg,#151515 3%,rgba(21,21,21,.95) 27%,rgba(21,21,21,.6) 45%,transparent 72%);
+  }
+  .j-benefit-grid article{box-shadow:none}
+}
+/* The before marker sits on dark media and must remain legible. */
+.j-core-grid .core-stage-label{color:#fff}

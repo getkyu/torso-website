@@ -1,4 +1,4 @@
-// Gallery-only enhancement: five-second before/after cycle, controls below the image.
+// Gallery-only enhancement: automatic three-second alternation with optional photo controls.
 (function () {
   'use strict';
   var boxes = Array.from(document.querySelectorAll('.gallery-compare'));
@@ -7,9 +7,9 @@
   var states = [];
   var observer = 'IntersectionObserver' in window ? new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {
-      entry.target.classList.toggle('is-in-view', entry.isIntersecting && entry.intersectionRatio >= .2);
+      entry.target.classList.toggle('is-in-view', entry.isIntersecting && entry.intersectionRatio >= .1);
     });
-  }, {threshold: [0, .2]}) : null;
+  }, {threshold: [0, .1]}) : null;
 
   boxes.forEach(function (box, index) {
     var before = box.querySelector('.ba__pic--b');
@@ -70,11 +70,10 @@
       }
     });
     state.configure = function () {
-      box.classList.toggle('is-reduced', reduced.matches);
-      controls.classList.toggle('is-reduced', reduced.matches);
-      toggle.hidden = reduced.matches;
-      state.paused = reduced.matches;
-      state.selected = reduced.matches ? 'after' : null;
+      // Automatic by default, including reduced-motion; direct photo choices remain optional.
+      box.classList.remove('is-reduced');
+      controls.classList.remove('is-reduced');
+      toggle.hidden = false;
       render();
     };
     state.configure();
@@ -88,5 +87,13 @@
   }
   document.addEventListener('visibilitychange', pageVisibility);
   pageVisibility();
-  reduced.addEventListener('change', function () { states.forEach(function (state) { state.configure(); }); });
+  window.addEventListener('pageshow', function () {
+    states.forEach(function (state) {
+      var rect = state.box.getBoundingClientRect();
+      state.box.classList.toggle('is-in-view', !observer || (rect.width > 0 && rect.bottom > 0 && rect.top < (window.innerHeight || document.documentElement.clientHeight)));
+    });
+    pageVisibility();
+  });
+  function motionChanged() { states.forEach(function (state) { state.configure(); }); }
+  if (reduced.addEventListener) reduced.addEventListener('change', motionChanged); else reduced.addListener(motionChanged);
 })();

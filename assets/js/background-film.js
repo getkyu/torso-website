@@ -10,8 +10,8 @@
     video.muted=true;video.defaultMuted=true;video.playsInline=true;video.loop=true;video.controls=false;
     video.setAttribute('muted','');video.setAttribute('playsinline','');video.setAttribute('webkit-playsinline','');
     var button=document.createElement('button');button.type='button';button.className='film-toggle';surface.appendChild(button);
-    function allowed(){return !document.hidden&&item.visible&&(mobile.matches||!item.paused)&&(mobile.matches||!reduced.matches||item.explicit);}
-    function label(){button.hidden=mobile.matches;button.textContent=video.paused?'▶ 영상 재생':'Ⅱ 영상 멈추기';button.setAttribute('aria-label',video.paused?'배경 영상 재생':'배경 영상 일시정지');button.setAttribute('aria-pressed',String(!video.paused));}
+    function allowed(){return !document.hidden&&item.visible&&(mobile.matches||!item.paused)&&(mobile.matches||!reduced.matches||item.explicit||video.hasAttribute('data-continuous'));}
+    function label(){button.hidden=mobile.matches||video.hasAttribute('data-no-controls');button.textContent=video.paused?'▶ 영상 재생':'Ⅱ 영상 멈추기';button.setAttribute('aria-label',video.paused?'배경 영상 재생':'배경 영상 일시정지');button.setAttribute('aria-pressed',String(!video.paused));}
     function syncAutoplay(){video.autoplay=allowed();if(video.autoplay)video.setAttribute('autoplay','');else video.removeAttribute('autoplay');}
     function failure(error){
       item.pending=false;
