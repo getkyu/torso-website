@@ -26,7 +26,7 @@
   gtag('js', new Date());
   gtag('config', 'G-F9YTZ0XVML');
 </script>
-<link rel="stylesheet" href="assets/css/cinematic-editorial.css?v=duo20261001">
+<link rel="stylesheet" href="assets/css/cinematic-editorial.css?v=autoplay20261001">
 </head>
 <body class="home-film philosophy-page">
 
@@ -200,35 +200,47 @@
   </div>
 </footer>
 
-<script src="assets/js/main.js?v=film20261001"></script>
+<script src="assets/js/main.js?v=autoplay20261001"></script>
 <script>
 (function () {
   var cards = Array.from(document.querySelectorAll('.philosophy-page .ph-media'));
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var mobile = window.matchMedia('(max-width:700px)');
   var active = new Set();
   function start(card) {
     var v = card.querySelector('video');
-    if (document.hidden || card.dataset.paused === 'true' || (reduced.matches && card.dataset.requested !== 'true')) return;
+    if (document.hidden || !active.has(card) || card._starting || (!mobile.matches && (card.dataset.paused === 'true' || (reduced.matches && card.dataset.requested !== 'true')))) return;
+    v.muted = true; v.defaultMuted = true; v.playsInline = true;
+    card._starting = true;
     var p = v.play();
-    if (p && p.catch) p.catch(function () {});
+    Promise.resolve(p).then(function () { card._starting = false; delete card.dataset.blocked; }).catch(function (err) {
+      card._starting = false;
+      if (err && err.name === 'NotAllowedError') card.dataset.blocked = 'true';
+    });
   }
   cards.forEach(function (card) {
     var v = card.querySelector('video');
     var button = card.querySelector('.ph-play-toggle');
-    v.controls = false;
-    v.muted = true;
-    button.hidden = false;
+    v.controls = false; v.muted = true; v.defaultMuted = true; v.playsInline = true; v.loop = true;
+    v.setAttribute('muted', ''); v.setAttribute('playsinline', ''); v.setAttribute('webkit-playsinline', '');
     function label() {
+      button.hidden = mobile.matches;
       button.textContent = v.paused ? '▶ 영상 보기' : 'Ⅱ 멈춰 보기';
       button.setAttribute('aria-label', v.getAttribute('aria-label') + (v.paused ? ' 재생' : ' 일시정지'));
     }
-    v.addEventListener('play', label);
-    v.addEventListener('pause', label);
+    function mode() {
+      v.autoplay = mobile.matches || !reduced.matches;
+      label();
+      if (mobile.matches) { delete card.dataset.paused; start(card); }
+    }
+    v.addEventListener('play', label); v.addEventListener('pause', label);
+    v.addEventListener('canplay', function () { start(card); });
     button.addEventListener('click', function () {
       if (v.paused) { card.dataset.paused = 'false'; card.dataset.requested = 'true'; start(card); }
       else { card.dataset.paused = 'true'; v.pause(); }
     });
-    label();
+    if (mobile.addEventListener) mobile.addEventListener('change', mode); else mobile.addListener(mode);
+    mode();
   });
   if ('IntersectionObserver' in window) {
     var observer = new IntersectionObserver(function (entries) {
@@ -239,17 +251,24 @@
     }, {threshold: 0.2});
     cards.forEach(function (card) { observer.observe(card); });
   } else { cards.forEach(function (card) { active.add(card); start(card); }); }
-  document.addEventListener('visibilitychange', function () {
+  function resume() {
     if (document.hidden) cards.forEach(function (card) { card.querySelector('video').pause(); });
     else active.forEach(start);
-  });
-  reduced.addEventListener('change', function () {
-    cards.forEach(function (card) { card.dataset.requested = 'false'; });
-    if (reduced.matches) cards.forEach(function (card) { card.querySelector('video').pause(); });
-    else active.forEach(start);
-  });
+  }
+  document.addEventListener('visibilitychange', resume); window.addEventListener('pageshow', resume);
+  function retryBlocked() { active.forEach(function (card) { if (card.dataset.blocked === 'true') start(card); }); }
+  ['pointerup', 'touchend', 'keydown'].forEach(function (event) { document.addEventListener(event, retryBlocked, {passive:true}); });
+  function motionChange() {
+    cards.forEach(function (card) {
+      card.dataset.requested = 'false';
+      var v = card.querySelector('video'); v.autoplay = mobile.matches || !reduced.matches;
+      if (reduced.matches && !mobile.matches) v.pause();
+      else start(card);
+    });
+  }
+  if (reduced.addEventListener) reduced.addEventListener('change', motionChange); else reduced.addListener(motionChange);
 })();
 </script>
-<script src="assets/js/background-film.js?v=film20261001"></script>
+<script src="assets/js/background-film.js?v=autoplay20261001"></script>
 </body>
 </html>
