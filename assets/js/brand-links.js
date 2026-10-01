@@ -2,6 +2,7 @@
 (function () {
   'use strict';
   var NS = 'http://www.w3.org/2000/svg';
+  var iconCount = 0;
 
   function element(name, attributes) {
     var node = document.createElementNS(NS, name);
@@ -21,12 +22,19 @@
         fill: 'currentColor'
       }));
     } else {
+      var gradientId = 'torso-instagram-' + (++iconCount);
+      var defs = element('defs', {});
+      var gradient = element('linearGradient', {id:gradientId, x1:'0', y1:'1', x2:'1', y2:'0'});
+      [['0%','#ffb347'],['42%','#f64f59'],['72%','#d6249f'],['100%','#8a5cf6']].forEach(function (stop) {
+        gradient.appendChild(element('stop', {offset:stop[0], 'stop-color':stop[1]}));
+      });
+      defs.appendChild(gradient); svg.appendChild(defs);
       svg.setAttribute('fill', 'none');
-      svg.setAttribute('stroke', 'currentColor');
+      svg.setAttribute('stroke', 'url(#' + gradientId + ')');
       svg.setAttribute('stroke-width', '1.8');
       svg.appendChild(element('rect', { x: '3', y: '3', width: '18', height: '18', rx: '5' }));
       svg.appendChild(element('circle', { cx: '12', cy: '12', r: '4' }));
-      svg.appendChild(element('circle', { cx: '17.4', cy: '6.6', r: '1', fill: 'currentColor', stroke: 'none' }));
+      svg.appendChild(element('circle', { cx: '17.4', cy: '6.6', r: '1', fill: '#d6249f', stroke: 'none' }));
     }
     return svg;
   }

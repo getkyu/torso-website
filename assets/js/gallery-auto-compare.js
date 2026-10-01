@@ -3,20 +3,42 @@
   'use strict';
   var boxes = Array.from(document.querySelectorAll('.gallery-compare'));
   if (!boxes.length) return;
-  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
   var states = [];
-  var observer = 'IntersectionObserver' in window ? new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      entry.target.classList.toggle('is-in-view', entry.isIntersecting && entry.intersectionRatio >= .1);
-    });
-  }, {threshold: [0, .1]}) : null;
+  var refreshPending = false;
+  function inViewport(box) {
+    var rect = box.getBoundingClientRect();
+    return rect.width > 0 && rect.height > 0 && rect.bottom > 0 && rect.top < (window.innerHeight || document.documentElement.clientHeight);
+  }
+  function sync(state) {
+    var active = inViewport(state.box) && !document.hidden && !state.paused;
+    state.box.classList.toggle('is-in-view', active);
+    if (!active) {
+      clearTimeout(state.timer); state.timer = null;
+    } else if (state.timer === null) {
+      state.timer = setTimeout(function () {
+        state.timer = null;
+        if (inViewport(state.box) && !document.hidden && !state.paused) {
+          state.current = state.current === 'before' ? 'after' : 'before';
+          state.render();
+        }
+        sync(state);
+      }, 3000);
+    }
+  }
+  function refresh() { states.forEach(sync); }
+  function requestRefresh() {
+    if (refreshPending) return;
+    refreshPending = true;
+    requestAnimationFrame(function () { refreshPending = false; refresh(); });
+  }
+  var observer = 'IntersectionObserver' in window ? new IntersectionObserver(refresh, {threshold:0}) : null;
 
   boxes.forEach(function (box, index) {
     var before = box.querySelector('.ba__pic--b');
     var after = box.querySelector('.ba__pic--a');
     if (!before || !after) return;
     var label = (index + 1) + '번째 시술 사례';
-    var state = {box: box, paused: false, selected: null};
+    var state = {box: box, paused: false, selected: null, current: 'before', timer: null};
     var controls = document.createElement('div');
     controls.className = 'gallery-compare__controls';
     controls.setAttribute('role', 'group');
@@ -40,7 +62,17 @@
     box.classList.add('is-enhanced');
     box.parentNode.insertAdjacentElement('afterend', controls);
 
+    var beforeLabel = controls.querySelector('.gallery-state--before');
+    var afterLabel = controls.querySelector('.gallery-state--after');
+    [after, beforeLabel, afterLabel].forEach(function(node) {
+      node.style.setProperty('animation', 'none', 'important');
+    });
     function render() {
+      box.setAttribute('data-compare-state', state.current);
+      controls.setAttribute('data-compare-state', state.current);
+      after.style.opacity = state.current === 'after' ? '1' : '0';
+      beforeLabel.style.opacity = state.current === 'before' ? '1' : '0';
+      afterLabel.style.opacity = state.current === 'after' ? '1' : '0';
       box.classList.toggle('is-paused', state.paused);
       box.classList.toggle('show-before', state.selected === 'before');
       box.classList.toggle('show-after', state.selected === 'after');
@@ -55,7 +87,9 @@
     function show(which) {
       state.paused = true;
       state.selected = which;
+      state.current = which;
       render();
+      sync(state);
     }
     beforeButton.addEventListener('click', function () { show('before'); });
     afterButton.addEventListener('click', function () { show('after'); });
@@ -67,33 +101,25 @@
         state.paused = false;
         state.selected = null;
         render();
+        sync(state);
       }
     });
-    state.configure = function () {
-      // Automatic by default, including reduced-motion; direct photo choices remain optional.
-      box.classList.remove('is-reduced');
-      controls.classList.remove('is-reduced');
-      toggle.hidden = false;
-      render();
-    };
-    state.configure();
+    state.render = render;
+    box.classList.remove('is-reduced');
+    controls.classList.remove('is-reduced');
+    render();
     states.push(state);
+    sync(state);
     if (observer) observer.observe(box);
-    else box.classList.add('is-in-view');
   });
 
-  function pageVisibility() {
-    states.forEach(function (state) { state.box.classList.toggle('is-page-hidden', document.hidden); });
-  }
-  document.addEventListener('visibilitychange', pageVisibility);
-  pageVisibility();
-  window.addEventListener('pageshow', function () {
-    states.forEach(function (state) {
-      var rect = state.box.getBoundingClientRect();
-      state.box.classList.toggle('is-in-view', !observer || (rect.width > 0 && rect.bottom > 0 && rect.top < (window.innerHeight || document.documentElement.clientHeight)));
-    });
-    pageVisibility();
+  // A timer changes the actual displayed photo, independent of CSS animation
+  // preferences. Offscreen/background cards wait without losing their state.
+  window.addEventListener('scroll', requestRefresh, {passive:true});
+  window.addEventListener('resize', requestRefresh);
+  document.addEventListener('visibilitychange', refresh);
+  window.addEventListener('pageshow', refresh);
+  window.addEventListener('pagehide', function() {
+    states.forEach(function(state) { clearTimeout(state.timer); state.timer = null; });
   });
-  function motionChanged() { states.forEach(function (state) { state.configure(); }); }
-  if (reduced.addEventListener) reduced.addEventListener('change', motionChanged); else reduced.addListener(motionChanged);
 })();
