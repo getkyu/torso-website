@@ -1023,51 +1023,70 @@ document.querySelectorAll('a[href]').forEach(a => {
   });
 })();
 
-// Consultation clips play silently when visible, with explicit tap-to-play fallback.
+// Consultation clips: automatic mobile playback; desktop preferences remain available.
 (function () {
   var videos = Array.from(document.querySelectorAll('.j-process-grid video'));
   if (!videos.length) return;
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
-  var visible = new Set();
+  var mobile = window.matchMedia('(max-width:700px)');
+  var visible = new Set(), pending = new WeakSet(), gestureRetried = new WeakSet();
+  function allowed(video) {
+    return visible.has(video) && !document.hidden && (mobile.matches || video.dataset.userPaused !== 'true') && (mobile.matches || !reduced.matches || video.dataset.motionAllowed === 'true');
+  }
   function silence(video) {
     video.muted = true; video.defaultMuted = true; video.playsInline = true;
-    video.setAttribute('muted', ''); video.setAttribute('playsinline', '');
+    video.setAttribute('muted', ''); video.setAttribute('playsinline', ''); video.setAttribute('webkit-playsinline', '');
   }
   function start(video) {
-    if ((reduced.matches && video.dataset.motionAllowed !== 'true') || document.hidden || video.dataset.userPaused === 'true' || video.dataset.autoplayBlocked === 'true') return;
     silence(video);
-    var playing = video.play();
-    if (playing && playing.catch) playing.catch(function (error) {
-      if ((error && error.name === 'AbortError') || !visible.has(video) || document.hidden || video.dataset.userPaused === 'true') return;
-      video.dataset.autoplayBlocked = 'true';
+    video.autoplay = allowed(video);
+    if (video.autoplay) video.setAttribute('autoplay', ''); else video.removeAttribute('autoplay');
+    if (!allowed(video)) { video.pause(); return; }
+    if (pending.has(video)) return;
+    pending.add(video);
+    var playing;
+    try { playing = video.play(); } catch (error) { failed(error); return; }
+    Promise.resolve(playing).then(function () {
+      pending.delete(video); gestureRetried.delete(video); delete video.dataset.autoplayBlocked;
+      if (!allowed(video)) video.pause();
       video.dispatchEvent(new Event('torso:playbackchange'));
-    });
+    }).catch(failed);
+    function failed(error) {
+      pending.delete(video);
+      if (error && error.name === 'NotAllowedError' && allowed(video)) video.dataset.autoplayBlocked = 'true';
+      else delete video.dataset.autoplayBlocked;
+      video.dispatchEvent(new Event('torso:playbackchange'));
+    }
   }
   videos.forEach(function (video) {
-    silence(video);
-    if (reduced.matches) { video.removeAttribute('autoplay'); video.pause(); }
+    silence(video); video.autoplay = false; video.removeAttribute('autoplay'); video.pause();
+    video.addEventListener('loadeddata', function () { start(video); });
+    video.addEventListener('canplay', function () { start(video); });
+    video.addEventListener('playing', function () { if (!allowed(video)) video.pause(); });
   });
   if ('IntersectionObserver' in window) {
     var observer = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
-        if (entry.isIntersecting && entry.intersectionRatio >= 0.15) { visible.add(entry.target); start(entry.target); }
-        else { visible.delete(entry.target); entry.target.pause(); }
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.15) visible.add(entry.target);
+        else visible.delete(entry.target);
+        start(entry.target);
       });
     }, {threshold:[0, 0.15]});
     videos.forEach(function (video) { observer.observe(video); });
   } else { videos.forEach(function (video) { visible.add(video); start(video); }); }
-  document.addEventListener('visibilitychange', function () {
-    if (document.hidden) videos.forEach(function (video) { video.pause(); });
-    else visible.forEach(start);
-  });
-  window.addEventListener('pageshow', function () { visible.forEach(start); });
-  function motionChanged() {
-    videos.forEach(function (video) {
-      delete video.dataset.motionAllowed;
-      if (reduced.matches) { video.removeAttribute('autoplay'); video.pause(); }
+  function sync() { videos.forEach(start); }
+  function gesture() {
+    visible.forEach(function (video) {
+      if (video.dataset.autoplayBlocked === 'true' && !gestureRetried.has(video) && !pending.has(video)) {
+        gestureRetried.add(video); start(video);
+      }
     });
-    if (!reduced.matches) visible.forEach(start);
   }
-  if (reduced.addEventListener) reduced.addEventListener('change', motionChanged);
-  else reduced.addListener(motionChanged);
+  document.addEventListener('touchend', gesture, {passive:true});
+  document.addEventListener('pointerup', gesture, {passive:true});
+  document.addEventListener('keydown', gesture);
+  document.addEventListener('visibilitychange', sync); window.addEventListener('pageshow', sync);
+  function motionChanged() { videos.forEach(function (video) { delete video.dataset.motionAllowed; }); sync(); }
+  if (reduced.addEventListener) reduced.addEventListener('change', motionChanged); else reduced.addListener(motionChanged);
+  if (mobile.addEventListener) mobile.addEventListener('change', sync); else mobile.addListener(sync);
 })();
