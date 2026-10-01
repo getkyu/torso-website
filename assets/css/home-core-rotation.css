@@ -23,3 +23,8 @@
 .j-core-grid .home-core-media>.rotation-hold{position:absolute;left:50%;top:50%;height:auto;max-width:none;object-fit:contain;transform-origin:0 0;opacity:0;pointer-events:none}
 .j-core-grid .home-core-media>.rotation-hold.is-visible{opacity:1}
 .j-core-grid .home-core-media>video.is-loading{opacity:0;transition:none}
+
+/* Match the static and moving artwork without filling the card with a close-up. */
+.j-core-grid .home-core-media>img{object-fit:contain;object-position:center}
+.j-core-grid .home-core-media>img.is-framed{inset:auto;left:50%;top:46%;height:auto;max-width:none;object-fit:contain;transform-origin:0 0}
+.j-core-grid .home-core-media>video,.j-core-grid .home-core-media>.rotation-hold{top:46%}
