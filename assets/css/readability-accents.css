@@ -1,0 +1,151 @@
+/* TORSO keeps its monochrome surfaces; colour only identifies a next step or benefit. */
+:root{--guide-cobalt:#294f8e;--benefit-copper:#915329}
+.customer-journey :is(.j-concerns,.j-styles,.j-benefits,.journey-designers) .j-link,
+.smedia .vitem>.vitem__book,
+.price-compare-key strong,
+.program-price-option>small{color:var(--guide-cobalt)}
+.product-story .concern-tab[aria-selected=true]{box-shadow:inset 3px 0 0 var(--guide-cobalt)}
+.price-first-badge{background:var(--benefit-copper);color:#fff}
+.price-first-panel__heading h3,
+.price-first-grid .price-compare-amounts strong,
+.journey-designer-profile .profile-price-mini--first .profile-price-mini__title,
+.profile-price-mini--first .price-compare-amounts strong,
+.program-price-option--first>small,
+.program-price-option--first .price-compare-amounts strong{color:var(--benefit-copper)}
+.price-first-panel,.profile-price-mini--first{border-top:2px solid var(--benefit-copper)}
+
+.hero-intro-lead,.hero-intro-scope{display:block}
+.hero-intro-scope{margin-top:12px}
+
+@media(max-width:700px){
+ body{font-size:16px;line-height:1.75;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+ body p{font-size:15px;line-height:1.8;overflow-wrap:break-word}
+ body small{font-size:12px;line-height:1.65}
+ body :is(.shead p,.styleblock__head p,.stylecard__body p,.desg__dx,.rev__text,.feature p,.fv-more,.price-note,.ph-small-note){font-size:15px;line-height:1.8}
+ body :is(.eyebrow,.prog-tag,.styleblock__head .cnt){font-size:12px;line-height:1.6;letter-spacing:.06em}
+ body :is(.shead h2,.style-core__head h2){font-size:clamp(28px,7.6vw,36px);line-height:1.35;letter-spacing:-.045em}
+ body :is(.styleblock__head h3,.stylecard__body h3,.feature h3){font-size:20px;line-height:1.5}
+ body .style-core__line{font-size:14px;line-height:1.7;letter-spacing:0}
+ body :is(.styleblock__head h3 small,.stylecard__body h3 small){font-size:13px}
+ body .faq summary{font-size:16px;line-height:1.7}
+ body .faq p{font-size:15px;line-height:1.85}
+ body :is(.faq__tag,.fv-card__role,.desg__b .role,.desg__dx-k,.privilege__k){font-size:12px;line-height:1.6}
+ body :is(.fv-card__menu,.desg__b .off,.desg__promo,.desg__disc){font-size:14px;line-height:1.8}
+ body .fv-card__names{font-size:18px;line-height:1.6}
+ body .desg__b p{font-size:15px;line-height:1.8}
+ body .desg__b h3{font-size:24px;line-height:1.45}
+ .foot :is(.foot__logo p,.foot__col a,.foot__col span){font-size:14px;line-height:1.8}
+ .foot :is(.foot__col h4,.foot__bottom){font-size:12px;line-height:1.75}
+
+ /* The longer consultation introduction can expand instead of colliding with a fixed hero. */
+ .home-cinema .consult-hero--cinema{height:auto;min-height:max(820px,100svh);max-height:none;padding:clamp(360px,108vw,540px) 0 112px;box-sizing:border-box}
+ .home-cinema .consult-hero--cinema .consult-hero__copy{padding:0 22px;min-width:0}
+ .home-cinema .consult-hero--cinema h1{font-size:clamp(39px,10.5vw,55px);line-height:1.18;max-width:none;font-weight:700}
+ .home-cinema .consult-hero--cinema .consult-brand{display:block;font-size:12px;line-height:1.6;letter-spacing:.08em;margin-bottom:18px}
+ .home-cinema .consult-hero--cinema .consult-brand span{display:block;width:fit-content;font-size:12px;line-height:1.6;margin:7px 0 0;padding:0;border:0}
+ .home-cinema .consult-hero--cinema .consult-hero__intro{font-size:16px;line-height:1.8;margin:20px 0 25px;max-width:none;word-break:keep-all;overflow-wrap:break-word}
+ .home-cinema .consult-hero--cinema .consult-hero__intro br{display:initial}
+ .hero-intro-lead,.hero-intro-scope{display:block}
+ .hero-intro-scope{margin-top:12px}
+ .hero-intro-scope strong{font-weight:650;color:#fff}
+ .home-cinema .consult-hero--cinema .j-btn{font-size:15px;line-height:1.5;min-height:50px;padding:13px 20px;white-space:normal}
+ .home-cinema .cinema-bottom{font-size:12px;line-height:1.6;gap:12px}
+ .product-story .j-promise{display:flex;justify-content:center;flex-wrap:wrap;row-gap:5px;font-size:12px;line-height:1.7;padding:21px 16px}
+ .product-story .j-promise span{white-space:normal}
+ .product-story .j-promise span+span:before{margin:0 8px}
+
+ .customer-journey .j-heading h2{font-size:clamp(30px,8vw,36px);font-weight:700;line-height:1.35}
+ .customer-journey .j-heading>p,.customer-journey .j-heading--row>p{font-size:16px;line-height:1.8}
+ .customer-journey .j-heading .j-kicker{font-size:12px;line-height:1.6;letter-spacing:.08em}
+ .customer-journey .concern-tab{font-size:15px;line-height:1.65;min-height:66px;padding:16px 13px}
+ .customer-journey .journey-answer-copy h3{font-size:24px;line-height:1.45;min-height:116px;font-weight:700;overflow-wrap:break-word}
+ .customer-journey .journey-answer-copy>p:not(.j-kicker){font-size:15px;line-height:1.9}
+ .customer-journey .journey-answer-copy .j-kicker{font-size:12px;line-height:1.7}
+ .customer-journey .journey-answer-copy .concern-principle{font-size:14px;line-height:1.8}
+ .customer-journey .journey-answer-copy .j-link{font-size:14px;line-height:1.75}
+ .customer-journey .journey-answer-image figcaption{font-size:12px;line-height:1.5;padding:25px 8px 9px;word-break:keep-all}
+ .customer-journey .j-case .j-case__body h3{font-size:20px;line-height:1.45;font-weight:700}
+ .customer-journey .j-case:first-child .j-case__body h3{font-size:24px}
+ .customer-journey .j-case .j-case__body p{font-size:14px;line-height:1.8}
+ .customer-journey .j-case .case-compare__state,.customer-journey .j-case .case-compare__toggle{font-size:12px;line-height:1.6}
+ .customer-journey .j-section-end,.customer-journey .j-section-end a{font-size:14px;line-height:1.75}
+ .customer-journey .j-core-grid .has-style-fit h3{font-size:20px;line-height:1.45;min-height:0;margin:15px 0 10px;font-weight:650}
+ .customer-journey .j-core-grid .has-style-fit h3 small{font-size:12px;line-height:1.65}
+ .customer-journey .j-core-grid .j-core-note{font-size:14px;line-height:1.8;min-height:0}
+ .customer-journey .j-core-grid .j-core-mood{font-size:13px;line-height:1.7}
+ .customer-journey .j-core-grid>a{min-width:0}
+ .j-core-grid .home-core-media>.style-name-label,
+ .designer-puzzle .designer-work-media>.style-name-label,
+ .smedia .style-card-media>.vitem__tag.style-name-label{font-size:14px;line-height:1.55;letter-spacing:0}
+ .smedia .vitem>.vitem__book{font-size:12px;line-height:1.6;padding:11px 4px;min-height:46px;white-space:normal;flex-wrap:wrap;text-align:center;overflow-wrap:break-word}
+
+ .customer-journey .j-process-grid h3{font-size:23px;line-height:1.45;font-weight:700}
+ .customer-journey .j-process-grid p{font-size:15px;line-height:1.85}
+ .customer-journey .j-process-grid .j-step{font-size:12px;line-height:1.6}
+ .customer-journey .j-consulting>.j-wrap>.j-link,.journey-more>summary{font-size:15px;line-height:1.8}
+ .consult-question summary{font-size:15px;line-height:1.7}
+ .consult-question :is(p,li){font-size:15px;line-height:1.85}
+ .customer-journey .journey-designers .core-puzzle__tile{min-height:400px}
+ .customer-journey .journey-designers .designer-work-media{bottom:173px}
+ .customer-journey .journey-designers .core-puzzle__tile>span{font-size:13px;line-height:1.5;bottom:148px}
+ .customer-journey .journey-designers .style-fit-caption{height:132px;bottom:10px}
+ .customer-journey .journey-designers .style-fit-caption strong{font-size:16px;line-height:1.5;overflow-wrap:break-word}
+ .customer-journey .journey-designers .style-fit-caption p{font-size:14px;line-height:1.65;overflow-wrap:break-word}
+ .customer-journey .journey-person h3{font-size:26px;line-height:1.4}
+ .customer-journey .journey-person h3 small{font-size:12px;line-height:1.5}
+ .customer-journey .journey-designer-profile p{font-size:15px;line-height:1.85}
+ .customer-journey .journey-designer-profile .journey-designer-focus{font-size:20px;line-height:1.5}
+ .customer-journey .journey-designer-meta{font-size:12px;line-height:1.8}
+ .customer-journey .journey-designer-profile .j-link{font-size:14px;line-height:1.65}
+ .customer-journey .j-booking-paths__intro,.customer-journey .j-booking-paths__grid p{font-size:15px;line-height:1.85}
+ .customer-journey .j-booking-paths__grid h4{font-size:18px;line-height:1.6}
+ .customer-journey .journey-booking .j-btn{font-size:15px;line-height:1.6}
+
+ /* Four price columns remain comparable even at 320px: remove padding, not digits. */
+ .product-story .price-comparison-sheet{padding:24px 8px}
+ .product-story .journey-price-caption{font-size:16px;line-height:1.6}
+ .product-story .journey-price-caption span,.price-compare-key,.price-first-terms,.journey-price-note{font-size:12px;line-height:1.8}
+ .product-story .journey-grade-prices.price-compare-table thead th:not(:first-child){font-size:12px;height:62px;line-height:1.45;padding:10px 1px;overflow-wrap:anywhere}
+ .product-story .journey-grade-prices.price-compare-table tbody th{font-size:14px;line-height:1.6;gap:8px}
+ .product-story .journey-grade-prices.price-compare-table tbody th small{font-size:12px;line-height:1.6}
+ .product-story .journey-grade-prices.price-compare-table tbody td{padding:12px 0;min-width:0}
+ .product-story .price-compare-table .price-compare-amounts s{font-size:13px;line-height:1.5;letter-spacing:-.035em}
+ .product-story .price-compare-table .price-compare-amounts strong{font-size:14px;line-height:1.5;letter-spacing:-.035em}
+ .price-first-panel__heading h3{font-size:20px;line-height:1.5}
+ .price-first-panel__heading p{font-size:14px;line-height:1.8}
+ .price-first-badge{font-size:12px;line-height:1.5}
+ .price-first-grid dt{font-size:14px;line-height:1.6}
+ .price-first-grid .price-compare-amounts{flex-direction:column;align-items:flex-start;gap:3px}
+ .price-first-grid .price-compare-amounts s{font-size:13px}
+ .price-first-grid .price-compare-amounts strong{font-size:20px}
+ .journey-designer-profile .profile-price-mini .profile-price-mini__title{font-size:14px;line-height:1.65}
+ .profile-price-mini__rows dt{font-size:13px;line-height:1.6}
+ .profile-price-mini .price-compare-amounts s{font-size:13px}
+ .profile-price-mini .price-compare-amounts strong{font-size:18px}
+ .journey-designer-profile .profile-price-mini .profile-price-mini__terms{font-size:12px;line-height:1.8}
+ .price-comparison-page .price-tab{font-size:13px;line-height:1.6;min-height:44px;padding:10px 2px;letter-spacing:-.035em}
+ .price-comparison-page .price-card__h .perk{font-size:12px;line-height:1.5;white-space:normal;padding:7px 9px}
+ .price-comparison-page .price-card__h .prog-tag,.price-hint,.price-note,.price-divider{font-size:12px;line-height:1.8}
+ .price-comparison-page .price-row .name{font-size:16px;line-height:1.6}
+ .price-comparison-page .price-row .name .name__sub{font-size:14px;line-height:1.8;margin-top:5px}
+ .price-comparison-page .program-price-comparison{gap:12px;flex-wrap:wrap}
+ .price-comparison-page .program-price-option+.program-price-option{padding-left:12px}
+ .price-comparison-page .program-price-option>small{font-size:12px;line-height:1.6;white-space:normal}
+ .price-comparison-page .program-price-option .price-compare-amounts{flex-direction:column;align-items:flex-start;gap:3px}
+ .price-comparison-page .program-price-option .price-compare-amounts s{font-size:13px}
+ .price-comparison-page .program-price-option .price-compare-amounts strong{font-size:22px}
+ .price-comparison-page .price-row .pay__lbl{font-size:12px;line-height:1.6}
+}
+
+@media(max-width:480px){
+ /* Larger copy needs full-width reading space beside detailed designer prices. */
+ .customer-journey .journey-designer{grid-template-columns:minmax(0,1fr);gap:20px}
+ .customer-journey .journey-designers .core-puzzle__tile{height:420px;min-height:0}
+ .customer-journey .journey-designers .designer-work-media{bottom:143px}
+ .customer-journey .journey-designers .core-puzzle__tile>span{bottom:118px}
+ .customer-journey .journey-designers .style-fit-caption{height:101px}
+ .customer-journey .j-case-grid{grid-template-columns:minmax(0,1fr)}
+ .customer-journey .j-case:first-child{grid-column:auto}
+ .customer-journey .j-case .j-case__body h3{font-size:23px}
+ .customer-journey .j-case .j-case__body p{font-size:15px}
+}
