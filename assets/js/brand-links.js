@@ -1,6 +1,8 @@
-// Identify booking and Instagram destinations without changing their links or labels.
+// Identify platform destinations without changing their URLs or visible labels.
 (function () {
   'use strict';
+  if (!document.body || document.documentElement.dataset.brandLinksReady) return;
+  document.documentElement.dataset.brandLinksReady = 'true';
   var NS = 'http://www.w3.org/2000/svg';
   var iconCount = 0;
 
@@ -40,15 +42,26 @@
   }
 
   function decorate(link) {
-    if (link.querySelector('.sns-ico, .brand-link-icon')) return;
     var destination;
     try { destination = new URL(link.getAttribute('href'), document.baseURI); }
     catch (_) { return; }
     if (destination.protocol !== 'https:' && destination.protocol !== 'http:') return;
     var host = destination.hostname.toLowerCase();
     var brand = host === 'booking.naver.com' ? 'naver' :
-      (host === 'instagram.com' || host === 'www.instagram.com') ? 'instagram' : '';
+      (host === 'instagram.com' || host === 'www.instagram.com') ? 'instagram' :
+      (host === 'youtube.com' || host === 'www.youtube.com' || host === 'youtu.be') ? 'youtube' :
+      (host === 'blog.naver.com' || host === 'm.blog.naver.com') ? 'blog' : '';
     if (!brand) return;
+
+    // Platform colour belongs to the designer's external links, not the whole site.
+    if (link.closest('.desg')) {
+      link.classList.add('platform-link', 'platform-link--' + brand);
+      if (brand === 'blog' && link.getAttribute('aria-label') === 'Blog') {
+        link.setAttribute('aria-label', '네이버 블로그');
+      }
+    }
+    if (link.querySelector('.sns-ico, .brand-link-icon')) return;
+    if (brand !== 'naver' && brand !== 'instagram') return;
 
     // Replace generic calendar/message symbols; preserve existing SNS logos and media cards.
     var existing = link.querySelector('svg.btn__ic');
@@ -66,6 +79,9 @@
   }
 
   scan(document.body);
+  document.querySelectorAll('.desg .desg__disc').forEach(function (badge) {
+    if (/Npay|N페이/i.test(badge.textContent)) badge.classList.add('brand-benefit--npay');
+  });
   // Style galleries add reservation links when opened. Only inspect newly added nodes.
   if ('MutationObserver' in window) {
     new MutationObserver(function (records) {
