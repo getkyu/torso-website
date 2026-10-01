@@ -76,6 +76,13 @@ Object.keys(cores).forEach(function(core){cores[core].styles.forEach(function(st
 document.querySelectorAll('.smedia[data-style]').forEach(function(grid){
  var style=catalog[grid.dataset.style];if(!style)return;
  grid.querySelectorAll('.vitem').forEach(function(tile){
+  var booking=tile.querySelector('.vitem__book');if(booking)booking.textContent=booking.textContent.replace(/^✂︎\s*/, '');
+  // Keep the booking link outside the artwork so it cannot cover a hairstyle.
+  if(!tile.querySelector('.style-card-media')){
+   var mediaFrame=document.createElement('div');mediaFrame.className='style-card-media';
+   Array.from(tile.children).forEach(function(child){if(!child.classList.contains('vitem__book'))mediaFrame.appendChild(child);});
+   tile.insertBefore(mediaFrame,tile.firstChild);
+  }
   var tag=tile.querySelector('.vitem__tag'),video=tile.querySelector('video');if(!tag)return;
   var fit=video?map[fileName(video.getAttribute('src'))]:null;
   if(video&&!fit)return;
