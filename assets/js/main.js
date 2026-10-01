@@ -988,38 +988,45 @@ document.querySelectorAll('a[href]').forEach(a => {
   }
 })();
 
-// Automatic before/after dissolve. Motion is optional and stops off screen.
+// Automatic before/after dissolve, with an optional pause for closer inspection.
 (function () {
-  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
   var cases = Array.from(document.querySelectorAll('.case-compare--auto'));
+  if (!cases.length) return;
+  var states = [];
+  function inViewport(box) {
+    var rect = box.getBoundingClientRect();
+    return rect.width > 0 && rect.bottom > 0 && rect.top < (window.innerHeight || document.documentElement.clientHeight);
+  }
+  function sync(state) { state.box.classList.toggle('is-in-view', state.inView && !document.hidden); }
   var observer = 'IntersectionObserver' in window ? new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) { entry.target.classList.toggle('is-in-view', entry.isIntersecting); });
-  }, {threshold:.25}) : null;
+    entries.forEach(function(entry) {
+      var state = states.find(function(item) { return item.box === entry.target; });
+      if (state) { state.inView = entry.isIntersecting && entry.intersectionRatio >= .1; sync(state); }
+    });
+  }, {threshold:[0,.1]}) : null;
   cases.forEach(function(box) {
     var toggle = box.querySelector('.case-compare__toggle');
-    var label = box.getAttribute('aria-label').replace(' 시술 전후 자동 비교', '');
-    function configure() {
-      box.classList.toggle('is-reduced', reduced.matches);
-      box.classList.remove('is-paused', 'show-before');
-      toggle.setAttribute('aria-pressed','false');
-      toggle.innerHTML = reduced.matches ? '시술 전 보기' : '<span aria-hidden="true">Ⅱ</span> 멈춰 보기';
-      toggle.setAttribute('aria-label', label + (reduced.matches ? ' 시술 전 보기' : ' 자동 비교 일시정지'));
+    var label = (box.getAttribute('aria-label') || '시술 사례').replace(' 시술 전후 자동 비교', '');
+    var state = {box:box, inView:observer ? inViewport(box) : true};
+    // The requested automatic comparison also runs with reduced-motion enabled.
+    box.classList.remove('is-reduced', 'is-paused', 'show-before');
+    function updateToggle() {
+      if (!toggle) return;
+      var paused = box.classList.contains('is-paused');
+      toggle.setAttribute('aria-pressed', String(paused));
+      toggle.innerHTML = paused ? '<span aria-hidden="true">▶</span> 다시 보기' : '<span aria-hidden="true">Ⅱ</span> 멈춰 보기';
+      toggle.setAttribute('aria-label', label + (paused ? ' 자동 비교 재생' : ' 자동 비교 일시정지'));
     }
-    configure(); reduced.addEventListener('change', configure);
-    if (observer) observer.observe(box); else box.classList.add('is-in-view');
-    toggle.addEventListener('click', function() {
-      if (reduced.matches) {
-        var before = box.classList.toggle('show-before');
-        toggle.textContent = before ? '시술 후 보기' : '시술 전 보기';
-        toggle.setAttribute('aria-label',label + ' ' + toggle.textContent);
-        toggle.setAttribute('aria-pressed',String(before));
-      } else {
-        var paused = box.classList.toggle('is-paused');
-        toggle.innerHTML = paused ? '<span aria-hidden="true">▶</span> 다시 보기' : '<span aria-hidden="true">Ⅱ</span> 멈춰 보기';
-        toggle.setAttribute('aria-label',label + (paused ? ' 자동 비교 재생' : ' 자동 비교 일시정지'));
-        toggle.setAttribute('aria-pressed',String(paused));
-      }
+    updateToggle();
+    if (toggle) toggle.addEventListener('click', function() {
+      box.classList.toggle('is-paused'); updateToggle();
     });
+    states.push(state); sync(state);
+    if (observer) observer.observe(box);
+  });
+  document.addEventListener('visibilitychange', function() { states.forEach(sync); });
+  window.addEventListener('pageshow', function() {
+    states.forEach(function(state) { state.inView = observer ? inViewport(state.box) : true; sync(state); });
   });
 })();
 
