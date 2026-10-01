@@ -209,7 +209,10 @@
   var active = new Set();
   function start(card) {
     var v = card.querySelector('video');
-    if (document.hidden || !active.has(card) || card._starting || (!mobile.matches && (card.dataset.paused === 'true' || (reduced.matches && card.dataset.requested !== 'true')))) return;
+    var allowed = !document.hidden && active.has(card) && (mobile.matches || (card.dataset.paused !== 'true' && (!reduced.matches || card.dataset.requested === 'true')));
+    v.autoplay = allowed;
+    if (!allowed) { v.pause(); return; }
+    if (card._starting) return;
     v.muted = true; v.defaultMuted = true; v.playsInline = true;
     card._starting = true;
     var p = v.play();
@@ -229,12 +232,13 @@
       button.setAttribute('aria-label', v.getAttribute('aria-label') + (v.paused ? ' 재생' : ' 일시정지'));
     }
     function mode() {
-      v.autoplay = mobile.matches || !reduced.matches;
+      v.autoplay = active.has(card) && !document.hidden && (mobile.matches || !reduced.matches);
       label();
       if (mobile.matches) { delete card.dataset.paused; start(card); }
     }
     v.addEventListener('play', label); v.addEventListener('pause', label);
     v.addEventListener('canplay', function () { start(card); });
+    v.addEventListener('playing', function () { if (!active.has(card) || document.hidden) { v.autoplay = false; v.pause(); } });
     button.addEventListener('click', function () {
       if (v.paused) { card.dataset.paused = 'false'; card.dataset.requested = 'true'; start(card); }
       else { card.dataset.paused = 'true'; v.pause(); }
@@ -261,7 +265,7 @@
   function motionChange() {
     cards.forEach(function (card) {
       card.dataset.requested = 'false';
-      var v = card.querySelector('video'); v.autoplay = mobile.matches || !reduced.matches;
+      var v = card.querySelector('video'); v.autoplay = active.has(card) && !document.hidden && (mobile.matches || !reduced.matches);
       if (reduced.matches && !mobile.matches) v.pause();
       else start(card);
     });
