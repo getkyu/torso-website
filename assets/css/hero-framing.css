@@ -1,0 +1,16 @@
+/* The mobile duo contains both full hair silhouettes. Leave more room below
+   the navigation instead of vertically centre-cropping their upper edges. */
+@media(max-width:700px){
+ .home-cinema .consult-hero--cinema>.cinema-video{
+  top:clamp(28px,8vw,48px);
+  bottom:auto;
+  object-position:center 40%;
+ }
+}
+/* Preserve the existing uncropped presentation on the narrowest phones. */
+@media(max-width:360px){
+ .home-cinema .consult-hero--cinema>.cinema-video{
+  object-fit:contain;
+  object-position:center top;
+ }
+}
