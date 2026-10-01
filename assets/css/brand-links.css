@@ -33,11 +33,61 @@
   min-height:46px;background:#03c75a;border-color:#03a94d;color:#062b15;
   letter-spacing:.01em;font-weight:700;
 }
-.desg .desg__book.platform-link--naver>.brand-link-icon{color:currentColor}
+.desg .desg__book.platform-link--naver>.brand-link-icon{
+  color:#03c75a;background:#fff;box-shadow:0 0 0 2px #fff;border-radius:1px;
+}
 .desg .desg__book.platform-link--naver:hover{background:#02b753;border-color:#078342;color:#062b15}
 .desg .desg__b .brand-benefit--npay{background:#eaf8ef;color:#086437;border:1px solid #b7dfc7}
 .desg .platform-link:focus-visible{outline:2px solid #181818;outline-offset:4px}
 @media(prefers-reduced-motion:reduce){
   .desg .desg__sns .platform-link,.desg .desg__book.platform-link--naver{transition:none}
   .desg .desg__sns .platform-link:hover{transform:none}
+}
+
+/* The booking destination identifies the person; only their name changes colour. */
+.booking-designer-link[data-booking-designer="jinsung"]{
+  --booking-person-ink:#294f8e;--booking-person-soft:#cadbfd;--booking-person-on-green:#17345f;
+}
+.booking-designer-link[data-booking-designer="junyoung"]{
+  --booking-person-ink:#8a482b;--booking-person-soft:#ffd2b5;--booking-person-on-green:#582809;
+}
+.booking-designer-link[data-booking-designer="jinhoon"]{
+  --booking-person-ink:#6d4c91;--booking-person-soft:#e8d1ff;--booking-person-on-green:#432658;
+}
+a.booking-designer-link{--booking-person-colour:var(--booking-person-ink)}
+a.booking-designer-link .booking-link-copy,
+a.booking-designer-link .booking-designer-name{
+  display:inline;margin:0;padding:0;border:0;background:none;font:inherit;letter-spacing:inherit;
+}
+a.booking-designer-link .booking-link-copy{color:inherit}
+a.booking-designer-link .booking-designer-name{color:var(--booking-person-colour);white-space:nowrap}
+/* Plain links on dark sections and dark filled buttons use lighter versions. */
+:is(.foot,.sec--dark,.j-consulting,.journey-booking,.j-closing,.consult-hero--cinema) a.booking-designer-link,
+a.booking-designer-link:is(.btn--fill,.j-btn--dark,.btn--ghost-w),
+.consult-dock>a.booking-designer-link,
+.core-panel a.vitem__book.booking-designer-link:hover{
+  --booking-person-colour:var(--booking-person-soft);
+}
+/* Light buttons/cards inside those dark sections retain the dark name colour. */
+a.booking-designer-link.j-btn--light,
+.consult-hero--cinema a.booking-designer-link.j-btn--dark,
+.core-panel a.vitem__book.booking-designer-link:not(:hover),
+a.booking-designer-link.btn--ghost-w:hover,
+.smedia .vitem>a.vitem__book.booking-designer-link{
+  --booking-person-colour:var(--booking-person-ink);
+}
+.desg .desg__book.platform-link--naver.booking-designer-link{
+  --booking-person-colour:var(--booking-person-on-green);
+}
+@media(forced-colors:active){
+  a.booking-designer-link .booking-designer-name{color:LinkText}
+}
+
+/* Price details keep their existing layout; Npay amounts and labels share green. */
+.price-comparison-page .brand-npay{display:inline;color:#086437;font:inherit}
+.price-comparison-page .program-price-option>small,
+.price-comparison-page .program-price-option .price-compare-amounts strong{color:#086437}
+.price-comparison-page .price-card__h .price-perks .perk,
+.price-comparison-page .price-row .pay__lbl--npay{
+  color:#086437;background:#eaf8ef;border-color:#b7dfc7;
 }

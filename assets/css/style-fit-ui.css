@@ -66,3 +66,7 @@
 
 /* Each archive card has its own booking row; leave the artwork unobstructed. */
 .style-archive>.fab-reserve{display:none}
+
+/* Keep the original vertical frame; cover previously cropped it into a close-up. */
+.smedia .style-card-media>video{object-fit:contain;object-position:center}
+.smedia .style-card-media>img,.smedia .style-card-media>.pfade img{object-fit:contain;object-position:center;box-sizing:border-box;padding:9%}
