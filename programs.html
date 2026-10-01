@@ -29,8 +29,9 @@
 <link rel="stylesheet" href="assets/css/brand-monochrome.css?v=journey20261001">
 <link rel="stylesheet" href="assets/css/brand-links.css?v=motion20261001">
 <link rel="stylesheet" href="assets/css/product-story.css?v=motion20261001">
+<link rel="stylesheet" href="assets/css/price-comparison.css?v=editorial20261001">
 </head>
-<body>
+<body class="price-comparison-page">
 
 <header class="nav">
   <div class="nav__in">
@@ -67,80 +68,100 @@
     <div class="shead" style="margin:0 auto 40px;text-align:center">
       <p class="eyebrow">Signature Programs</p>
       <h2 style="font-size:clamp(18px,1.9vw,24px)" data-typer>내 고민에는 어떤 메뉴가 필요할까요?</h2>
-      <p>담당자와 할인 조건을 선택하면 적용 금액을 확인할 수 있습니다.<br>메뉴가 고민된다면 상담 후 시술을 결정하셔도 괜찮습니다.</p>
+      <p>직급을 선택하면 정가와 Npay 금액을 함께 확인할 수 있습니다.<br>메뉴가 고민된다면 상담 후 시술을 결정하셔도 괜찮습니다.</p>
     </div>
 
     <div class="price-tabs">
       <span class="price-tabs__thumb" aria-hidden="true"></span>
-      <button class="price-tab" data-tab="junior">주니어</button>
+      <button class="price-tab" data-tab="junior">디자이너</button>
       <button class="price-tab active" data-tab="senior">수석</button>
+      <button class="price-tab" data-tab="manager">실장</button>
       <button class="price-tab" data-tab="director">원장</button>
     </div>
 
-    <!-- 주니어 · 용운 -->
+    <!-- 디자이너 -->
     <div class="price-card hidden" id="price-junior" data-disc="npay">
       <div class="price-card__h">
         <span class="price-card__title">
-          <h3>주니어 · 용운</h3>
-          <span class="price-perks price-perks--inline" role="group" aria-label="할인 적용">
-            <button type="button" class="perk perk--btn" data-disc="npay" aria-pressed="true"><span class="perk__pct perk__pct--npay">10%</span> 네이버페이</button>
+          <h3>디자이너</h3>
+          <span class="price-perks price-perks--inline" role="group" aria-label="가격 비교 안내">
+            <span class="perk">Npay 10%</span>
           </span>
         </span>
-        <span class="prog-tag">Junior Program</span>
+        <span class="prog-tag">Designer Program</span>
       </div>
-      <p class="price-hint">주니어디자이너 용운 가격 · 첫 방문 할인 없이 네이버페이 결제 시 10% 적용</p>
-      <div class="price-row"><span class="name">맨즈 퍼스널컷<small class="name__sub">내 얼굴에는 어떤 머리가 어울릴까요?<br>헤어컨설팅 포함</small></span><span class="pay" data-base="30000">30,000</span></div>
-      <div class="price-row"><span class="name">컷 + 다운펌<small class="name__sub">옆머리가 떠서 머리가 커 보이나요?</small></span><span class="pay" data-base="60000">60,000</span></div>
-      <div class="price-row"><span class="name">컷 + 일반펌<small class="name__sub">볼륨과 자연스러운 움직임이 필요하신가요?</small></span><span class="pay" data-base="120000">120,000</span></div>
-      <div class="price-row"><span class="name">컷 + 열펌<small class="name__sub">곱슬·부스스함 때문에 손질이 어렵나요?</small></span><span class="pay" data-base="140000">140,000</span></div>
+      <p class="price-hint">디자이너 기준 가격 · 네이버페이 결제 시 10% 적용</p>
+      <div class="price-row"><span class="name">맨즈 퍼스널컷<small class="name__sub">내 얼굴에는 어떤 머리가 어울릴까요?<br>헤어컨설팅 포함</small></span><span class="program-price-comparison" data-base="30000"><span class="program-price-option"><small>Npay 10%</small><span class="price-compare-amounts" data-regular="30000" data-discount="10"><s><span class="sr-only">정가 </span>30,000</s><strong><span class="sr-only">Npay 10% 적용가 </span>27,000</strong></span></span></span></div>
+      <div class="price-row"><span class="name">컷 + 다운펌<small class="name__sub">옆머리가 떠서 머리가 커 보이나요?</small></span><span class="program-price-comparison" data-base="60000"><span class="program-price-option"><small>Npay 10%</small><span class="price-compare-amounts" data-regular="60000" data-discount="10"><s><span class="sr-only">정가 </span>60,000</s><strong><span class="sr-only">Npay 10% 적용가 </span>54,000</strong></span></span></span></div>
+      <div class="price-row"><span class="name">컷 + 일반펌<small class="name__sub">볼륨과 자연스러운 움직임이 필요하신가요?</small></span><span class="program-price-comparison" data-base="120000"><span class="program-price-option"><small>Npay 10%</small><span class="price-compare-amounts" data-regular="120000" data-discount="10"><s><span class="sr-only">정가 </span>120,000</s><strong><span class="sr-only">Npay 10% 적용가 </span>108,000</strong></span></span></span></div>
+      <div class="price-row"><span class="name">컷 + 열펌<small class="name__sub">곱슬·부스스함 때문에 손질이 어렵나요?</small></span><span class="program-price-comparison" data-base="140000"><span class="program-price-option"><small>Npay 10%</small><span class="price-compare-amounts" data-regular="140000" data-discount="10"><s><span class="sr-only">정가 </span>140,000</s><strong><span class="sr-only">Npay 10% 적용가 </span>126,000</strong></span></span></span></div>
       <div class="price-divider">컬러 · 케어 (커트 별도)</div>
-      <div class="price-row"><span class="name">염색<small class="name__sub">내 피부톤에는 어떤 색이 어울릴까요?</small></span><span class="pay" data-base="50000">50,000</span></div>
-      <div class="price-row"><span class="name">탈색<small class="name__sub">원하는 밝기, 지금 모발에도 가능할까요?</small></span><span class="pay" data-base="80000">80,000</span></div>
+      <div class="price-row"><span class="name">염색<small class="name__sub">내 피부톤에는 어떤 색이 어울릴까요?</small></span><span class="program-price-comparison" data-base="50000"><span class="program-price-option"><small>Npay 10%</small><span class="price-compare-amounts" data-regular="50000" data-discount="10"><s><span class="sr-only">정가 </span>50,000</s><strong><span class="sr-only">Npay 10% 적용가 </span>45,000</strong></span></span></span></div>
+      <div class="price-row"><span class="name">탈색<small class="name__sub">원하는 밝기, 지금 모발에도 가능할까요?</small></span><span class="program-price-comparison" data-base="80000"><span class="program-price-option"><small>Npay 10%</small><span class="price-compare-amounts" data-regular="80000" data-discount="10"><s><span class="sr-only">정가 </span>80,000</s><strong><span class="sr-only">Npay 10% 적용가 </span>72,000</strong></span></span></span></div>
       <div class="price-row"><span class="name">드라이<small class="name__sub">중요한 날, 평소와 다른 분위기가 필요할까요?</small></span><span class="pay">18,000<span class="pay__lbl pay__lbl--npay">네이버 표시가</span></span></div>
     </div>
 
-    <!-- 수석 · 진훈·준영 -->
+    <!-- 수석 디자이너 -->
     <div class="price-card" id="price-senior" data-disc="first20">
       <div class="price-card__h">
         <span class="price-card__title">
-          <h3>수석 · 진훈 · 준영</h3>
-          <span class="price-perks price-perks--inline" role="group" aria-label="할인 적용 (택1)">
-            <button type="button" class="perk perk--btn" data-disc="npay" aria-pressed="false"><span class="perk__pct perk__pct--npay">10%</span> 네이버페이</button>
-            <button type="button" class="perk perk--btn perk--hot" data-disc="first20" aria-pressed="true"><span class="perk__pct">20%</span> 첫 방문 · Npay 결제 시</button>
+          <h3>수석 디자이너</h3>
+          <span class="price-perks price-perks--inline" role="group" aria-label="가격 비교 안내">
+            <span class="perk">Npay 10%</span>
+            <span class="perk perk--hot">첫 방문 · Npay 20%</span>
           </span>
         </span>
         <span class="prog-tag">Senior Program</span>
       </div>
       <p class="price-hint">커트·펌 패키지 첫 방문 · Npay 결제 시 20%<br>재방문은 네이버페이 결제 시 10%<br>할인 중복 불가 · 염색·탈색·드라이는 첫 방문 할인 제외</p>
-      <div class="price-row"><span class="name">맨즈 퍼스널컷<small class="name__sub">내 얼굴에는 어떤 머리가 어울릴까요?<br>헤어컨설팅 포함</small></span><span class="pay" data-base="40000">40,000</span></div>
-      <div class="price-row"><span class="name">컷 + 다운펌<small class="name__sub">옆머리가 떠서 머리가 커 보이나요?</small></span><span class="pay" data-base="80000">80,000</span></div>
-      <div class="price-row"><span class="name">컷 + 일반펌<small class="name__sub">볼륨과 자연스러운 움직임이 필요하신가요?</small></span><span class="pay" data-base="150000">150,000</span></div>
-      <div class="price-row"><span class="name">컷 + 열펌<small class="name__sub">곱슬·부스스함 때문에 손질이 어렵나요?</small></span><span class="pay" data-base="170000">170,000</span></div>
+      <div class="price-row"><span class="name">맨즈 퍼스널컷<small class="name__sub">내 얼굴에는 어떤 머리가 어울릴까요?<br>헤어컨설팅 포함</small></span><span class="program-price-comparison" data-base="40000"><span class="program-price-option"><small>Npay 10%</small><span class="price-compare-amounts" data-regular="40000" data-discount="10"><s><span class="sr-only">정가 </span>40,000</s><strong><span class="sr-only">Npay 10% 적용가 </span>36,000</strong></span></span><span class="program-price-option program-price-option--first"><small>첫 방문 · Npay 20%</small><span class="price-compare-amounts" data-regular="40000" data-discount="20"><s><span class="sr-only">정가 </span>40,000</s><strong><span class="sr-only">첫 방문 Npay 20% 적용가 </span>32,000</strong></span></span></span></div>
+      <div class="price-row"><span class="name">컷 + 다운펌<small class="name__sub">옆머리가 떠서 머리가 커 보이나요?</small></span><span class="program-price-comparison" data-base="80000"><span class="program-price-option"><small>Npay 10%</small><span class="price-compare-amounts" data-regular="80000" data-discount="10"><s><span class="sr-only">정가 </span>80,000</s><strong><span class="sr-only">Npay 10% 적용가 </span>72,000</strong></span></span><span class="program-price-option program-price-option--first"><small>첫 방문 · Npay 20%</small><span class="price-compare-amounts" data-regular="80000" data-discount="20"><s><span class="sr-only">정가 </span>80,000</s><strong><span class="sr-only">첫 방문 Npay 20% 적용가 </span>64,000</strong></span></span></span></div>
+      <div class="price-row"><span class="name">컷 + 일반펌<small class="name__sub">볼륨과 자연스러운 움직임이 필요하신가요?</small></span><span class="program-price-comparison" data-base="150000"><span class="program-price-option"><small>Npay 10%</small><span class="price-compare-amounts" data-regular="150000" data-discount="10"><s><span class="sr-only">정가 </span>150,000</s><strong><span class="sr-only">Npay 10% 적용가 </span>135,000</strong></span></span><span class="program-price-option program-price-option--first"><small>첫 방문 · Npay 20%</small><span class="price-compare-amounts" data-regular="150000" data-discount="20"><s><span class="sr-only">정가 </span>150,000</s><strong><span class="sr-only">첫 방문 Npay 20% 적용가 </span>120,000</strong></span></span></span></div>
+      <div class="price-row"><span class="name">컷 + 열펌<small class="name__sub">곱슬·부스스함 때문에 손질이 어렵나요?</small></span><span class="program-price-comparison" data-base="170000"><span class="program-price-option"><small>Npay 10%</small><span class="price-compare-amounts" data-regular="170000" data-discount="10"><s><span class="sr-only">정가 </span>170,000</s><strong><span class="sr-only">Npay 10% 적용가 </span>153,000</strong></span></span><span class="program-price-option program-price-option--first"><small>첫 방문 · Npay 20%</small><span class="price-compare-amounts" data-regular="170000" data-discount="20"><s><span class="sr-only">정가 </span>170,000</s><strong><span class="sr-only">첫 방문 Npay 20% 적용가 </span>136,000</strong></span></span></span></div>
       <div class="price-divider">컬러 · 케어 (커트 별도 · 첫 방문 할인 제외)</div>
-      <div class="price-row"><span class="name">염색<small class="name__sub">내 피부톤에는 어떤 색이 어울릴까요?</small></span><span class="pay" data-base="60000" data-first="0">60,000</span></div>
-      <div class="price-row"><span class="name">탈색<small class="name__sub">원하는 밝기, 지금 모발에도 가능할까요?</small></span><span class="pay" data-base="80000" data-first="0">80,000</span></div>
+      <div class="price-row"><span class="name">염색<small class="name__sub">내 피부톤에는 어떤 색이 어울릴까요?</small></span><span class="program-price-comparison" data-base="60000"><span class="program-price-option"><small>Npay 10%</small><span class="price-compare-amounts" data-regular="60000" data-discount="10"><s><span class="sr-only">정가 </span>60,000</s><strong><span class="sr-only">Npay 10% 적용가 </span>54,000</strong></span></span></span></div>
+      <div class="price-row"><span class="name">탈색<small class="name__sub">원하는 밝기, 지금 모발에도 가능할까요?</small></span><span class="program-price-comparison" data-base="80000"><span class="program-price-option"><small>Npay 10%</small><span class="price-compare-amounts" data-regular="80000" data-discount="10"><s><span class="sr-only">정가 </span>80,000</s><strong><span class="sr-only">Npay 10% 적용가 </span>72,000</strong></span></span></span></div>
       <div class="price-row"><span class="name">드라이<small class="name__sub">중요한 날, 평소와 다른 분위기가 필요할까요?</small></span><span class="pay">18,000<span class="pay__lbl pay__lbl--npay">네이버 표시가</span></span></div>
+    </div>
+
+    <!-- 실장 -->
+    <div class="price-card hidden" id="price-manager" data-disc="npay">
+      <div class="price-card__h">
+        <span class="price-card__title">
+          <h3>실장</h3>
+          <span class="price-perks price-perks--inline" role="group" aria-label="가격 비교 안내">
+            <span class="perk">Npay 10%</span>
+          </span>
+        </span>
+        <span class="prog-tag">Manager Program</span>
+      </div>
+      <p class="price-hint">실장 기준 가격 · 네이버페이 결제 시 10% 적용</p>
+      <div class="price-row"><span class="name">맨즈 퍼스널컷<small class="name__sub">내 얼굴에는 어떤 머리가 어울릴까요?<br>헤어컨설팅 포함</small></span><span class="program-price-comparison" data-base="50000"><span class="program-price-option"><small>Npay 10%</small><span class="price-compare-amounts" data-regular="50000" data-discount="10"><s><span class="sr-only">정가 </span>50,000</s><strong><span class="sr-only">Npay 10% 적용가 </span>45,000</strong></span></span></span></div>
+      <div class="price-row"><span class="name">컷 + 다운펌<small class="name__sub">옆머리가 떠서 머리가 커 보이나요?</small></span><span class="program-price-comparison" data-base="100000"><span class="program-price-option"><small>Npay 10%</small><span class="price-compare-amounts" data-regular="100000" data-discount="10"><s><span class="sr-only">정가 </span>100,000</s><strong><span class="sr-only">Npay 10% 적용가 </span>90,000</strong></span></span></span></div>
+      <div class="price-row"><span class="name">컷 + 일반펌<small class="name__sub">볼륨과 자연스러운 움직임이 필요하신가요?</small></span><span class="program-price-comparison" data-base="180000"><span class="program-price-option"><small>Npay 10%</small><span class="price-compare-amounts" data-regular="180000" data-discount="10"><s><span class="sr-only">정가 </span>180,000</s><strong><span class="sr-only">Npay 10% 적용가 </span>162,000</strong></span></span></span></div>
+      <div class="price-row"><span class="name">컷 + 열펌<small class="name__sub">곱슬·부스스함 때문에 손질이 어렵나요?</small></span><span class="program-price-comparison" data-base="200000"><span class="program-price-option"><small>Npay 10%</small><span class="price-compare-amounts" data-regular="200000" data-discount="10"><s><span class="sr-only">정가 </span>200,000</s><strong><span class="sr-only">Npay 10% 적용가 </span>180,000</strong></span></span></span></div>
+      <p class="price-hint">그 외 시술 메뉴와 금액은 예약 전 문의해 주세요.</p>
     </div>
 
     <!-- DIRECTOR -->
     <div class="price-card hidden" id="price-director" data-disc="npay">
       <div class="price-card__h">
         <span class="price-card__title">
-          <h3>원장 · 진성</h3>
-          <span class="price-perks price-perks--inline" role="group" aria-label="할인 적용">
-            <button type="button" class="perk perk--btn" data-disc="npay" aria-pressed="true"><span class="perk__pct perk__pct--npay">10%</span> 네이버페이</button>
+          <h3>원장</h3>
+          <span class="price-perks price-perks--inline" role="group" aria-label="가격 비교 안내">
+            <span class="perk">Npay 10%</span>
           </span>
         </span>
         <span class="prog-tag">Master Program</span>
       </div>
       <p class="price-hint">원장 시술은 첫 방문 할인 없이 <b>네이버페이 결제 시 10%</b>가 적용돼요</p>
-      <div class="price-row"><span class="name">맨즈 퍼스널컷<small class="name__sub">내 얼굴에는 어떤 머리가 어울릴까요?<br>헤어컨설팅 포함</small></span><span class="pay" data-base="60000">60,000</span></div>
-      <div class="price-row"><span class="name">컷 + 다운펌<small class="name__sub">옆머리가 떠서 머리가 커 보이나요?</small></span><span class="pay" data-base="120000">120,000</span></div>
-      <div class="price-row"><span class="name">컷 + 일반펌<small class="name__sub">볼륨과 자연스러운 움직임이 필요하신가요?</small></span><span class="pay" data-base="210000">210,000</span></div>
-      <div class="price-row"><span class="name">컷 + 열펌<small class="name__sub">곱슬·부스스함 때문에 손질이 어렵나요?</small></span><span class="pay" data-base="230000">230,000</span></div>
+      <div class="price-row"><span class="name">맨즈 퍼스널컷<small class="name__sub">내 얼굴에는 어떤 머리가 어울릴까요?<br>헤어컨설팅 포함</small></span><span class="program-price-comparison" data-base="60000"><span class="program-price-option"><small>Npay 10%</small><span class="price-compare-amounts" data-regular="60000" data-discount="10"><s><span class="sr-only">정가 </span>60,000</s><strong><span class="sr-only">Npay 10% 적용가 </span>54,000</strong></span></span></span></div>
+      <div class="price-row"><span class="name">컷 + 다운펌<small class="name__sub">옆머리가 떠서 머리가 커 보이나요?</small></span><span class="program-price-comparison" data-base="120000"><span class="program-price-option"><small>Npay 10%</small><span class="price-compare-amounts" data-regular="120000" data-discount="10"><s><span class="sr-only">정가 </span>120,000</s><strong><span class="sr-only">Npay 10% 적용가 </span>108,000</strong></span></span></span></div>
+      <div class="price-row"><span class="name">컷 + 일반펌<small class="name__sub">볼륨과 자연스러운 움직임이 필요하신가요?</small></span><span class="program-price-comparison" data-base="210000"><span class="program-price-option"><small>Npay 10%</small><span class="price-compare-amounts" data-regular="210000" data-discount="10"><s><span class="sr-only">정가 </span>210,000</s><strong><span class="sr-only">Npay 10% 적용가 </span>189,000</strong></span></span></span></div>
+      <div class="price-row"><span class="name">컷 + 열펌<small class="name__sub">곱슬·부스스함 때문에 손질이 어렵나요?</small></span><span class="program-price-comparison" data-base="230000"><span class="program-price-option"><small>Npay 10%</small><span class="price-compare-amounts" data-regular="230000" data-discount="10"><s><span class="sr-only">정가 </span>230,000</s><strong><span class="sr-only">Npay 10% 적용가 </span>207,000</strong></span></span></span></div>
       <div class="price-divider">컬러 · 케어 (커트 별도 · 첫 방문 할인 제외)</div>
-      <div class="price-row"><span class="name">염색<small class="name__sub">내 피부톤에는 어떤 색이 어울릴까요?</small></span><span class="pay" data-base="80000" data-first="0">80,000</span></div>
-      <div class="price-row"><span class="name">탈색<small class="name__sub">원하는 밝기, 지금 모발에도 가능할까요?</small></span><span class="pay" data-base="100000" data-first="0">100,000</span></div>
+      <div class="price-row"><span class="name">염색<small class="name__sub">내 피부톤에는 어떤 색이 어울릴까요?</small></span><span class="program-price-comparison" data-base="80000"><span class="program-price-option"><small>Npay 10%</small><span class="price-compare-amounts" data-regular="80000" data-discount="10"><s><span class="sr-only">정가 </span>80,000</s><strong><span class="sr-only">Npay 10% 적용가 </span>72,000</strong></span></span></span></div>
+      <div class="price-row"><span class="name">탈색<small class="name__sub">원하는 밝기, 지금 모발에도 가능할까요?</small></span><span class="program-price-comparison" data-base="100000"><span class="program-price-option"><small>Npay 10%</small><span class="price-compare-amounts" data-regular="100000" data-discount="10"><s><span class="sr-only">정가 </span>100,000</s><strong><span class="sr-only">Npay 10% 적용가 </span>90,000</strong></span></span></span></div>
       <div class="price-row"><span class="name">드라이<small class="name__sub">중요한 날, 평소와 다른 분위기가 필요할까요?</small></span><span class="pay">18,000<span class="pay__lbl pay__lbl--npay">네이버 표시가</span></span></div>
     </div>
 
@@ -152,7 +173,7 @@
       <p class="price-hint">기본 다운펌은 옆머리(사이드) 기준 · 추가 옵션은 다운펌 포함 펌 메뉴에만 적용 (커트 단독 불가) · 추가 옵션은 할인 제외</p>
     </div>
 
-    <p class="price-note">단위: 원 · VAT 포함 · 할인 버튼을 선택하면 정가와 적용가가 함께 표시됩니다.<br>염색·탈색·드라이는 커트 별도입니다. 모발 길이·상태에 따른 추가 금액은 시술 전 상담에서 확인해 주세요.</p>
+    <p class="price-note">단위: 원 · VAT 포함 · 취소선은 정가, 굵은 금액은 해당 조건의 적용가입니다. Npay 10%와 첫 방문 20%는 중복되지 않습니다.<br>염색·탈색·드라이는 커트 별도입니다. 모발 길이·상태에 따른 추가 금액은 시술 전 상담에서 확인해 주세요.</p>
     <p class="price-note">소요 시간 — 커트 약 40~50분 · 컷+다운펌 약 1시간~1시간 20분 · 일반펌·열펌 약 2시간 · 염색 약 1시간~1시간 30분 · 탈색 약 1시간 30분~2시간 (모발 길이·상태에 따라 달라질 수 있어요)</p>
   </div>
 </section>
@@ -233,7 +254,7 @@
   </div>
 </footer>
 
-<script src="assets/js/main.js?v=motion20261001"></script>
+<script src="assets/js/main.js?v=editorial20261001"></script>
 <script src="assets/js/background-film.js?v=autoplay20261001"></script>
 <script src="assets/js/brand-links.js?v=motion20261001"></script>
 </body>
