@@ -11,7 +11,8 @@
 }
 .btn.brand-link,.j-btn.brand-link{gap:8px}
 .btn.brand-link>.brand-link-icon,.j-btn.brand-link>.brand-link-icon{margin-inline-end:0}
-.brand-link-icon--naver{color:#03c75a}
+.brand-link-icon--naver,.brand-link-icon--talk{color:#03c75a}
+.brand-link-icon--talk{width:17px;height:17px;flex-basis:17px}
 .brand-link-icon--instagram{width:16px;height:16px;flex-basis:16px}
 
 /* A designer's platform buttons keep their familiar identity on a white surface. */

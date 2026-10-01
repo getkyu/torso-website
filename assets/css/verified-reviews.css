@@ -11,8 +11,8 @@
 .verified-review[hidden]{display:none!important}
 .review-deck .verified-review{border-top:0}
 .review-deck--ready .review-deck__stage{display:grid;align-items:stretch;isolation:isolate}
-.review-deck--ready .verified-review{grid-area:1/1;opacity:0;visibility:hidden;pointer-events:none;z-index:0;transition:opacity .65s ease,visibility 0s linear .65s}
-.review-deck--ready .verified-review.is-active{opacity:1;visibility:visible;pointer-events:auto;z-index:1;transition:opacity .65s ease,visibility 0s}
+.review-deck--ready .verified-review{grid-area:1/1;opacity:0;visibility:hidden;pointer-events:none;z-index:0;transition:opacity .8s ease,visibility 0s linear .8s}
+.review-deck--ready .verified-review.is-active{opacity:1;visibility:visible;pointer-events:auto;z-index:1;transition:opacity .8s ease,visibility 0s}
 .verified-review__media{display:grid;place-items:center;position:relative;aspect-ratio:4/5;width:100%;min-width:0;overflow:hidden;margin:0 0 24px;background:linear-gradient(135deg,#e6e7e9,#f6f6f7 60%,#e8e9eb);border:1px solid #e4e5e8}
 .verified-review__media>img,.verified-review__media>video{display:block;width:100%;height:100%;min-height:0;max-height:100%;object-fit:contain;object-position:center;margin:0;border:0;aspect-ratio:4/5}
 .verified-review figcaption{display:flex;gap:10px 12px;justify-content:space-between;align-items:center;margin:0 0 20px;flex-wrap:wrap}
@@ -53,4 +53,13 @@
 }
 
 /* Keep the reviewed hairstyle while excluding background mirror faces. */
-.verified-review__media--focus>img{height:80%;aspect-ratio:1;object-fit:cover;object-position:center bottom}
+
+
+/* Review photos are individually framed around the customer's hairstyle.
+   The original files and review pairings are unchanged. */
+.verified-review__media{aspect-ratio:1;border:0}
+.verified-review__media>img{
+ position:absolute;display:block;width:var(--review-width,100%);height:auto;
+ min-width:0;max-width:none;min-height:0;max-height:none;aspect-ratio:auto;
+ left:var(--review-left,0%);top:var(--review-top,0%);object-fit:initial;margin:0;
+}
