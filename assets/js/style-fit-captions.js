@@ -2,7 +2,7 @@
 // Style descriptions are grounded in styles.html; mood/reason are concise editorial
 // selection cues, not claims that a hairstyle suits a particular face or hair type.
 // The four s2-3 clips have only a shared catalog name: do not invent individual subtypes.
-// The known before clip and in-progress clip are explicitly distinguished from results.
+// Before clips remain explicit; texture captions name the style without implying an action.
 window.TORSO_STYLE_FIT = {
   // The existing high-resolution finish film is the actual homepage texture-cut client.
   "finish.mp4": {
@@ -11,9 +11,9 @@ window.TORSO_STYLE_FIT = {
     "reason": "진성원장 실제 시술 · 가벼운 머릿결과 입체적인 질감"
   },
   "s1-1_01.mp4": {
-    "style": "텍스처컷 · 시술 과정",
-    "mood": "시술 과정",
-    "reason": "결을 정리하는 과정 살펴보기"
+    "style": "텍스처컷",
+    "mood": "가벼운 결, 입체적인 질감",
+    "reason": "모발의 결을 살리는 텍스처 디자인"
   },
   "s1-1_02.mp4": {
     "style": "텍스처컷",
