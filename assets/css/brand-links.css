@@ -13,3 +13,31 @@
 .btn.brand-link>.brand-link-icon,.j-btn.brand-link>.brand-link-icon{margin-inline-end:0}
 .brand-link-icon--naver{color:#03c75a}
 .brand-link-icon--instagram{width:16px;height:16px;flex-basis:16px}
+
+/* A designer's platform buttons keep their familiar identity on a white surface. */
+.desg .desg__sns .platform-link{
+  width:44px;height:44px;border-radius:11px;background:#fff;
+  border-color:#dedede;transition:background .2s ease,border-color .2s ease,transform .2s ease;
+}
+.desg .desg__sns .platform-link .sns-ico{width:22px;height:22px}
+.desg .desg__sns .platform-link--instagram .sns-ico>rect:first-child{fill:url(#igGrad)}
+.desg .desg__sns .platform-link--youtube .sns-ico>rect:first-child{fill:#ff0000}
+.desg .desg__sns .platform-link--blog .sns-ico>rect:first-child,
+.desg .desg__sns .platform-link--blog .sns-ico>rect:last-child,
+.desg .desg__sns .platform-link--naver .sns-ico>rect:first-child{fill:#03c75a}
+.desg .desg__sns .platform-link--instagram:hover{background:#fff5fa;border-color:#b73178}
+.desg .desg__sns .platform-link--youtube:hover{background:#fff4f4;border-color:#de2323}
+.desg .desg__sns .platform-link--blog:hover,
+.desg .desg__sns .platform-link--naver:hover{background:#effaf3;border-color:#078342}
+.desg .desg__book.platform-link--naver{
+  min-height:46px;background:#03c75a;border-color:#03a94d;color:#062b15;
+  letter-spacing:.01em;font-weight:700;
+}
+.desg .desg__book.platform-link--naver>.brand-link-icon{color:currentColor}
+.desg .desg__book.platform-link--naver:hover{background:#02b753;border-color:#078342;color:#062b15}
+.desg .desg__b .brand-benefit--npay{background:#eaf8ef;color:#086437;border:1px solid #b7dfc7}
+.desg .platform-link:focus-visible{outline:2px solid #181818;outline-offset:4px}
+@media(prefers-reduced-motion:reduce){
+  .desg .desg__sns .platform-link,.desg .desg__book.platform-link--naver{transition:none}
+  .desg .desg__sns .platform-link:hover{transform:none}
+}

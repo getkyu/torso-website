@@ -1,10 +1,11 @@
-/* Subtle editorial marks on the three verified homepage AFTER photographs. */
+/* Subtle editorial marks on the six verified homepage comparison photographs. */
 .case-compare__media>.compare-highlights,
 .compare-highlights>.compare-highlight,
 .compare-highlight>svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 .case-compare__media>.compare-highlights{z-index:3;overflow:hidden;color:#b8ddff}
 .compare-highlights>.compare-highlight{opacity:0;transition:opacity .16s ease}
 .compare-highlights>.compare-highlight.is-shown{opacity:1}
+.compare-highlight[data-compare-stage="before"]{color:#e2e8ef}
 .compare-highlight>svg{overflow:visible;filter:drop-shadow(0 1px 1px #0009)}
 .compare-highlight__trace{fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:0}
 .compare-highlight.is-shown .compare-highlight__trace{stroke-dashoffset:0}
@@ -13,8 +14,9 @@
 .compare-highlight__label--top-left{top:4%;left:4%}
 .compare-highlight__label--bottom-left{bottom:4%;left:4%}
 .compare-highlight__label--bottom-right{bottom:4%;right:4%}
-/* Remove marks immediately on BEFORE; never leave a result annotation on it. */
-.case-compare--auto:not([data-compare-state="after"]) .compare-highlights{visibility:hidden}
+/* Hide the previous marks synchronously, even before MutationObserver runs. */
+.case-compare--auto:not([data-compare-state="before"]) .compare-highlight[data-compare-stage="before"],
+.case-compare--auto:not([data-compare-state="after"]) .compare-highlight[data-compare-stage="after"]{visibility:hidden}
 @media(max-width:700px){
  .compare-highlight__label{font-size:13px;padding:5px 7px}
  .j-case:not(:first-child) .compare-highlight__label{font-size:12px;line-height:1.4;padding:5px 6px;max-width:88%;border-radius:4px}

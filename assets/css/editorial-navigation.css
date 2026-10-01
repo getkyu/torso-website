@@ -1,0 +1,43 @@
+/* Shared navigation polish. The page's native scrolling stays in control. */
+.nav .nav__logo--branch{flex-direction:column;gap:3px;line-height:1}
+.nav .nav__branch{
+  display:block;color:#242424;font-size:11px;font-weight:500;line-height:1.4;
+  letter-spacing:.13em;white-space:nowrap;text-align:center;
+}
+.home-film:not(.menu-open) .nav:not(.solid) .nav__logo--branch,
+.home-cinema:not(.menu-open) .nav:not(.solid) .nav__logo--branch,
+.home-film:not(.menu-open) .nav:not(.solid) .nav__branch,
+.home-cinema:not(.menu-open) .nav:not(.solid) .nav__branch{
+  color:#fff;text-shadow:0 1px 5px rgba(0,0,0,.75);
+}
+.nav.solid .nav__branch,body.menu-open .nav .nav__branch{color:#242424;text-shadow:none}
+.nav__mobile-philosophy{display:none}
+.nav :is(.nav__logo,.nav__burger,.nav__menu a):focus-visible{
+  outline:2px solid currentColor;outline-offset:5px;
+}
+html{scroll-padding-top:calc(var(--nav-h,76px) + 18px)}
+@media(max-width:900px){
+  .nav .nav__branch{font-size:10.5px;letter-spacing:.1em}
+  .nav__mobile-philosophy{display:list-item}
+  body.menu-open .nav__nav{
+    height:100vh;height:100dvh;max-height:100dvh;overflow-y:auto;
+    justify-content:flex-start;padding:calc(var(--nav-h,76px) + 18px) 0 max(28px,env(safe-area-inset-bottom));
+    overscroll-behavior:contain;-webkit-overflow-scrolling:touch;
+  }
+  body.menu-open .nav__menu{flex:none}
+  body.menu-open .nav__menu a{min-height:48px;padding:10px;line-height:1.5}
+  body.menu-open .nav__menu--l .nav__mobile-philosophy{animation-delay:.37s}
+}
+/* Short, clear entrances instead of a long blur; no additional observers needed. */
+.reveal,.process.reveal{
+  filter:none;transform:translateY(18px);will-change:auto;
+  transition:opacity .7s var(--ease-soft),transform .75s var(--ease-soft);
+}
+.reveal.in{filter:none;transform:none}
+.reveal:focus-within{opacity:1;filter:none;transform:none}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .reveal,.process.reveal,.shead.reveal :is(.eyebrow,h2,p){
+    opacity:1;transform:none;filter:none;transition:none;
+  }
+}
