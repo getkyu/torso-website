@@ -116,3 +116,26 @@
 .home-cinema .nav.solid .nav__burger svg{filter:none}
 .home-cinema .nav.solid .nav__burger svg *{stroke:var(--ink)}
 .home-cinema .nav.solid .nav__burger .pivot{fill:var(--ink);stroke:none}
+
+/* The philosophy is supported by actual consultation and cutting footage. */
+.philosophy-page .ph-banner--film{min-height:660px;text-align:left}
+.philosophy-page .ph-banner--film .banner__in{padding-top:160px;padding-bottom:120px;position:relative;z-index:2}
+.philosophy-page .ph-banner--film .banner__in>h1,.philosophy-page .ph-banner--film .ph-banner__note{max-width:620px;margin-left:0}
+.philosophy-page .ph-banner--film .cinema-video{object-position:center center}
+.philosophy-page .ph-banner--film .banner__scrim{background:linear-gradient(90deg,rgba(12,20,14,.92),rgba(12,20,14,.7) 44%,rgba(12,20,14,.1) 78%)}
+@media(max-width:700px){
+ .philosophy-page .ph-banner--film{min-height:760px;display:flex;align-items:flex-end}
+ .philosophy-page .ph-banner--film .cinema-video{object-fit:contain;object-position:center top}
+ .philosophy-page .ph-banner--film .banner__in{padding:380px 25px 90px;width:100%}
+ .philosophy-page .ph-banner--film .banner__scrim{background:linear-gradient(0deg,#101a12 3%,rgba(14,25,17,.95) 27%,rgba(14,25,17,.6) 45%,transparent 72%)}
+ .philosophy-page .ph-banner--film h1{font-size:33px}
+}
+
+@media(max-width:360px){.consult-hero--cinema .cinema-video{object-fit:contain;object-position:center top}}
+
+/* Mobile films play in view without overlay playback controls. */
+@media(max-width:700px){
+ .film-toggle,.designer-puzzle-toggle,.process-playback,.home-core-controls,.home-core-toggle,.ph-play-toggle{display:none!important}
+ .portfolio-showcase .consult-hero__photo figcaption{padding-right:0}
+ .cinema-bottom{right:25px}
+}
