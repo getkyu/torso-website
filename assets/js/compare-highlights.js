@@ -16,8 +16,8 @@
       after: {
         source: 'ba10_after.webp',
         points: [
-          {text:'가볍게 흐르는 앞머리', position:'top-left', kind:'arrow', path:'M48 29 Q62 30 73 43'},
-          {text:'또렷한 귀 주변', position:'bottom-left', kind:'ring', ellipse:[26,60,9,11]}
+          {text:'몽실몽실한 랜덤 컬', position:'top-left', kind:'contour', path:'M36 27 C30 30 32 38 38 37 S45 28 48 33 S46 43 53 40 S59 30 65 35'},
+          {text:'컬이 만드는 입체감', position:'bottom-left', kind:'ring', ellipse:[33,37,17,15]}
         ]
       }
     },

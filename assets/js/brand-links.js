@@ -5,6 +5,11 @@
   document.documentElement.dataset.brandLinksReady = 'true';
   var NS = 'http://www.w3.org/2000/svg';
   var iconCount = 0;
+  var bookingDesigners = {
+    '3696795': {name: '진성', key: 'jinsung'},
+    '6961265': {name: '준영', key: 'junyoung'},
+    '6826157': {name: '진훈', key: 'jinhoon'}
+  };
 
   function element(name, attributes) {
     var node = document.createElementNS(NS, name);
@@ -41,6 +46,37 @@
     return svg;
   }
 
+  function decorateDesigner(link, destination) {
+    var match = destination.pathname.match(/\/items\/(\d+)(?:\/|$)/);
+    var person = match && bookingDesigners[match[1]];
+    if (!person) return;
+    link.classList.add('booking-designer-link');
+    link.dataset.bookingDesigner = person.key;
+    if (link.querySelector('.booking-designer-name')) return;
+    var texts = [], walker = document.createTreeWalker(link, NodeFilter.SHOW_TEXT);
+    var node;
+    while ((node = walker.nextNode())) {
+      if (node.nodeValue.indexOf(person.name) < 0 || !node.parentElement ||
+          node.parentElement.closest('svg, .brand-link-icon, .booking-designer-name, [aria-hidden="true"]')) continue;
+      texts.push(node);
+    }
+    texts.forEach(function (text) {
+      // Keep the original wording in one flex item; only the name receives colour.
+      var copy = document.createElement('span');
+      copy.className = 'booking-link-copy';
+      text.nodeValue.split(person.name).forEach(function (part, index) {
+        if (index) {
+          var name = document.createElement('span');
+          name.className = 'booking-designer-name';
+          name.textContent = person.name;
+          copy.appendChild(name);
+        }
+        if (part) copy.appendChild(document.createTextNode(part));
+      });
+      text.replaceWith(copy);
+    });
+  }
+
   function decorate(link) {
     var destination;
     try { destination = new URL(link.getAttribute('href'), document.baseURI); }
@@ -52,6 +88,7 @@
       (host === 'youtube.com' || host === 'www.youtube.com' || host === 'youtu.be') ? 'youtube' :
       (host === 'blog.naver.com' || host === 'm.blog.naver.com') ? 'blog' : '';
     if (!brand) return;
+    if (brand === 'naver') decorateDesigner(link, destination);
 
     // Platform colour belongs to the designer's external links, not the whole site.
     if (link.closest('.desg')) {
@@ -73,12 +110,38 @@
   }
 
   function scan(root) {
+    if (root.nodeType !== 1 && root.nodeType !== 3) return;
+    var parent = root.nodeType === 1 ? root : root.parentElement;
+    if (!parent) return;
+    var owner = parent.closest('a[href]');
+    if (owner) decorate(owner);
     if (root.nodeType !== 1) return;
-    if (root.matches('a[href]')) decorate(root);
     root.querySelectorAll('a[href]').forEach(decorate);
   }
 
+  function markNpayLabels() {
+    if (!document.body.classList.contains('price-comparison-page')) return;
+    var texts = [], walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT), node;
+    while ((node = walker.nextNode())) {
+      if (!/Npay|N페이|네이버페이/i.test(node.nodeValue) || !node.parentElement ||
+          node.parentElement.closest('script, style, svg, .sr-only, .brand-npay, [aria-hidden="true"]')) continue;
+      texts.push(node);
+    }
+    texts.forEach(function (text) {
+      var fragment = document.createDocumentFragment();
+      text.nodeValue.split(/(Npay|N페이|네이버페이)/gi).forEach(function (part, index) {
+        if (index % 2) {
+          var label = document.createElement('span');
+          label.className = 'brand-npay'; label.textContent = part;
+          fragment.appendChild(label);
+        } else if (part) fragment.appendChild(document.createTextNode(part));
+      });
+      text.replaceWith(fragment);
+    });
+  }
+
   scan(document.body);
+  markNpayLabels();
   document.querySelectorAll('.desg .desg__disc').forEach(function (badge) {
     if (/Npay|N페이/i.test(badge.textContent)) badge.classList.add('brand-benefit--npay');
   });

@@ -21,13 +21,21 @@ function canRun(c){return c.inView&&!document.hidden&&(mobile.matches||!userPaus
 function resetRecovery(c){c.blocked=false;c.blockedReason=null;c.failures=0;c.abortRetries=0;c.gestureRetried=false;}
 function frameVideo(v,key){
  var f=FRAMES[key];if(!f)return;
- var h=f.head,track=f.track,t=v.currentTime,x=h[0],y=h[1];
+ var h=f.head,track=v.tagName==='IMG'?[]:f.track,t=v.currentTime||0,x=h[0],y=h[1];
  if(track.length){var a=track[0],b=track[track.length-1];for(var i=1;i<track.length;i++){if(track[i][0]>=t){a=track[i-1];b=track[i];break;}}
   var p=Math.max(0,Math.min(1,(t-a[0])/(b[0]-a[0]||1)));x=a[1]+(b[1]-a[1])*p;y=a[2]+(b[2]-a[2])*p;}
- var aspect=v.parentElement.clientWidth/v.parentElement.clientHeight;var width=Math.min(.62*(f.width/f.height)/(aspect*h[3]),.80/h[2]);
+ // Limit both dimensions of the measured head, leaving room for hair, chin and neck.
+ var wrap=v.parentElement,aspect=wrap.clientWidth&&wrap.clientHeight?wrap.clientWidth/wrap.clientHeight:.8;
+ var width=Math.min(.54*(f.width/f.height)/(aspect*h[3]),.70/h[2],1.20);
  v.style.width=(width*100)+'%';v.style.aspectRatio=f.width+'/'+f.height;
  v.style.transform='translate('+(-x*100)+'%,'+(-y*100)+'%)';
 }
+// The fallback photograph is a checked frame from each designer's first clip.
+function framePosters(){cards.forEach(function(c){var image=c.wrap.querySelector('img');if(!image)return;image.classList.add('is-framed');frameVideo(image,c.clips[0]);});}
+function reframe(){framePosters();cards.forEach(function(c){if(c.video.dataset.clip)frameVideo(c.video,c.video.dataset.clip);});}
+reframe();
+if('ResizeObserver' in window){var frameObserver=new ResizeObserver(reframe);cards.forEach(function(c){frameObserver.observe(c.wrap);});}
+else window.addEventListener('resize',reframe);
 // Keep the exact outgoing frame visible while the same video loads its next source.
 function holdFrame(c){
  var v=c.video;
