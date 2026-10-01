@@ -28,6 +28,9 @@
         d: 'M16.273 12.845 7.376 0H0v24h7.727V11.155L16.624 24H24V0h-7.727z',
         fill: 'currentColor'
       }));
+    } else if (brand === 'talk') {
+      svg.appendChild(element('path', {d:'M12 2C6.5 2 2 5.8 2 10.5c0 2.6 1.4 4.9 3.6 6.4L5 22l5-3.2c.7.1 1.3.2 2 .2 5.5 0 10-3.8 10-8.5S17.5 2 12 2z',fill:'currentColor'}));
+      [7,12,17].forEach(function (x) {svg.appendChild(element('circle',{cx:String(x),cy:'10.5',r:'1.2',fill:'#fff'}));});
     } else {
       var gradientId = 'torso-instagram-' + (++iconCount);
       var defs = element('defs', {});
@@ -84,6 +87,7 @@
     if (destination.protocol !== 'https:' && destination.protocol !== 'http:') return;
     var host = destination.hostname.toLowerCase();
     var brand = host === 'booking.naver.com' ? 'naver' :
+      host === 'talk.naver.com' ? 'talk' :
       (host === 'instagram.com' || host === 'www.instagram.com') ? 'instagram' :
       (host === 'youtube.com' || host === 'www.youtube.com' || host === 'youtu.be') ? 'youtube' :
       (host === 'blog.naver.com' || host === 'm.blog.naver.com') ? 'blog' : '';
@@ -98,7 +102,7 @@
       }
     }
     if (link.querySelector('.sns-ico, .brand-link-icon')) return;
-    if (brand !== 'naver' && brand !== 'instagram') return;
+    if (brand !== 'naver' && brand !== 'instagram' && brand !== 'talk') return;
 
     // Replace generic calendar/message symbols; preserve existing SNS logos and media cards.
     var existing = link.querySelector('svg.btn__ic');

@@ -1,5 +1,5 @@
 .customer-journey .concern-answer--face:not([hidden]){display:block}
-.customer-journey .concern-answer--face .journey-answer-image{float:right;width:130px;height:185px;margin:26px 24px 12px 18px;border-radius:10px}
+.customer-journey .concern-answer--face .journey-answer-image{float:right;width:34%;height:auto;aspect-ratio:9/16;margin:26px 24px 12px 18px;border-radius:10px}
 .customer-journey .concern-answer--face .journey-answer-copy>p:not(.j-kicker){clear:both}
 .consult-detail-list{clear:both;margin:22px 0;border-top:1px solid #c9ccd1;border-bottom:1px solid #c9ccd1}
 .consult-detail-list summary{display:flex;justify-content:space-between;align-items:center;gap:16px;list-style:none;font-size:15px;font-weight:700;line-height:1.6;padding:17px 0;cursor:pointer;color:#294f84}
@@ -13,8 +13,9 @@
 .consult-detail-result>strong{display:block;margin-bottom:8px;color:#222;font-size:15px}
 @media(max-width:760px){.customer-journey .concern-tabs{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:700px){
- .customer-journey .concern-answer--face .journey-answer-image{width:30%;height:160px;margin:23px 20px 12px 14px}
- .customer-journey .concern-answer--face .journey-answer-copy h3{min-height:130px}
+ .customer-journey .concern-answer--face .journey-answer-image{float:none;width:100%;height:360px;aspect-ratio:auto;margin:0;border-radius:0}
+ .customer-journey .concern-answer--face .journey-answer-copy h3{min-height:0}
+ .customer-journey .concern-answer--face .journey-answer-image video{object-fit:contain}
  .consult-detail-list dl{grid-template-columns:1fr;gap:17px}
  .consult-detail-list dt{font-size:15px}
  .consult-detail-list dd{font-size:15px;line-height:1.85}

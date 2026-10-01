@@ -5,7 +5,7 @@
   var hover = window.matchMedia('(hover: hover)');
   var decks = [];
   var suspended = false;
-  var interval = 7000;
+  var interval = 6000;
 
   function stopTimer(state) {
     clearTimeout(state.timer);
