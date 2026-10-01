@@ -80,7 +80,7 @@
 .customer-journey .j-closing--film{min-height:450px}
 /* JavaScript changes real photo states; reduced motion only removes the dissolve. */
 .case-compare--auto[data-compare-state] .case-compare__media>img,
-.case-compare--auto[data-compare-state] .case-compare__state>span{animation:none!important;transition:opacity .65s ease}
+.case-compare--auto[data-compare-state] .case-compare__state>span{animation:none!important;transition:opacity .4s ease}
 .case-compare--auto[data-compare-state] .case-compare__before{filter:saturate(.8)}
 .case-compare--auto[data-compare-state="before"] .case-compare__after,
 .case-compare--auto[data-compare-state="before"] .case-state--after,

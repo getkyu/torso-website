@@ -18,17 +18,17 @@
  .j-core-grid .has-style-fit h3{min-height:93px}
 }
 
-/* Compact monochrome nameplates, separate from the existing BEFORE marker. */
+/* Quiet editorial lettering directly on the photograph. */
 .j-core-grid .home-core-media>.style-name-label,
 .designer-puzzle .designer-work-media>.style-name-label,
 .smedia .vitem>.vitem__tag.style-name-label{
- position:absolute;z-index:3;left:8px;right:auto;top:auto;bottom:8px;
- display:block;box-sizing:border-box;max-width:calc(100% - 16px);margin:0;
- padding:5px 8px;border:1px solid rgba(224,225,226,.4);border-radius:2px;
- color:#fff;background:rgba(12,13,14,.84);font-family:var(--font-sans, sans-serif);
- font-size:12px;font-weight:500;line-height:1.35;letter-spacing:-.015em;
+ position:absolute;z-index:4;left:14px;right:auto;top:auto;bottom:15px;
+ display:block;box-sizing:border-box;max-width:calc(100% - 28px);margin:0;
+ padding:0;border:0;border-radius:0;
+ color:rgba(255,255,255,.88);background:transparent;font-family:var(--font-sans, sans-serif);
+ font-size:clamp(13px,1.1vw,17px);font-weight:450;line-height:1.5;letter-spacing:.045em;
  text-transform:none;white-space:normal;word-break:keep-all;overflow-wrap:break-word;
- text-shadow:0 1px 2px rgba(0,0,0,.3);pointer-events:none;
+ text-shadow:0 1px 8px rgba(0,0,0,.55),0 1px 2px rgba(0,0,0,.45);pointer-events:none;
 }
 .j-core-grid .home-core-media>.style-name-label--active,
 .designer-puzzle .designer-work-media>.style-name-label--active{display:none}
@@ -36,12 +36,11 @@
 .designer-puzzle .designer-work-media.has-active>.style-name-label--poster{display:none}
 .j-core-grid .home-core-media.has-active>.style-name-label--active,
 .designer-puzzle .designer-work-media.has-active>.style-name-label--active{display:block}
-.j-core-grid .home-core-media>.style-name-label[data-stage="before"],
-.smedia .vitem>.vitem__tag.style-name-label{top:8px;bottom:auto}
+.j-core-grid .home-core-media>.style-name-label[data-stage="before"]{top:14px;bottom:auto}
 @media(max-width:700px){
  .j-core-grid .home-core-media>.style-name-label,
  .designer-puzzle .designer-work-media>.style-name-label,
- .smedia .vitem>.vitem__tag.style-name-label{font-size:11px;padding:4px 7px}
+ .smedia .vitem>.vitem__tag.style-name-label{font-size:12px;left:11px;bottom:12px;max-width:calc(100% - 22px);padding:0;letter-spacing:.02em}
 }
 @media(prefers-reduced-motion:reduce){
  .j-core-grid .home-core-media:not(.motion-enabled)>.style-name-label--active,
@@ -49,3 +48,11 @@
  .j-core-grid .home-core-media:not(.motion-enabled)>.style-name-label--poster,
  .designer-puzzle .designer-work-media:not(.motion-enabled)>.style-name-label--poster{display:block}
 }
+
+.j-core-grid .home-core-media::after,
+.designer-puzzle .designer-work-media::after,
+.smedia .vitem:has(.style-name-label)::after{content:"";position:absolute;z-index:3;inset:68% 0 0;pointer-events:none;background:linear-gradient(0deg,rgba(0,0,0,.32),transparent)}
+
+/* Keep booking separate from the editorial style caption. */
+.smedia .vitem>.vitem__book{top:10px;bottom:auto;z-index:5}
+.smedia .vitem>.vitem__tag.style-name-label{-webkit-backdrop-filter:none;backdrop-filter:none}

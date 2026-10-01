@@ -4,10 +4,10 @@
 .gallery-compare.is-enhanced .ba__pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;transform-origin:center;transition:none}
 .rev--ba .gallery-compare.is-enhanced .ba__pic--b img{filter:saturate(.8);transform:translate(var(--before-x,0%),var(--before-y,0%)) scale(var(--before-scale,1))}
 .rev--ba .gallery-compare.is-enhanced .ba__pic--a img{filter:none;transform:translate(var(--after-x,0%),var(--after-y,0%)) scale(var(--after-scale,1))}
-.gallery-compare.is-enhanced .ba__pic--a{clip-path:none;opacity:0;animation:none!important;transition:opacity .65s ease}
+.gallery-compare.is-enhanced .ba__pic--a{clip-path:none;opacity:0;animation:none!important;transition:opacity .4s ease}
 .gallery-compare__controls{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:52px;padding:5px 14px;background:transparent;border:0;color:#47553e}
 .gallery-compare__state{display:grid;min-width:40px;font-size:11px;line-height:1.5}
-.gallery-compare__state>span{grid-area:1/1;white-space:nowrap;animation:none!important;transition:opacity .65s ease}
+.gallery-compare__state>span{grid-area:1/1;white-space:nowrap;animation:none!important;transition:opacity .4s ease}
 .gallery-compare__state>.gallery-state--after{opacity:0}
 .gallery-compare__choices{display:flex;align-items:center;gap:2px;margin-left:auto}
 .gallery-compare__controls button{appearance:none;min-height:44px;padding:8px 5px;background:transparent;border:1px solid transparent;border-radius:0;color:inherit;font:inherit;font-size:11px;line-height:1.4;cursor:pointer;white-space:nowrap}
