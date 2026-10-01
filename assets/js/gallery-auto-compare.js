@@ -1,4 +1,4 @@
-// Gallery-only enhancement: automatic three-second alternation with optional photo controls.
+// Gallery-only enhancement: automatic 1.5-second alternation with optional photo controls.
 (function () {
   'use strict';
   var boxes = Array.from(document.querySelectorAll('.gallery-compare'));
@@ -22,7 +22,7 @@
           state.render();
         }
         sync(state);
-      }, 3000);
+      }, 1500);
     }
   }
   function refresh() { states.forEach(sync); }

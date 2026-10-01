@@ -988,7 +988,7 @@ document.querySelectorAll('a[href]').forEach(a => {
   }
 })();
 
-// Change the actual photo state every three seconds. CSS animations can be
+// Change the actual photo state every 1.5 seconds. CSS animations can be
 // disabled by iOS Reduce Motion (or a global stylesheet) without stopping this.
 (function () {
   var cases = Array.from(document.querySelectorAll('.case-compare--auto'));
@@ -1026,7 +1026,7 @@ document.querySelectorAll('a[href]').forEach(a => {
           render(state);
         }
         sync(state);
-      }, 3000);
+      }, 1500);
     }
   }
   function refresh() { states.forEach(sync); }

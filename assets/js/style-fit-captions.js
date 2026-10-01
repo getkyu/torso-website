@@ -4,6 +4,12 @@
 // The four s2-3 clips have only a shared catalog name: do not invent individual subtypes.
 // The known before clip and in-progress clip are explicitly distinguished from results.
 window.TORSO_STYLE_FIT = {
+  // The existing high-resolution finish film is the actual homepage texture-cut client.
+  "finish.mp4": {
+    "style": "텍스쳐컷",
+    "mood": "가벼운 머릿결과 입체적인 질감을 원한다면?",
+    "reason": "진성원장 실제 시술 · 가벼운 머릿결과 입체적인 질감"
+  },
   "s1-1_01.mp4": {
     "style": "텍스처컷 · 시술 과정",
     "mood": "시술 과정",
