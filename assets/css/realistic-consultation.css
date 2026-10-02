@@ -1,0 +1,22 @@
+/* One generated model, consistent angles. Labels distinguish these from real clients. */
+.consult-photo{position:relative;display:block;width:100%;aspect-ratio:1;background-image:url('../img/consultation/realistic-face-study.png');background-size:200% 200%;background-repeat:no-repeat;overflow:hidden}
+.consult-photo--front{background-position:0 0}.consult-photo--quarter{background-position:100% 0}.consult-photo--profile-base{background-position:0 100%}.consult-photo--profile-design{background-position:100% 100%}
+.consult-lab__panel>figure>.consult-photo,.consult-simulation__photos{max-width:520px;margin:0 auto}
+.consult-photo__guides{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+.consult-photo__guides path,.consult-photo__guides rect{fill:none;stroke:#cfebff;stroke-width:3;stroke-dasharray:6 6;filter:drop-shadow(0 1px 2px #162d4a)}
+.consult-photo__guides text{font-family:inherit;font-size:20px;font-weight:650;fill:#fff;paint-order:stroke;stroke:#203a53;stroke-width:3px;stroke-linejoin:round}
+.consult-photo__guides .photo-target{fill:#f7edd2;stroke:#36556f;stroke-width:3}
+.consult-photo__guides .photo-number-bg{fill:#214566;stroke:#e2f1ff;stroke-width:2}
+.consult-photo__guides .photo-number{font-size:21px;text-anchor:middle;dominant-baseline:central;stroke:none}
+.consult-photo__guides .photo-feature-box{fill:#9dbeea12;stroke:#d9b6f0}
+.consult-simulation__photos{position:relative;aspect-ratio:1;background:#e2e4e6}
+.sim-photo-layer{position:absolute;inset:0}
+.sim-photo-layer--after{opacity:0;transition:opacity .95s cubic-bezier(.4,0,.2,1)}
+.consult-simulation__photos[data-sim-view="1"] .sim-photo-layer--after{opacity:1}
+.sim-photo-guide{transition:opacity .7s}.sim-photo-guide--design{opacity:0}
+.consult-simulation__photos[data-sim-view="1"] .sim-photo-guide--base{opacity:0}
+.consult-simulation__photos[data-sim-view="1"] .sim-photo-guide--design{opacity:1}
+.consult-simulation__top{padding-bottom:12px}
+.consult-observation__diagram .consult-photo{width:100%;height:100%}
+@media(max-width:700px){.consult-photo__guides text{font-size:24px}.consult-photo__guides .photo-number{font-size:23px}}
+@media(prefers-reduced-motion:reduce){.sim-photo-layer--after,.sim-photo-guide{transition:none}}
