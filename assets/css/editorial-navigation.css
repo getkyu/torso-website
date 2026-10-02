@@ -41,3 +41,33 @@ html{scroll-padding-top:calc(var(--nav-h,76px) + 18px)}
     opacity:1;transform:none;filter:none;transition:none;
   }
 }
+
+/* Brand philosophy: use the original TORSO letterforms, with a quiet descriptor. */
+.philosophy-wordmark,
+.foot__col a.philosophy-wordmark,
+.nav__menu a.philosophy-wordmark{
+  display:inline-flex;align-items:center;justify-content:flex-start;gap:7px;
+  max-width:100%;line-height:1.2;letter-spacing:0;white-space:nowrap;text-transform:none;
+}
+.philosophy-wordmark .philosophy-wordmark__torso{
+  display:block;flex:0 0 auto;width:62px;height:26.3px;margin:0;background:currentColor;
+  /* 394px of the 1068px source preserves only the original TORSO word. */
+  -webkit-mask:url('../logo/logo_black.png') left center / 271.07% 100% no-repeat;
+  mask:url('../logo/logo_black.png') left center / 271.07% 100% no-repeat;
+}
+.philosophy-wordmark .philosophy-wordmark__for{
+  display:inline;margin:0;color:inherit;font-size:12px;font-weight:600;letter-spacing:.02em;text-transform:none;
+}
+.philosophy-wordmark .philosophy-wordmark__label{
+  display:inline;margin:0 0 0 3px;color:inherit;font-size:14px;font-weight:550;
+}
+.philosophy-wordmark--hero{display:flex;width:620px;max-width:100%;justify-content:center;color:#fff!important;margin:0 0 22px}
+.philosophy-wordmark--hero .philosophy-wordmark__torso{width:86px;height:36.5px}
+.philosophy-wordmark--hero .philosophy-wordmark__for{font-size:15px}
+.philosophy-wordmark--hero .philosophy-wordmark__label{font-size:17px}
+@media(max-width:900px){
+  .nav .nav__menu a.philosophy-wordmark{display:flex;width:100%;justify-content:center;text-transform:none}
+  .nav__menu .philosophy-wordmark__torso{width:76px;height:32.2px}
+  .nav__menu .philosophy-wordmark__for{font-size:15px}
+  .nav__menu .philosophy-wordmark__label{font-size:18px}
+}
