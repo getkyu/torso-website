@@ -1,4 +1,4 @@
-/* A real guest and a real service, with the person kept clear of hero copy. */
+/* The customer's question leads; real service footage supports the answer. */
 .home-cinema .consult-hero--cinema.dongo-hero{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(280px,.8fr);gap:clamp(35px,6vw,100px);align-items:center;height:auto;min-height:760px;max-height:none;padding:calc(var(--nav-h) + 40px) max(28px,calc((100vw - 1180px)/2)) 56px;background:radial-gradient(ellipse at 88% 45%,#3c3931 0,transparent 55%),#141515;clip-path:none}
 .dongo-hero__film{grid-column:2;grid-row:1;position:relative;width:100%;max-width:408px;justify-self:end;margin:0;border-radius:22px;overflow:hidden;background:#232422;box-shadow:0 24px 80px #0005}
 .dongo-hero__video{display:block;width:100%;height:auto;aspect-ratio:9/16;object-fit:contain;background:#232422}
@@ -8,37 +8,22 @@
 .home-cinema .dongo-hero .consult-brand{font-size:12px;letter-spacing:.15em;margin-bottom:24px}
 .dongo-hero__bridge{font-size:18px;line-height:1.8;color:#f0e2c9;margin:25px 0 0;word-break:keep-all}
 .home-cinema .dongo-hero .consult-hero__intro{font-size:16px;line-height:1.8;max-width:490px;margin:22px 0 28px;color:#d4d5d5;word-break:keep-all}
-.dongo-credit{position:absolute;bottom:0;left:0;right:0;display:flex;align-items:center;gap:10px;padding:50px 20px 20px;background:linear-gradient(transparent,#000b);color:#fff;text-shadow:0 1px 6px #0008;pointer-events:none}
-.dongo-credit__mark{display:grid;place-items:center;width:27px;height:20px;background:#e33131;border-radius:6px;font-size:10px;flex:none}
-.dongo-credit strong{display:block;font-size:18px;line-height:1.5;font-weight:650}
-.dongo-credit small{display:block;font-size:12px;line-height:1.6;color:#f1f1f1;letter-spacing:0}
+.dongo-credit{position:absolute;bottom:0;left:0;right:0;padding:50px 20px 20px;background:linear-gradient(transparent,#000b);color:#fff;font-size:14px;line-height:1.6;text-shadow:0 1px 6px #0008;pointer-events:none}
 .dongo-hero__film .film-toggle{position:relative;display:block;right:auto;bottom:auto;float:right;margin:8px 12px;min-height:36px;padding:6px 12px;font-size:11px;border-color:#777;background:transparent}
 .dongo-hero__film:has(.film-toggle:not([hidden])) .dongo-credit{bottom:52px}
-.dongo-inline-credit{line-height:1.55!important}.dongo-inline-credit span{font-size:12px;opacity:.85}
+.dongo-inline-credit{line-height:1.55!important}
 .dongo-closing-credit{position:absolute;left:max(36px,calc((100vw - 1200px)/2));bottom:22px;right:180px;color:#fff;font-size:14px;line-height:1.6;text-shadow:0 1px 5px #000;margin:0}
-.dongo-closing-credit span{color:#d6d6d6;margin-left:12px;font-size:12px}
-@media(max-width:1000px) and (min-width:701px){.home-cinema .consult-hero--cinema.dongo-hero{gap:28px}.home-cinema .dongo-hero h1{font-size:46px}.dongo-credit{padding:35px 14px 14px}.dongo-credit small{font-size:11px}.dongo-hero__bridge{font-size:16px}}
+@media(max-width:1000px) and (min-width:701px){.home-cinema .consult-hero--cinema.dongo-hero{gap:28px}.home-cinema .dongo-hero h1{font-size:46px}.dongo-credit{padding:35px 14px 14px}.dongo-hero__bridge{font-size:16px}}
 @media(max-width:700px){
  .home-cinema .consult-hero--cinema.dongo-hero{display:flex;flex-direction:column;align-items:stretch;gap:30px;padding:calc(var(--nav-h) + 20px) 22px 46px;min-height:0;background:radial-gradient(ellipse at 90% 20%,#39372f,transparent 50%),#141515}
- .dongo-hero__film{width:100%;max-width:360px;align-self:center;border-radius:18px;flex:none}
+ .dongo-hero__film{order:2;width:100%;max-width:360px;align-self:center;border-radius:18px;flex:none}
  .dongo-hero__video{aspect-ratio:9/14;object-fit:cover;object-position:center top}
- .home-cinema .dongo-hero .consult-hero__copy{width:100%;padding:0;max-width:none}
+ .home-cinema .dongo-hero .consult-hero__copy{order:1;width:100%;padding:0;max-width:none}
  .home-cinema .dongo-hero h1{font-size:clamp(36px,9.4vw,50px);line-height:1.2}
  .home-cinema .dongo-hero .consult-brand{font-size:11px;margin-bottom:16px}
  .home-cinema .dongo-hero .consult-hero__intro{font-size:16px;margin:20px 0 24px}
  .dongo-hero__bridge{font-size:16px;line-height:1.8;margin-top:20px}
- .dongo-credit{padding:46px 16px 16px;gap:9px}.dongo-credit strong{font-size:18px}.dongo-credit small{font-size:12px}
+ .dongo-credit{padding:46px 16px 16px;font-size:13px}
  .dongo-hero__film .film-toggle[hidden]{display:none}
- .dongo-closing-credit{left:25px;right:25px;bottom:18px;font-size:13px}.dongo-closing-credit span{display:block;margin:3px 0 0;font-size:12px}
+ .dongo-closing-credit{left:25px;right:25px;bottom:18px;font-size:13px}
 }
-
-/* Channel identity stays compact and clear of the hairstyle. */
-.dongo-credit{pointer-events:auto}
-.dongo-channel{display:inline-flex;align-items:center;gap:10px;flex:none;text-decoration:none;border-radius:8px}
-.dongo-channel__youtube{display:grid;place-items:center;width:38px;height:28px;border-radius:8px;background:#f02128;color:#fff;font-size:14px;text-shadow:none}
-.dongo-channel__avatar{display:block;width:56px!important;height:56px!important;object-fit:cover;border-radius:50%;border:1px solid #ffffff80}
-.dongo-channel__caption{font-size:13px;line-height:1.5;color:inherit;white-space:nowrap}
-.dongo-channel:focus-visible{outline:2px solid #fff;outline-offset:4px}
-.dongo-inline-credit,.dongo-closing-credit{display:flex;align-items:center;gap:12px}
-.dongo-closing-credit .dongo-channel__caption{margin:0;color:#fff}
-@media(max-width:700px){.dongo-channel__avatar{width:48px!important;height:48px!important}.dongo-credit,.dongo-inline-credit,.dongo-closing-credit{gap:10px}.dongo-channel__caption{font-size:12px}.dongo-closing-credit .dongo-channel__youtube{display:grid;margin:0;font-size:14px}.dongo-closing-credit .dongo-channel__caption{display:block;margin:0}}
