@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="520" height="430" viewBox="0 0 520 430" role="img" aria-labelledby="title desc">
+  <title id="title">같은 얼굴 윤곽에서 비교하는 이목구비 배치</title>
+  <desc id="desc">윤곽이 같은 두 성인 남성의 얼굴. 왼쪽은 이목구비가 안쪽에 모인 배치, 오른쪽은 넓게 펼쳐진 배치의 설명용 예시다. 실제 인물이나 측정 결과가 아니며 좋고 나쁨을 나타내지 않는다.</desc>
+  <defs>
+    <linearGradient id="bg" x2="0" y2="1"><stop stop-color="#fbfcfd"/><stop offset="1" stop-color="#edf2f5"/></linearGradient>
+    <linearGradient id="skin" x2="1" y2="1"><stop stop-color="#fff"/><stop offset="1" stop-color="#e4ebef"/></linearGradient>
+    <g id="face">
+      <path d="M-35 236v28l-37 16-21 35H93l-21-35-37-16v-28" fill="#e2eaf0" stroke="#7891a1" stroke-width="1.4"/>
+      <path d="M-35 262q35 27 70 0M-57 277q57 40 114 0" fill="none" stroke="#99abb7" stroke-width="1.1"/>
+      <g fill="url(#skin)" stroke="#738b9b" stroke-width="1.4"><path d="M-65 141q-19-9-15 18t17 23M65 141q19-9 15 18t-17 23"/><path d="M-67 112q-1-66 67-66t67 66l-4 73q-3 34-29 58l-16 14q-18 13-36 0l-16-14q-26-24-29-58Z"/></g>
+      <path d="M-64 147l-11-32q-6-42 13-62 25-30 68-28 43 1 60 29 17 23 8 63l-9 32-5-48q-36-4-56-38-22 34-65 37Z" fill="#526d80" stroke="#435e70" stroke-width="1.4"/>
+      <g fill="none" stroke="#8da1ae" stroke-width="1" opacity=".85"><path d="M-60 84Q-23 73-3 42M-64 71q18-17 42-24M8 42q17 28 46 39M20 39q17 17 38 24"/></g>
+      <g fill="none" stroke="#a4b4be" stroke-width="1"><path d="M-47 186q5 24 17 34M47 186q-5 24-17 34M-10 243h20"/></g>
+    </g>
+  </defs>
+  <rect width="520" height="430" rx="20" fill="url(#bg)"/>
+  <path d="M260 52v288" stroke="#c2cfd7" stroke-width="1" stroke-dasharray="3 7"/>
+  <use href="#face" x="137" y="18"/><use href="#face" x="383" y="18"/>
+  <g transform="translate(137 18)">
+    <g fill="#526d80"><path d="M-40 133q16-7 30-1v5q-16-5-30 1Z"/><path d="M10 132q14-6 30 1v5q-14-6-30-1Z"/><circle cx="-23" cy="154" r="3.6"/><circle cx="23" cy="154" r="3.6"/></g>
+    <g fill="none" stroke="#617e91" stroke-linecap="round"><path d="M-39 156q16-14 29 0M10 156q14-14 29 0" stroke-width="1.6"/><path d="M-38 157q15 7 27 0M11 157q14 7 27 0" stroke-width="1"/><path d="M-4 153l-6 39q10 8 21 0l-4-14M-18 219q18-7 36 0M-17 220q17 10 34 0" stroke-width="1.4"/></g>
+    <path d="M-43 122v48M43 122v48" fill="none" stroke="#95b2c4" stroke-width="1.1" stroke-dasharray="3 4"/>
+  </g>
+  <g transform="translate(383 18)">
+    <g fill="#526d80"><path d="M-53 130q19-8 35-1v5q-17-5-35 2Z"/><path d="M18 129q16-7 35 1v6q-18-7-35-2Z"/><circle cx="-35" cy="154" r="3.6"/><circle cx="35" cy="154" r="3.6"/></g>
+    <g fill="none" stroke="#617e91" stroke-linecap="round"><path d="M-53 156q18-14 34 0M19 156q16-14 34 0" stroke-width="1.6"/><path d="M-52 157q17 7 32 0M20 157q15 7 32 0" stroke-width="1"/><path d="M-4 153l-9 39q13 8 26 0l-5-14M-25 219q25-7 50 0M-23 220q23 10 46 0" stroke-width="1.4"/></g>
+    <path d="M-57 120v50M57 120v50" fill="none" stroke="#95b2c4" stroke-width="1.1" stroke-dasharray="3 4"/>
+  </g>
+  <g fill="#526e80" font-family="'Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="18" font-weight="500" text-anchor="middle"><text x="137" y="382">안쪽에 모인 배치</text><text x="383" y="382">넓게 펼쳐진 배치</text></g>
+</svg>
