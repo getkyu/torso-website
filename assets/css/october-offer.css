@@ -1,0 +1,24 @@
+/* The seasonal offer shares one date state across benefits, prices and profiles. */
+[data-oct-offer][hidden],[data-oct-standard][hidden],[data-oct-ended][hidden]{display:none!important}
+.october-offer{max-width:860px;margin:0 auto 30px;padding:26px 30px;border:1px solid #ccd7d0;border-radius:18px;background:#f3f6f3;color:#263b30;text-align:left;word-break:keep-all}
+.october-offer .october-offer__eyebrow{font-size:12px;font-weight:700;letter-spacing:.08em;color:#526a5b;margin:0 0 10px}
+.october-offer h3{font-size:clamp(22px,2.4vw,28px);line-height:1.45;letter-spacing:-.035em;margin:0 0 14px}
+.october-offer p,.october-offer li{font-size:16px;line-height:1.85}
+.october-offer p{margin:0 0 14px}
+.october-offer ul{margin:0;padding-left:20px}
+.october-offer li+li{margin-top:5px}
+.october-offer-ended{max-width:860px;margin:0 auto 24px;padding:16px 20px;border:1px solid #d8d8d8;border-radius:12px;font-size:15px;line-height:1.75;color:#555;background:#f6f6f6}
+.october-addon{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 24px 16px;font-size:13px;line-height:1.6;color:#365346}
+.october-addon__amount{display:flex;align-items:baseline;gap:10px;white-space:nowrap}
+.october-addon s{color:#737373;font-size:13px}
+.october-addon strong{font-size:20px;font-weight:750}
+.october-home-link{margin-top:16px}
+.october-home-link a{font-size:15px;line-height:1.7}
+@media(max-width:700px){
+ .october-offer{padding:22px 20px;margin-bottom:24px}
+ .october-offer h3{font-size:23px}
+ .october-offer p,.october-offer li{font-size:16px}
+ .october-addon{padding:0 20px 18px;flex-wrap:wrap}
+ .october-addon__amount{margin-left:auto}
+ .desg__disc[data-oct-offer]{font-size:13px;line-height:1.7}
+}
