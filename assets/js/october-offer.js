@@ -12,7 +12,7 @@
       el.hidden = !active;
     });
     document.querySelectorAll('[data-oct-standard]').forEach(function (el) {
-      el.hidden = active;
+      el.hidden = now >= startsAt;
     });
     document.querySelectorAll('[data-oct-ended]').forEach(function (el) {
       el.hidden = now < endsAt;
