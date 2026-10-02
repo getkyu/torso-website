@@ -1,0 +1,46 @@
+
+/* Compact, keyboard-accessible consultation illustrations. */
+.consult-lab{clear:both;margin:30px 0;padding:22px;border:1px solid #cfd6dd;border-radius:20px;background:#fff;color:#252a31;overflow:hidden}
+.consult-lab__heading>span{font-size:11px;letter-spacing:.13em;font-weight:700;color:#526b88}
+.consult-lab__heading h4{margin:10px 0;font-size:25px;line-height:1.5;letter-spacing:-.035em}
+.consult-lab__heading p,.consult-lab__panel>p,.consult-head-types p{font-size:16px;line-height:1.8;color:#53616e;word-break:keep-all;overflow-wrap:anywhere;margin:8px 0 16px}
+.consult-lab__tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px;margin:22px 0 16px;padding:5px;border-radius:14px;background:#eef1f4}
+.consult-lab__tabs button{font:inherit;font-size:14px;font-weight:650;border:0;background:none;color:#535e69;padding:12px 6px;line-height:1.5;cursor:pointer;border-radius:10px;min-height:46px}
+.consult-lab__tabs button[aria-selected=true]{background:#fff;color:#244d80;box-shadow:0 2px 8px #25395712}
+.consult-lab :is(button,summary):focus-visible{outline:3px solid #547eae;outline-offset:3px}
+.consult-lab__panel[hidden]{display:none!important}
+.consult-lab__panel>figure{position:relative;margin:0 0 20px;border-radius:14px;background:#f5f7f9;overflow:hidden}
+.consult-lab__panel>figure>img{display:block;width:100%;height:auto;max-height:410px;object-fit:contain;transform:none}
+.consult-lab__panel figcaption{position:static;padding:11px 10px 15px;margin:0;text-align:center;font-size:13px;line-height:1.6;color:#677787;background:none}
+.consult-lab__key{list-style:none;display:grid;gap:16px;padding:0;margin:22px 0}
+.consult-lab__key li{display:flex;gap:12px;align-items:flex-start;margin:0;padding:0}
+.consult-lab__key b{display:grid;place-items:center;width:25px;height:25px;flex:none;background:#e9eff6;color:#355c85;border-radius:50%;font-size:13px}
+.consult-lab__key strong{display:block;font-size:16px;line-height:1.5;color:#243749}
+.consult-lab__key p{font-size:16px;color:#576370;line-height:1.8;margin:4px 0 0;word-break:keep-all;overflow-wrap:anywhere}
+.consult-lab__panel h5{font-size:21px;line-height:1.65;letter-spacing:-.025em;margin:18px 0 10px}
+.consult-lab__panel>p.consult-lab__note{font-size:14px;color:#617080}
+.consult-lab__disclaimer{font-size:13px;line-height:1.8;color:#6b7580;border-top:1px solid #dbe0e6;padding-top:16px;margin:22px 0 0;word-break:keep-all}
+.consult-simulation__top{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:18px 18px 2px}
+.consult-simulation__top>span{font-size:10px;font-weight:700;letter-spacing:.13em;color:#6a7989}
+.consult-simulation__top>strong{font-size:14px;color:#315777}
+.consult-simulation>svg{display:block;width:100%;max-height:425px}
+.sim-neck,.sim-skull{fill:#e9edf1;stroke:#7b8997;stroke-width:1.8;stroke-linejoin:round}
+.sim-hair{fill:url(#sim-hair-fill);stroke:#3e5266;stroke-width:1.5}
+.sim-skull-guide{fill:none;stroke:#dce4ee;stroke-dasharray:4 5;stroke-width:1.7;opacity:.7}
+.sim-face-line{fill:none;stroke:#74818e;stroke-width:1.9;stroke-linecap:round}
+.sim-flow{fill:none;stroke:#c9d9e8;stroke-width:2;stroke-linecap:round}
+.sim-flow--design,.sim-part--design{opacity:0}
+.sim-part{fill:none;stroke:#416f9f;stroke-width:1.5;stroke-dasharray:4 4}
+.sim-part circle{fill:#e3bc81;stroke:#fff;stroke-width:2}
+.sim-part text{fill:#385a7b;stroke:none;font-family:inherit;font-size:18px;font-weight:650}
+.sim-fixed-label{font-family:inherit;text-anchor:middle;fill:#596b7d;font-size:15px}
+.consult-simulation__choices{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;padding:8px 12px}
+.consult-simulation__choices button{font:inherit;font-size:14px;min-height:44px;padding:8px 12px;border:1px solid #cbd5df;background:#fff;color:#385068;border-radius:30px;cursor:pointer}
+.consult-simulation__choices button[aria-pressed=true]{background:#324f6d;border-color:#324f6d;color:#fff}
+.consult-head-types{margin-top:24px;border-top:1px solid #d9dfe5;padding-top:8px}
+.consult-head-types summary{cursor:pointer;font-weight:650;font-size:15px;line-height:1.7;padding:12px 0;color:#2c527b}
+.consult-head-types svg{display:block;width:100%;max-height:280px;margin:10px 0}
+.consult-head-types p{font-size:15px}
+@media(max-width:700px){.consult-lab{padding:16px;margin:26px 0}.consult-lab__tabs{grid-template-columns:repeat(2,minmax(0,1fr))}.consult-lab__tabs button{font-size:15px}.consult-lab__heading h4{font-size:24px}.consult-lab__key p,.consult-lab__key strong{font-size:16px}.consult-simulation__top{padding:15px 12px 5px}.consult-simulation__choices{gap:5px;padding:8px 6px}.consult-simulation__choices button{font-size:13px;padding:8px 10px}.consult-lab__disclaimer{font-size:14px}.consult-lab__panel>p.consult-lab__note{font-size:15px}}
+
+@media(max-width:700px){.sim-part text{font-size:25px}.sim-fixed-label{font-size:20px}.consult-simulation__choices{display:grid;grid-template-columns:1fr 1fr}.consult-simulation__choices button{font-size:14px}.consult-simulation__choices [data-sim-play]{grid-column:1/-1;justify-self:center;padding-inline:20px}}
