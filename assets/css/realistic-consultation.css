@@ -20,3 +20,15 @@
 .consult-observation__diagram .consult-photo{width:100%;height:100%}
 @media(max-width:700px){.consult-photo__guides text{font-size:24px}.consult-photo__guides .photo-number{font-size:23px}}
 @media(prefers-reduced-motion:reduce){.sim-photo-layer--after,.sim-photo-guide{transition:none}}
+
+.consult-photo__guides .sim-point{stroke:#fff;stroke-width:3;filter:drop-shadow(0 1px 3px #0009)}
+.consult-photo__guides .sim-point--top{fill:#65dbe0}.consult-photo__guides .sim-point--golden{fill:#f7c775}
+.consult-photo__guides .sim-point-label{font-size:20px}
+.consult-point-key{display:flex;flex-wrap:wrap;gap:12px 24px;margin:18px 0 24px}
+.consult-point-key p{display:flex;gap:9px;align-items:flex-start;margin:0;font-size:14px!important;line-height:1.6!important;flex:1 1 180px}
+.consult-point-key i{display:block;width:12px;height:12px;border-radius:50%;margin-top:5px;flex:none;border:1px solid #3c5266}
+.consult-point-key__top{background:#65dbe0}.consult-point-key__golden{background:#f7c775}
+.consult-point-key strong{display:block;font-size:15px;color:#222}
+@media(max-width:700px){.consult-photo__guides .sim-point-label{font-size:23px}.consult-point-key p{font-size:15px!important}}
+
+.consult-photo__guides .sim-parting{stroke-width:4}.consult-photo__guides .sim-parting--base{stroke:#f7c775}.consult-photo__guides .sim-parting--design{stroke:#65dbe0}
