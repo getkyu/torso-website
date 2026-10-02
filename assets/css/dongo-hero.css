@@ -27,3 +27,13 @@
  .dongo-hero__film .film-toggle[hidden]{display:none}
  .dongo-closing-credit{left:25px;right:25px;bottom:18px;font-size:13px}
 }
+
+/* Compact channel credit remains below the hairstyle. */
+.dongo-credit{pointer-events:auto}
+.dongo-credit,.dongo-inline-credit,.dongo-closing-credit{display:flex;align-items:center;gap:12px}
+.dongo-channel{display:inline-flex;align-items:center;gap:10px;flex:none;text-decoration:none;border-radius:8px}
+.dongo-channel__youtube{display:grid;place-items:center;width:38px;height:28px;border-radius:8px;background:#f02128;color:#fff;font-size:14px;text-shadow:none}
+.dongo-channel__avatar{display:block;width:56px!important;height:56px!important;object-fit:cover;border-radius:50%;border:1px solid #ffffff80}
+.dongo-channel__caption{font-size:13px;line-height:1.5;color:inherit;white-space:nowrap}
+.dongo-channel:focus-visible{outline:2px solid #fff;outline-offset:4px}
+@media(max-width:700px){.dongo-channel__avatar{width:48px!important;height:48px!important}.dongo-credit,.dongo-inline-credit,.dongo-closing-credit{gap:10px}.dongo-channel__caption{font-size:12px}}
