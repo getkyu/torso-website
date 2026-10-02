@@ -28,6 +28,20 @@
     item.appendChild(philosophy);
     list.appendChild(item);
   }
+  // Keep the original TORSO lettering; the descriptor remains readable text.
+  document.querySelectorAll('a[href="philosophy.html"]').forEach(function (link) {
+    if (link.textContent.trim() !== '브랜드 철학') return;
+    link.classList.add('philosophy-wordmark');
+    link.setAttribute('aria-label', 'TORSO for MEN 철학');
+    link.textContent = '';
+    [['torso', ''], ['for', 'for MEN'], ['label', '철학']].forEach(function (part) {
+      var span = document.createElement('span');
+      span.className = 'philosophy-wordmark__' + part[0];
+      span.setAttribute('aria-hidden', 'true');
+      span.textContent = part[1];
+      link.appendChild(span);
+    });
+  });
   if (philosophy && /\/philosophy\.html$/.test(window.location.pathname)) {
     philosophy.classList.add('active');
     philosophy.setAttribute('aria-current', 'page');
