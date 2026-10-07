@@ -1,13 +1,14 @@
 // Photo-space measurements only. These thresholds reject unsuitable inputs;
 // they are not aesthetic criteria or validated face-shape classifications.
 export const OVAL = [10,338,297,332,284,251,389,356,454,323,361,288,397,365,379,378,400,377,152,148,176,149,150,136,172,58,132,93,234,127,162,21,54,103,67,109];
-export const MEASURE_POINTS = [10,152,234,454,172,397];
+const REQUIRED_MEASURE_POINTS = [10,152,234,454,172,397];
+export const MEASURE_POINTS = [...REQUIRED_MEASURE_POINTS,9,2];
 export function inspectFaces(faces, width, height) {
   if (!Array.isArray(faces) || !faces.length) return {ok:false,code:'no-face'};
   if (faces.length !== 1) return {ok:false,code:'multiple'};
   if (!Number.isFinite(width) || !Number.isFinite(height) || width <= 0 || height <= 0) return {ok:false,code:'invalid'};
   const points = faces[0];
-  const ids = [...new Set([...OVAL,...MEASURE_POINTS,1,33,263])];
+  const ids = [...new Set([...OVAL,...REQUIRED_MEASURE_POINTS,1,33,263])];
   if (!Array.isArray(points) || ids.some(i=>!points[i] || !Number.isFinite(points[i].x) || !Number.isFinite(points[i].y))) return {ok:false,code:'invalid'};
   const p = i=>({x:points[i].x*width,y:points[i].y*height});
   const distance = (a,b)=>Math.hypot(p(a).x-p(b).x,p(a).y-p(b).y);
@@ -24,8 +25,29 @@ export function inspectFaces(faces, width, height) {
   if (!Number.isFinite(nosePosition)||nosePosition<.18||nosePosition>.72) return {ok:false,code:'angle'};
   const heightRatio=faceHeight/faceWidth,jawRatio=jawWidth/faceWidth;
   if (!Number.isFinite(heightRatio)||!Number.isFinite(jawRatio)||heightRatio<=0||jawRatio<=0) return {ok:false,code:'invalid'};
+  // Optional photo-space comparison: brow-area point -> below-nose point -> chin.
+  // Project onto the eye line's perpendicular to avoid treating roll as extra length.
+  // These are estimated mesh points, not anatomical facial thirds or ideal ratios.
+  let segmentRatio=null;
+  const segmentIds=[9,2,152,33,263];
+  if(segmentIds.every(i=>points[i] && Number.isFinite(points[i].x) && Number.isFinite(points[i].y) && points[i].x>=0 && points[i].x<=1 && points[i].y>=0 && points[i].y<=1)){
+    const eyeDX=right.x-left.x,eyeDY=right.y-left.y,eyeLength=Math.hypot(eyeDX,eyeDY);
+    if(eyeLength>0){
+      let axisX=-eyeDY/eyeLength,axisY=eyeDX/eyeLength;
+      // Keep the perpendicular pointing down the image, including mirrored photos.
+      if(axisY<0){axisX=-axisX;axisY=-axisY;}
+      const along=i=>p(i).x*axisX+p(i).y*axisY;
+      const brow=along(9),base=along(2),chin=along(152);
+      const eye=((left.x+right.x)*axisX+(left.y+right.y)*axisY)/2;
+      const upper=base-brow,lower=chin-base;
+      if(axisY>0 && brow<eye && eye<base && upper>0 && lower>0){
+        const upperPercent=upper/(upper+lower)*100;
+        if(Number.isFinite(upperPercent))segmentRatio={upperPercent,lowerPercent:100-upperPercent};
+      }
+    }
+  }
   const box={x:Math.min(...OVAL.map(i=>p(i).x)),y:Math.min(...OVAL.map(i=>p(i).y)),width:Math.max(...OVAL.map(i=>p(i).x))-Math.min(...OVAL.map(i=>p(i).x)),height:Math.max(...OVAL.map(i=>p(i).y))-Math.min(...OVAL.map(i=>p(i).y))};
-  return {ok:true,heightRatio,jawRatio,box};
+  return {ok:true,heightRatio,jawRatio,segmentRatio,box};
 }
 export function pixelQuality(imageData) {
   const {data,width,height}=imageData;
