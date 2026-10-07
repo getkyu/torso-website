@@ -201,7 +201,6 @@ var TORSO_MEDIA = (function () {
     jinsung:  { name: '진성',  url: BOOK + '3696795' },
     junyoung: { name: '준영',  url: BOOK + '6961265' },
     jinhoon:  { name: '진훈',  url: BOOK + '6826157' },
-    yongun:   { name: '용운',  url: BOOK + '7942111' }, // 주니어
     shop:     { name: '예약하기', url: 'https://booking.naver.com/booking/13/bizes/242540' } // 매장 메인 예약
   };
   // 영상 → 시술 디자이너 마킹 (원장 마킹표 확정 시 여기만 채우면 됨)
