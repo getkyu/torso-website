@@ -691,7 +691,7 @@ body.menu-open .nav__burger-txt{color:var(--ink)!important}
 .hidden{display:none}
 
 /* ===== Designers ===== */
-.desg-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.desg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
 .desg{border:1px solid var(--line);background:rgba(255,255,255,.22);display:flex;flex-direction:column;
   scroll-margin-top:96px;transition:transform .45s var(--ease),box-shadow .45s var(--ease),border-color .45s var(--ease)}
 .desg:hover{transform:translateY(-6px) scale(1.025);border-color:var(--accent);box-shadow:0 22px 54px -22px rgba(20,18,15,.32),0 6px 18px rgba(20,18,15,.06);z-index:2}
