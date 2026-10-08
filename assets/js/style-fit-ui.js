@@ -67,7 +67,7 @@ document.querySelectorAll('.home-core-media').forEach(function(wrap){
  var poster=wrap.querySelector('img');if(poster)imageLabel(wrap,posters[fileName(poster.getAttribute('src'))],true);
 });
 // The designer fallback posters are exact frames of these first clips.
-var first={jinsung:'s1-1_02.mp4',jinhoon:'s1-2_03.mp4',junyoung:'s1-2_01.mp4'};
+var first={jinsung:'s1-1_02.mp4',jinhoon:'s3-3_01.mp4',junyoung:'s1-2_01.mp4'};
 document.querySelectorAll('[data-designer-work]').forEach(function(card){render(card.querySelector('.designer-work-media'),first[card.dataset.designerWork],true);});
 // The styles page already has one tag inside each image. Reuse it, including
 // the catalog name for grouped photos, without adding labels to consultation media.
