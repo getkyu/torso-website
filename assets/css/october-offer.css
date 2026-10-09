@@ -22,3 +22,8 @@
  .october-addon__amount{margin-left:auto}
  .desg__disc[data-oct-offer]{font-size:13px;line-height:1.7}
 }
+/* 2026-10-09 한 줄 요약 + 자세히 보기 */
+.october-offer .october-offer__summary{font-weight:700;margin:0 0 10px}
+.october-offer__more summary{cursor:pointer;font-size:14px;color:#526a5b;text-decoration:underline;text-underline-offset:3px;list-style:none}
+.october-offer__more summary::-webkit-details-marker{display:none}
+.october-offer__more[open] summary{margin-bottom:12px}

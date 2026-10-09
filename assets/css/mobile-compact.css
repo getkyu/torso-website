@@ -1,0 +1,17 @@
+/* 2026-10-09 홈 길이 줄이기: AI 설명 접기, 휴대폰에서 후기·디자이너·과정 가로 넘김 */
+.consult-more{margin:28px 0}
+.consult-more>summary{cursor:pointer;list-style:none;display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border:1px solid currentColor;border-radius:999px;font-size:15px;font-weight:700;opacity:.85}
+.consult-more>summary::-webkit-details-marker{display:none}
+.consult-more>summary::after{content:"+";font-weight:400}
+.consult-more[open]>summary::after{content:"–"}
+.consult-more[open]>summary{margin-bottom:24px}
+.swipe-hint{display:none}
+@media (max-width:700px){
+  .swipe-hint{display:block;font-size:13px;opacity:.6;margin:0 0 10px;text-align:right}
+  .verified-reviews__grid,.designer-puzzle,.j-process-grid{display:flex!important;flex-wrap:nowrap!important;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px!important;padding-bottom:10px;-webkit-overflow-scrolling:touch;grid-template-columns:none!important}
+  .verified-reviews__grid,.designer-puzzle,.j-process-grid{width:100%!important;max-width:100%!important;min-width:0!important;box-sizing:border-box;position:relative;contain:paint}
+  #reviews .j-wrap,#designers .j-wrap,#consulting .j-wrap,.consult-hero__photo--puzzle{min-width:0!important;max-width:100%!important;overflow:hidden}
+  .verified-reviews__grid>*{position:relative;overflow:hidden;contain:paint}
+  .verified-reviews__grid>*,.designer-puzzle>*{flex:0 0 86%!important;max-width:86%;scroll-snap-align:start;margin:0!important}
+  .j-process-grid>*{flex:0 0 80%!important;max-width:80%;scroll-snap-align:start;margin:0!important}
+}
