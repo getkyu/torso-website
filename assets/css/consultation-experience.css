@@ -1,0 +1,62 @@
+/* A compact, optional consultation-preparation flow inside the existing details. */
+.consult-experience [hidden]{display:none!important}
+.consult-experience .cex-interactive{padding:5px 0 20px;color:#20242a;font-family:inherit}
+.consult-experience .cex-heading>span,.consult-experience .cex-label{display:block;color:#526b88;font-size:11px;font-weight:700;letter-spacing:.1em}
+.consult-experience .cex-heading h4{margin:8px 0 10px;font-size:23px;font-weight:700;line-height:1.5;letter-spacing:-.025em}
+.consult-experience .cex-heading p,.consult-experience .cex-intro{margin:8px 0 18px;font-size:14px;line-height:1.7;color:#58616c;word-break:keep-all}
+.consult-experience .cex-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));list-style:none;gap:4px;margin:22px 0;padding:0;border-bottom:1px solid #d9dfe5}
+.consult-experience .cex-steps li{margin:0;padding:0;min-width:0}
+.consult-experience button{font:inherit;cursor:pointer}
+.consult-experience .cex-steps button{width:100%;min-height:48px;padding:10px 2px;border:0;border-bottom:3px solid transparent;background:none;color:#65707a;font-size:12px;font-weight:650;white-space:nowrap}
+.consult-experience .cex-steps button span{font-size:10px;margin-right:3px}
+.consult-experience .cex-steps button[aria-current=step]{border-color:#244d80;color:#244d80}
+.consult-experience button:disabled{opacity:.42;cursor:default}
+.consult-experience :is(button,a,input,textarea):focus-visible{outline:3px solid #547eae;outline-offset:3px}
+.consult-experience .cex-step>h5{margin:0 0 16px;font-size:19px;font-weight:700;line-height:1.55;word-break:keep-all}
+.consult-experience .cex-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:0 0 18px}
+.consult-experience .cex-tabs button{min-width:0;min-height:48px;padding:8px 3px;border:1px solid #d4dbe3;border-radius:7px;background:#fff;color:#4b5764;font-size:13px;font-weight:600;line-height:1.5;word-break:keep-all}
+.consult-experience .cex-tabs button[aria-selected=true]{border-color:#2e5485;background:#eef3f9;color:#244d80;box-shadow:inset 0 0 0 1px #2e5485}
+.consult-experience .cex-tabs button[data-picked=true]::after{content:' ·';color:#244d80}
+.consult-experience .cex-area-panel{min-width:0}
+.consult-experience .cex-observation{display:grid;grid-template-columns:110px minmax(0,1fr);gap:16px;align-items:center;padding:16px 0;border-top:1px solid #dde2e8}
+.consult-experience .cex-diagram{width:110px;margin:0;padding:0;background:#f2f5f8;border-radius:10px;overflow:hidden}
+.consult-experience .cex-diagram svg{display:block;width:100%;height:auto}
+.consult-experience .cex-diagram figcaption{position:static;padding:0 6px 10px;background:none;color:#63717f;font-size:10px;line-height:1.5;text-align:center}
+.consult-experience .cex-outline{fill:#fff;stroke:#8a97a4;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.consult-experience .cex-features{fill:none;stroke:#8a97a4;stroke-width:2;stroke-linecap:round}
+.consult-experience .cex-mark{fill:none;stroke:#315f97;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.consult-experience .cex-mark circle{fill:#e2ecf8;stroke-width:2}
+.consult-experience .cex-observation-copy h6{margin:5px 0 9px;font-size:17px;font-weight:700;line-height:1.5;word-break:keep-all}
+.consult-experience .cex-observation-copy ul{margin:0;padding-left:16px;list-style:disc;font-size:14px;line-height:1.65;color:#525c67;word-break:keep-all}
+.consult-experience .cex-observation-copy li+li{margin-top:5px}
+.consult-experience .cex-influence{padding:13px 15px;background:#edf2f7;border-left:2px solid #6c8db4;border-radius:0 7px 7px 0}
+.consult-experience .cex-influence p{margin:5px 0 0;font-size:14px;line-height:1.75;color:#374c62;word-break:keep-all}
+.consult-experience fieldset{min-width:0;margin:22px 0 0;padding:0;border:0}
+.consult-experience .cex-choices legend{margin:0 0 12px;padding:0;font-size:16px;font-weight:650;line-height:1.55}
+.consult-experience .cex-choice-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.consult-experience .cex-choice-grid label,.consult-experience .cex-routines label{display:flex;gap:9px;align-items:flex-start;min-width:0;margin:0;padding:13px 11px;border:1px solid #d3dbe4;border-radius:9px;background:#fff;cursor:pointer}
+.consult-experience label:has(input:checked){border-color:#315f97;background:#edf3fa}
+.consult-experience input[type=radio]{flex:none;width:16px;height:16px;margin:3px 0 0;accent-color:#315f97;cursor:pointer}
+.consult-experience .cex-choice-grid b,.consult-experience .cex-routines b{display:block;font-size:14px;font-weight:650;line-height:1.55;word-break:keep-all}
+.consult-experience .cex-choice-grid small,.consult-experience .cex-routines small{display:block;margin-top:5px;font-size:12px;line-height:1.65;color:#647180;word-break:keep-all}
+.consult-experience .cex-unsure{display:flex;gap:9px;align-items:flex-start;min-height:44px;margin:8px 0 0;padding:11px;border:1px solid transparent;border-radius:7px;font-size:13px;line-height:1.65;cursor:pointer;word-break:keep-all}
+.consult-experience .cex-remove{display:inline-flex;align-items:center;min-height:44px;margin:2px 0 0;padding:8px 2px;border:0;background:transparent;color:#4c6380;font-size:13px;text-decoration:underline;text-underline-offset:4px}
+.consult-experience .cex-feedback,.consult-experience .cex-routine-note,.consult-experience .cex-copy-status{min-height:24px;margin:10px 0 0;font-size:13px;line-height:1.7;color:#345a87;word-break:keep-all}
+.consult-experience .cex-routines{display:grid;gap:8px;margin-top:12px}
+.consult-experience .cex-routines label{min-height:60px;align-items:center}
+.consult-experience .cex-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:17px}
+.consult-experience .cex-primary,.consult-experience .cex-secondary{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:11px 14px;border:1px solid #252b32;border-radius:7px;font-size:14px;font-weight:650;line-height:1.5}
+.consult-experience .cex-primary{flex:1;background:#252b32;color:#fff}
+.consult-experience .cex-secondary{background:transparent;color:#333}
+.consult-experience .cex-note-label{display:block;margin:16px 0 8px;font-size:13px;font-weight:650}
+.consult-experience .cex-note{display:block;box-sizing:border-box;width:100%;min-height:230px;padding:14px;border:1px solid #ced6df;border-radius:9px;background:#f7f9fb;color:#303943;font:inherit;font-size:14px;line-height:1.85;resize:vertical}
+.consult-experience .cex-booking{margin-top:15px;padding:16px;border:1px solid #d6dde5;border-radius:9px;background:#f4f7fa}
+.consult-experience .cex-booking h6{margin:0;font-size:16px;line-height:1.55;font-weight:650}
+.consult-experience .cex-booking p{margin:9px 0;font-size:14px;line-height:1.75;color:#53616e;word-break:keep-all}
+.consult-experience .cex-booking a{display:inline-flex;align-items:center;min-height:44px;font-size:14px;color:#244d80;font-weight:700;text-underline-offset:4px}
+.consult-experience .cex-booking small{display:block;margin-top:5px;font-size:12px;line-height:1.7;color:#607080}
+.consult-experience .cex-related{display:flex;flex-wrap:wrap;gap:6px 18px;padding-top:15px;margin-top:22px;border-top:1px solid #d9dfe5}
+.consult-experience .cex-related a{display:inline-flex;align-items:center;min-height:44px;color:#345a87;font-size:13px;font-weight:600;text-underline-offset:4px}
+.consult-experience .cex-privacy{margin:7px 0 0;font-size:12px;line-height:1.75;color:#727d88;word-break:keep-all}
+.consult-experience .cex-sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+@media(max-width:380px){.consult-experience .cex-observation{grid-template-columns:86px minmax(0,1fr);gap:11px}.consult-experience .cex-diagram{width:86px}.consult-experience .cex-choice-grid{grid-template-columns:1fr}.consult-experience .cex-steps button{font-size:11px}.consult-experience .cex-heading h4{font-size:21px}.consult-experience .cex-observation-copy h6{font-size:16px}}
