@@ -11,7 +11,7 @@
 .consult-experience .cex-steps button span{font-size:10px;margin-right:3px}
 .consult-experience .cex-steps button[aria-current=step]{border-color:#244d80;color:#244d80}
 .consult-experience button:disabled{opacity:.42;cursor:default}
-.consult-experience :is(button,a,input,textarea):focus-visible{outline:3px solid #547eae;outline-offset:3px}
+.consult-experience :is(button,a,input,textarea,summary):focus-visible{outline:3px solid #547eae;outline-offset:3px}
 .consult-experience .cex-step>h5{margin:0 0 16px;font-size:19px;font-weight:700;line-height:1.55;word-break:keep-all}
 .consult-experience .cex-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:0 0 18px}
 .consult-experience .cex-tabs button{min-width:0;min-height:48px;padding:8px 3px;border:1px solid #d4dbe3;border-radius:7px;background:#fff;color:#4b5764;font-size:13px;font-weight:600;line-height:1.5;word-break:keep-all}
@@ -60,3 +60,36 @@
 .consult-experience .cex-privacy{margin:7px 0 0;font-size:12px;line-height:1.75;color:#727d88;word-break:keep-all}
 .consult-experience .cex-sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
 @media(max-width:380px){.consult-experience .cex-observation{grid-template-columns:86px minmax(0,1fr);gap:11px}.consult-experience .cex-diagram{width:86px}.consult-experience .cex-choice-grid{grid-template-columns:1fr}.consult-experience .cex-steps button{font-size:11px}.consult-experience .cex-heading h4{font-size:21px}.consult-experience .cex-observation-copy h6{font-size:16px}}
+
+/* Design reasons stay optional and readable inside the existing consultation flow. */
+.consult-experience .cex-criteria,.consult-experience .cex-example{margin:15px 0;padding:0;border:1px solid #d9dfe5;border-radius:8px;background:#fafbfc}
+.consult-experience :is(.cex-criteria,.cex-example)>summary{display:block;box-sizing:border-box;min-height:48px;margin:0;padding:13px 14px;border:0;color:#394a5d;font-size:13px;font-weight:650;line-height:1.65;cursor:pointer;word-break:keep-all;overflow-wrap:anywhere;list-style:none}
+.consult-experience :is(.cex-criteria,.cex-example)>summary::after{content:none}
+.consult-experience :is(.cex-criteria,.cex-example)>summary::before{content:"＋";margin-right:6px;color:#526b88}
+.consult-experience :is(.cex-criteria,.cex-example)[open]>summary::before{content:"−"}
+.consult-experience .cex-criteria ol{display:grid;gap:12px;margin:0;padding:3px 18px 14px 34px;list-style:decimal}
+.consult-experience .cex-criteria li{margin:0;padding:0 0 0 2px;color:#526b88;font-size:12px;line-height:1.65;word-break:keep-all}
+.consult-experience .cex-criteria li b,.consult-experience .cex-criteria li span{display:block}
+.consult-experience .cex-criteria li b{color:#34404d;font-size:13px}
+.consult-experience .cex-criteria li span{color:#65717c}
+.consult-experience .cex-criteria>p{margin:0;padding:11px 14px;border-top:1px solid #e1e6eb;color:#52677e;font-size:11px;line-height:1.7;word-break:keep-all}
+.consult-experience .cex-customer-question{margin:5px 0 12px;color:#252e38;font-size:19px;font-weight:700;line-height:1.65;word-break:keep-all}
+.consult-experience .cex-onsite{padding:16px 2px 3px}
+.consult-experience .cex-onsite p{margin:6px 0 0;color:#4b5866;font-size:13px;line-height:1.75;word-break:keep-all}
+.consult-experience .cex-example-label{margin:0;padding:0 14px 12px;color:#747f89;font-size:11px;line-height:1.65;word-break:keep-all}
+.consult-experience .cex-example dl{display:grid;grid-template-columns:1fr;gap:12px;margin:0;padding:0 14px 16px}
+.consult-experience .cex-example dl>div{display:block;margin:0;padding:0;border:0}
+.consult-experience .cex-example dt{margin:0 0 4px;color:#52677e;font-size:11px;font-weight:700;line-height:1.6}
+.consult-experience .cex-example dd{margin:0;color:#505c68;font-size:13px;line-height:1.75;word-break:keep-all}
+.consult-experience .cex-preference{margin-top:23px}
+.consult-experience .cex-preference>label{display:block;margin-bottom:9px;color:#34404d;font-size:14px;font-weight:650;line-height:1.7;word-break:keep-all}
+.consult-experience .cex-preference label small{color:#76818c;font-size:11px;font-weight:400}
+.consult-experience .cex-preference textarea{display:block;box-sizing:border-box;width:100%;min-width:0;max-width:100%;min-height:112px;padding:12px;border:1px solid #ced6df;border-radius:8px;background:#fff;color:#303943;font:inherit;font-size:16px;line-height:1.65;resize:vertical}
+.consult-experience .cex-preference textarea::placeholder{color:#7a8490;opacity:1}
+.consult-experience .cex-preference>p{margin:7px 0 0;color:#76818c;font-size:11px;line-height:1.65}
+.consult-experience .cex-result-checklist{margin:17px 0;padding:14px;border:1px solid #d9dfe5;border-radius:8px;background:#fafbfc}
+.consult-experience .cex-result-checklist h6{margin:0 0 11px;color:#34404d;font-size:13px;font-weight:650;line-height:1.65;word-break:keep-all}
+.consult-experience .cex-result-checklist ul{display:grid;gap:9px;list-style:none;margin:0;padding:0}
+.consult-experience .cex-result-checklist li{margin:0;color:#64717e;font-size:12px;line-height:1.7;word-break:keep-all}
+.consult-experience .cex-result-checklist li b{display:block;color:#43566b;font-size:12px;font-weight:650}
+@media(max-width:380px){.consult-experience .cex-customer-question{font-size:18px}.consult-experience .cex-criteria>summary{font-size:12px}.consult-experience .cex-note{font-size:16px}.consult-experience .cex-result-checklist{padding:12px}}
