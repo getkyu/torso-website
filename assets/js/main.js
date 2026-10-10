@@ -498,11 +498,9 @@ document.querySelectorAll('a[href]').forEach(a => {
       }, base + i * 45);
     });
   }
-  // 날짜 기반 할인 전환 (2026-11-01)
-  var LATE_FIRST = new Date() >= new Date(2026, 10, 1); // month 10 = 11월
+  // 첫 방문 할인은 명시된 조건만 적용하며 날짜로 전환하지 않습니다.
   function firstPctOf(el) {
     var pct = el.dataset.first !== undefined ? parseInt(el.dataset.first, 10) : 50;
-    if (LATE_FIRST && el.dataset.firstLate !== undefined) pct = parseInt(el.dataset.firstLate, 10);
     return pct;
   }
   function discounted(base, mode, el) {
@@ -564,12 +562,6 @@ document.querySelectorAll('a[href]').forEach(a => {
       var v = parseInt(el.dataset.now, 10);
       el.textContent = '+' + v.toLocaleString('en-US');
     });
-    if (LATE_FIRST) {                                // 2026-11-01부터 펌 첫방문 20%
-      var pct = document.querySelector('[data-perm-pct]');
-      var pnote = document.querySelector('[data-perm-note]');
-      if (pct) pct.textContent = '20%';
-      if (pnote) pnote.remove();
-    }
   })();
 
   // discount toggle buttons (mutually exclusive within a card)
