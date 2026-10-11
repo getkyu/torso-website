@@ -54,6 +54,15 @@
 .picks-video:hover{color:var(--mut)}
 .picks-card .btn{min-height:44px;justify-content:center;padding:12px 16px;font-size:13px;letter-spacing:0;line-height:1.5}
 .picks-closing h2{line-height:1.45}
+.picks-category__sub{margin-top:6px;color:var(--ink-soft);font-size:14px}
+.picks-card.picks-card--story{padding:0 0 22px;overflow:hidden;text-decoration:none;color:inherit;transition:transform .2s}
+.picks-card--story:hover{transform:translateY(-2px)}
+.picks-card--story img{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;margin-bottom:16px}
+.picks-card--story .picks-tag,.picks-card--story h3,.picks-card--story>p,.picks-card--story .picks-more{margin-left:22px;margin-right:22px}
+.picks-tag{font-size:11px;letter-spacing:.16em;color:var(--mut)}
+.picks-card--story h3{margin-top:6px}
+.picks-card--story>p{margin:8px 22px 14px}
+.picks-more{margin-top:auto;font-size:14px;font-weight:600;text-decoration:underline;text-underline-offset:5px}
 @media(max-width:900px){
   .picks-category{grid-template-columns:1fr;gap:24px}
 }
@@ -100,35 +109,34 @@
     <aside class="picks-disclosure" aria-label="쿠팡 파트너스 안내">
       <p>이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</p>
     </aside>
-    <p class="picks-intro__copy">시술과 영상에서 실제로 쓴 제품만 모았습니다. 같은 제품도 모질·길이·펌 상태에 따라 다르게 표현되니, 내 머리에 맞는지는 상담 때 함께 확인해요.</p>
+    <p class="picks-intro__copy">시술과 영상에서 실제로 쓴 제품만, 머리 고민별로 모았습니다. 카드를 누르면 실제 전후와 사용법을 볼 수 있어요. 같은 제품도 모질·길이·펌 상태에 따라 다르게 표현되니, 내 머리에 맞는지는 상담 때 함께 확인해요.</p>
   </section>
 
   <div class="picks-catalog wrap">
     <section class="picks-category" aria-labelledby="picks-category-1">
       <div class="picks-category__head">
         <p class="eyebrow">01</p>
-        <h2 id="picks-category-1">오일·에센스</h2>
+        <h2 id="picks-category-1">오일</h2>
+        <p class="picks-category__sub">촉촉함만 살짝</p>
       </div>
       <ul class="picks-grid">
         <li>
-          <article class="picks-card">
-            <h3>나플라 N. 폴리쉬 오일</h3>
-            <p>마무리 윤기와 결 정리용 오일</p>
-            <div class="picks-card__actions">
-              <a class="picks-video" href="https://youtu.be/GOGSmjjZ39k?t=662" target="_blank" rel="noopener" aria-label="나플라 N. 폴리쉬 오일 나온 영상 (새 탭)">나온 영상 ↗</a>
-              <a class="btn btn--fill" href="https://link.coupang.com/a/hJWjVIJJmK" target="_blank" rel="sponsored nofollow noopener" aria-label="나플라 N. 폴리쉬 오일 쿠팡에서 보기 (새 탭)">쿠팡에서 보기 ↗</a>
-            </div>
-          </article>
+          <a class="picks-card picks-card--story" href="picks/nafla-oil.html">
+            <img src="assets/img/picks/gogs_after.jpg" alt="나플라 N. 폴리쉬 오일로 마무리한 머리" width="640" height="640" loading="lazy">
+            <span class="picks-tag">HOLY PERM</span>
+            <h3>드라이할수록 풀리는 펌, 매일 아침 다시 펴고 있다면?</h3>
+            <p>나플라 N. 폴리쉬 오일</p>
+            <span class="picks-more">전후 보고 사용법 확인 →</span>
+          </a>
         </li>
         <li>
-          <article class="picks-card">
-            <h3>다슈 프로 에어리 폴리쉬 헤어오일</h3>
-            <p>가볍게 쓰기 좋은 폴리쉬 오일</p>
-            <div class="picks-card__actions">
-              <a class="picks-video" href="https://youtu.be/GOGSmjjZ39k?t=670" target="_blank" rel="noopener" aria-label="다슈 프로 에어리 폴리쉬 헤어오일 나온 영상 (새 탭)">나온 영상 ↗</a>
-              <a class="btn btn--fill" href="https://link.coupang.com/a/hJWzc2zvX2" target="_blank" rel="sponsored nofollow noopener" aria-label="다슈 프로 에어리 폴리쉬 헤어오일 쿠팡에서 보기 (새 탭)">쿠팡에서 보기 ↗</a>
-            </div>
-          </article>
+          <a class="picks-card picks-card--story" href="picks/dashu-oil.html">
+            <img src="assets/img/picks/gogs_after.jpg" alt="다슈 프로 에어리 폴리쉬 헤어오일로 마무리한 머리" width="640" height="640" loading="lazy">
+            <span class="picks-tag">HOLY PERM</span>
+            <h3>힙한 펌, 손질이 어려울까 망설여진다면?</h3>
+            <p>다슈 프로 에어리 폴리쉬 헤어오일</p>
+            <span class="picks-more">전후 보고 사용법 확인 →</span>
+          </a>
         </li>
       </ul>
     </section>
@@ -137,37 +145,35 @@
       <div class="picks-category__head">
         <p class="eyebrow">02</p>
         <h2 id="picks-category-2">컬크림·젤리</h2>
+        <p class="picks-category__sub">컬과 결을 살릴 때</p>
       </div>
       <ul class="picks-grid">
         <li>
-          <article class="picks-card">
-            <h3>밀본 니제르 젤리 M</h3>
-            <p>펌 컬을 촉촉하게 살리는 젤리 타입</p>
-            <div class="picks-card__actions">
-              <a class="picks-video" href="https://youtu.be/6xprQNotbIQ?t=524" target="_blank" rel="noopener" aria-label="밀본 니제르 젤리 M 나온 영상 (새 탭)">나온 영상 ↗</a>
-              <a class="btn btn--fill" href="https://link.coupang.com/a/hJWqmBy1pA" target="_blank" rel="sponsored nofollow noopener" aria-label="밀본 니제르 젤리 M 쿠팡에서 보기 (새 탭)">쿠팡에서 보기 ↗</a>
-            </div>
-          </article>
+          <a class="picks-card picks-card--story" href="picks/niger-m.html">
+            <img src="assets/img/picks/niger_m_after.jpg" alt="밀본 니제르 젤리 M로 마무리한 머리" width="640" height="640" loading="lazy">
+            <span class="picks-tag">HOLY PERM</span>
+            <h3>펌은 했는데, 집에서 말리면 그 컬이 안 나온다면?</h3>
+            <p>밀본 니제르 젤리 M</p>
+            <span class="picks-more">전후 보고 사용법 확인 →</span>
+          </a>
         </li>
         <li>
-          <article class="picks-card">
-            <h3>밀본 니제르 젤리 S</h3>
-            <p>가일컷·다운펌 손질에 쓴 가벼운 젤리</p>
-            <div class="picks-card__actions">
-              <a class="picks-video" href="https://youtu.be/ysKXT6aETbc?t=241" target="_blank" rel="noopener" aria-label="밀본 니제르 젤리 S 나온 영상 (새 탭)">나온 영상 ↗</a>
-              <a class="btn btn--fill" href="https://link.coupang.com/a/hJXU0OGMj6" target="_blank" rel="sponsored nofollow noopener" aria-label="밀본 니제르 젤리 S 쿠팡에서 보기 (새 탭)">쿠팡에서 보기 ↗</a>
-            </div>
-          </article>
+          <a class="picks-card picks-card--story" href="picks/niger-s.html">
+            <img src="assets/img/picks/niger_s_after.jpg" alt="밀본 니제르 젤리 S로 마무리한 머리" width="640" height="640" loading="lazy">
+            <span class="picks-tag">GAIL CUT · DOWN PERM</span>
+            <h3>가르마 머리, 매일 아침 새로 만들고 있다면?</h3>
+            <p>밀본 니제르 젤리 S</p>
+            <span class="picks-more">전후 보고 사용법 확인 →</span>
+          </a>
         </li>
         <li>
-          <article class="picks-card">
-            <h3>다슈 데일리 볼륨업 컬크림</h3>
-            <p>스왈로펌 컬을 정리한 컬크림</p>
-            <div class="picks-card__actions">
-              <a class="picks-video" href="https://youtu.be/SFsD1VkyXIk?t=305" target="_blank" rel="noopener" aria-label="다슈 데일리 볼륨업 컬크림 나온 영상 (새 탭)">나온 영상 ↗</a>
-              <a class="btn btn--fill" href="https://link.coupang.com/a/hJWtOMcgdE" target="_blank" rel="sponsored nofollow noopener" aria-label="다슈 데일리 볼륨업 컬크림 쿠팡에서 보기 (새 탭)">쿠팡에서 보기 ↗</a>
-            </div>
-          </article>
+          <a class="picks-card picks-card--story" href="picks/dashu-curl.html">
+            <img src="assets/img/picks/dashu_curl_after.jpg" alt="다슈 데일리 볼륨업 컬크림로 마무리한 머리" width="640" height="640" loading="lazy">
+            <span class="picks-tag">SWALLOW PERM</span>
+            <h3>숱 많은 직모, 펌하면 더 부해질까 걱정이라면?</h3>
+            <p>다슈 데일리 볼륨업 컬크림</p>
+            <span class="picks-more">전후 보고 사용법 확인 →</span>
+          </a>
         </li>
       </ul>
     </section>
@@ -175,38 +181,27 @@
     <section class="picks-category" aria-labelledby="picks-category-3">
       <div class="picks-category__head">
         <p class="eyebrow">03</p>
-        <h2 id="picks-category-3">왁스·포마드</h2>
+        <h2 id="picks-category-3">무스</h2>
+        <p class="picks-category__sub">가볍고 간단하게</p>
       </div>
       <ul class="picks-grid">
         <li>
-          <article class="picks-card">
-            <h3>데미 우에보 디자인 큐브 홀드 왁스</h3>
-            <p>짧은머리 결을 세우는 왁스</p>
-            <div class="picks-card__actions">
-              <a class="picks-video" href="https://youtu.be/K_z_PnX5i0Y?t=192" target="_blank" rel="noopener" aria-label="데미 우에보 디자인 큐브 홀드 왁스 나온 영상 (새 탭)">나온 영상 ↗</a>
-              <a class="btn btn--fill" href="https://link.coupang.com/a/hJWqEf6gYm" target="_blank" rel="sponsored nofollow noopener" aria-label="데미 우에보 디자인 큐브 홀드 왁스 쿠팡에서 보기 (새 탭)">쿠팡에서 보기 ↗</a>
-            </div>
-          </article>
+          <a class="picks-card picks-card--story" href="picks/eimi-mousse.html">
+            <img src="assets/img/picks/eimi_after.jpg" alt="웰라 아이미 컬 크래프트 왁스 무스로 마무리한 머리" width="640" height="640" loading="lazy">
+            <span class="picks-tag">VOLUME MAGIC</span>
+            <h3>볼륨매직하면 머리가 착 달라붙을까 걱정이라면?</h3>
+            <p>웰라 아이미 컬 크래프트 왁스 무스</p>
+            <span class="picks-more">전후 보고 사용법 확인 →</span>
+          </a>
         </li>
         <li>
-          <article class="picks-card">
-            <h3>쿨그리스 블루</h3>
-            <p>촉촉한 웨트 질감의 워터 왁스</p>
-            <div class="picks-card__actions">
-              <a class="picks-video" href="https://youtu.be/GXn2P8XuyPU?t=239" target="_blank" rel="noopener" aria-label="쿨그리스 블루 나온 영상 (새 탭)">나온 영상 ↗</a>
-              <a class="btn btn--fill" href="https://link.coupang.com/a/hJWxEw8z6q" target="_blank" rel="sponsored nofollow noopener" aria-label="쿨그리스 블루 쿠팡에서 보기 (새 탭)">쿠팡에서 보기 ↗</a>
-            </div>
-          </article>
-        </li>
-        <li>
-          <article class="picks-card">
-            <h3>수아베시토 포마드</h3>
-            <p>단정한 광택 스타일용 포마드</p>
-            <div class="picks-card__actions">
-              <a class="picks-video" href="https://youtu.be/K_z_PnX5i0Y?t=212" target="_blank" rel="noopener" aria-label="수아베시토 포마드 나온 영상 (새 탭)">나온 영상 ↗</a>
-              <a class="btn btn--fill" href="https://link.coupang.com/a/hJWp5kuaAu" target="_blank" rel="sponsored nofollow noopener" aria-label="수아베시토 포마드 쿠팡에서 보기 (새 탭)">쿠팡에서 보기 ↗</a>
-            </div>
-          </article>
+          <a class="picks-card picks-card--story" href="picks/uevo-foam.html">
+            <img src="assets/img/picks/foam_after.jpg" alt="데미 우에보 디자인팟 컬메이크 폼로 마무리한 머리" width="640" height="640" loading="lazy">
+            <span class="picks-tag">SHADOW PERM</span>
+            <h3>연예인 사진을 보여주면 똑같이 나올까 요?</h3>
+            <p>데미 우에보 디자인팟 컬메이크 폼</p>
+            <span class="picks-more">전후 보고 사용법 확인 →</span>
+          </a>
         </li>
       </ul>
     </section>
@@ -214,28 +209,27 @@
     <section class="picks-category" aria-labelledby="picks-category-4">
       <div class="picks-category__head">
         <p class="eyebrow">04</p>
-        <h2 id="picks-category-4">젤</h2>
+        <h2 id="picks-category-4">왁스·포마드</h2>
+        <p class="picks-category__sub">질감과 수분감</p>
       </div>
       <ul class="picks-grid">
         <li>
-          <article class="picks-card">
-            <h3>어반트라이브 07.8 락앤샤인</h3>
-            <p>고정력과 윤기를 함께 주는 젤</p>
-            <div class="picks-card__actions">
-              <a class="picks-video" href="https://youtu.be/DlG-e44d1FI?t=451" target="_blank" rel="noopener" aria-label="어반트라이브 07.8 락앤샤인 나온 영상 (새 탭)">나온 영상 ↗</a>
-              <a class="btn btn--fill" href="https://link.coupang.com/a/hJWv0BXe1Y" target="_blank" rel="sponsored nofollow noopener" aria-label="어반트라이브 07.8 락앤샤인 쿠팡에서 보기 (새 탭)">쿠팡에서 보기 ↗</a>
-            </div>
-          </article>
+          <a class="picks-card picks-card--story" href="picks/coolgrease.html">
+            <img src="assets/img/picks/cool_after.jpg" alt="쿨그리스 블루로 마무리한 머리" width="640" height="640" loading="lazy">
+            <span class="picks-tag">TEXTURE CUT</span>
+            <h3>제품만 바르면 떡지는 머리 라면?</h3>
+            <p>쿨그리스 블루</p>
+            <span class="picks-more">전후 보고 사용법 확인 →</span>
+          </a>
         </li>
         <li>
-          <article class="picks-card">
-            <h3>갸스비 슈퍼하드 스타일링 젤</h3>
-            <p>강한 고정이 필요할 때 쓴 젤</p>
-            <div class="picks-card__actions">
-              <a class="picks-video" href="https://youtu.be/8iPsY0m1FsA?t=193" target="_blank" rel="noopener" aria-label="갸스비 슈퍼하드 스타일링 젤 나온 영상 (새 탭)">나온 영상 ↗</a>
-              <a class="btn btn--fill" href="https://link.coupang.com/a/hJWngikoHA" target="_blank" rel="sponsored nofollow noopener" aria-label="갸스비 슈퍼하드 스타일링 젤 쿠팡에서 보기 (새 탭)">쿠팡에서 보기 ↗</a>
-            </div>
-          </article>
+          <a class="picks-card picks-card--story" href="picks/suavecito.html">
+            <img src="assets/img/picks/suave_after.jpg" alt="수아베시토 포마드로 마무리한 머리" width="640" height="640" loading="lazy">
+            <span class="picks-tag">SHORT COMMA</span>
+            <h3>짧은 머리, 내리기만 하면 밋밋해 보인다면?</h3>
+            <p>수아베시토 포마드</p>
+            <span class="picks-more">전후 보고 사용법 확인 →</span>
+          </a>
         </li>
       </ul>
     </section>
@@ -243,28 +237,27 @@
     <section class="picks-category" aria-labelledby="picks-category-5">
       <div class="picks-category__head">
         <p class="eyebrow">05</p>
-        <h2 id="picks-category-5">무스</h2>
+        <h2 id="picks-category-5">젤</h2>
+        <p class="picks-category__sub">고정력과 윤기</p>
       </div>
       <ul class="picks-grid">
         <li>
-          <article class="picks-card">
-            <h3>웰라 아이미 컬 크래프트 왁스 무스</h3>
-            <p>자연스러운 컬과 볼륨을 잡는 왁스 무스</p>
-            <div class="picks-card__actions">
-              <a class="picks-video" href="https://youtu.be/A19ej_miJL8?t=400" target="_blank" rel="noopener" aria-label="웰라 아이미 컬 크래프트 왁스 무스 나온 영상 (새 탭)">나온 영상 ↗</a>
-              <a class="btn btn--fill" href="https://link.coupang.com/a/hJWvHRqeFE" target="_blank" rel="sponsored nofollow noopener" aria-label="웰라 아이미 컬 크래프트 왁스 무스 쿠팡에서 보기 (새 탭)">쿠팡에서 보기 ↗</a>
-            </div>
-          </article>
+          <a class="picks-card picks-card--story" href="picks/urbantribe.html">
+            <img src="assets/img/picks/urban_after.jpg" alt="어반트라이브 07.8 락앤샤인로 마무리한 머리" width="640" height="640" loading="lazy">
+            <span class="picks-tag">VOLUME MAGIC</span>
+            <h3>짧은 반곱슬, 드라이를 오래 해야만 넘어간다고요?</h3>
+            <p>어반트라이브 07.8 락앤샤인</p>
+            <span class="picks-more">전후 보고 사용법 확인 →</span>
+          </a>
         </li>
         <li>
-          <article class="picks-card">
-            <h3>데미 우에보 디자인팟 컬메이크 폼</h3>
-            <p>펌 컬을 가볍게 살리는 폼</p>
-            <div class="picks-card__actions">
-              <a class="picks-video" href="https://youtu.be/PQ_Q-pQt_vg?t=608" target="_blank" rel="noopener" aria-label="데미 우에보 디자인팟 컬메이크 폼 나온 영상 (새 탭)">나온 영상 ↗</a>
-              <a class="btn btn--fill" href="https://link.coupang.com/a/hJWxV8V9qe" target="_blank" rel="sponsored nofollow noopener" aria-label="데미 우에보 디자인팟 컬메이크 폼 쿠팡에서 보기 (새 탭)">쿠팡에서 보기 ↗</a>
-            </div>
-          </article>
+          <a class="picks-card picks-card--story" href="picks/gatsby.html">
+            <img src="assets/img/picks/gatsby_after.jpg" alt="갸스비 슈퍼하드 스타일링 젤로 마무리한 머리" width="640" height="640" loading="lazy">
+            <span class="picks-tag">SPIN SWALLOW</span>
+            <h3>스핀스왈로 질감, 펌을 해야만 날까요?</h3>
+            <p>갸스비 슈퍼하드 스타일링 젤</p>
+            <span class="picks-more">전후 보고 사용법 확인 →</span>
+          </a>
         </li>
       </ul>
     </section>
@@ -272,37 +265,27 @@
     <section class="picks-category" aria-labelledby="picks-category-6">
       <div class="picks-category__head">
         <p class="eyebrow">06</p>
-        <h2 id="picks-category-6">스프레이</h2>
+        <h2 id="picks-category-6">스프레이·도구</h2>
+        <p class="picks-category__sub">형태를 잡고 고정</p>
       </div>
       <ul class="picks-grid">
         <li>
-          <article class="picks-card">
-            <h3>밀본 니제르 홀드핏 베일 스프레이</h3>
-            <p>드라이 후 형태를 고정한 스프레이</p>
-            <div class="picks-card__actions">
-              <a class="picks-video" href="https://youtu.be/CMdVoHuvCZM?t=531" target="_blank" rel="noopener" aria-label="밀본 니제르 홀드핏 베일 스프레이 나온 영상 (새 탭)">나온 영상 ↗</a>
-              <a class="btn btn--fill" href="https://link.coupang.com/a/hJXVjHJGj6" target="_blank" rel="sponsored nofollow noopener" aria-label="밀본 니제르 홀드핏 베일 스프레이 쿠팡에서 보기 (새 탭)">쿠팡에서 보기 ↗</a>
-            </div>
-          </article>
+          <a class="picks-card picks-card--story" href="picks/niger-spray.html">
+            <img src="assets/img/picks/comma_after.jpg" alt="밀본 니제르 홀드핏 베일 스프레이로 마무리한 머리" width="640" height="640" loading="lazy">
+            <span class="picks-tag">COMMA HAIR</span>
+            <h3>쉼표 앞머리에 스프레이를 바로 뿌리고 있다면?</h3>
+            <p>밀본 니제르 홀드핏 베일 스프레이</p>
+            <span class="picks-more">전후 보고 사용법 확인 →</span>
+          </a>
         </li>
-      </ul>
-    </section>
-
-    <section class="picks-category" aria-labelledby="picks-category-7">
-      <div class="picks-category__head">
-        <p class="eyebrow">07</p>
-        <h2 id="picks-category-7">도구</h2>
-      </div>
-      <ul class="picks-grid">
         <li>
-          <article class="picks-card">
-            <h3>유닉스 에어샷 T 드라이어</h3>
-            <p>드라이만으로 스타일링할 때 쓴 드라이어</p>
-            <div class="picks-card__actions">
-              <a class="picks-video" href="https://youtu.be/CMdVoHuvCZM?t=16" target="_blank" rel="noopener" aria-label="유닉스 에어샷 T 드라이어 나온 영상 (새 탭)">나온 영상 ↗</a>
-              <a class="btn btn--fill" href="https://link.coupang.com/a/hJXVB7eM1I" target="_blank" rel="sponsored nofollow noopener" aria-label="유닉스 에어샷 T 드라이어 쿠팡에서 보기 (새 탭)">쿠팡에서 보기 ↗</a>
-            </div>
-          </article>
+          <a class="picks-card picks-card--story" href="picks/unix-dryer.html">
+            <img src="assets/img/picks/comma_after.jpg" alt="유닉스 에어샷 T 드라이어로 마무리한 머리" width="640" height="640" loading="lazy">
+            <span class="picks-tag">COMMA HAIR</span>
+            <h3>쉼표머리, 고데기·롤빗 없이는 안 될까요?</h3>
+            <p>유닉스 에어샷 T 드라이어</p>
+            <span class="picks-more">전후 보고 사용법 확인 →</span>
+          </a>
         </li>
       </ul>
     </section>
