@@ -40,9 +40,9 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="assets/logo/symbol_black.png">
-<link rel="preload" as="image" href="assets/img/hero-finish.jpg" fetchpriority="high">
+<link rel="preload" as="image" href="assets/home-film/hero-poster.jpg" fetchpriority="high">
 <link rel="stylesheet" href="assets/css/style.css?v=release20261001">
-<link rel="stylesheet" href="assets/css/home-core-rotation.css?v=photo20261001r2">
+<link rel="stylesheet" href="assets/css/home-core-rotation.css?v=motion20261018b">
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-F9YTZ0XVML"></script>
 <script>
@@ -65,7 +65,7 @@
 <link rel="stylesheet" href="assets/css/readability-accents.css?v=clarity20261001r2">
 <link rel="stylesheet" href="assets/css/compare-highlights.css?v=photo20261001r2">
 <link rel="stylesheet" href="assets/css/editorial-navigation.css?v=brand20261002">
-<link rel="stylesheet" href="assets/css/verified-reviews.css?v=focus20261002">
+<link rel="stylesheet" href="assets/css/verified-reviews.css?v=motion20261018b">
 <link rel="stylesheet" href="assets/css/consultation-details.css?v=observe20261002">
 <link rel="stylesheet" href="assets/css/consultation-experience.css?v=reason20261010">
 <link rel="stylesheet" href="assets/css/consultation-lab.css?v=detail20261002">
@@ -76,6 +76,7 @@
 <link rel="stylesheet" href="assets/css/unassigned-booking.css?v=20261004">
 <link rel="stylesheet" href="assets/css/mobile-compact.css?v=20261009c">
 <link rel="stylesheet" href="assets/css/home-retouch.css?v=20261018">
+<link rel="stylesheet" href="assets/home-film/home-film.css?v=20261018">
 </head>
 <body class="home-consult home-cinema customer-journey product-story">
 <a class="skip-link" href="#main">본문으로 바로가기</a>
@@ -105,9 +106,10 @@
     <h1 id="hero-title">요즘 머리, <em>나한테도 어울릴까요?</em></h1>
     <p class="hx-hero__line">트렌드는 그대로, 얼굴·두상·모질과 평소 손질 습관에 맞게 다듬고 집에서 손질하는 법까지 알려드립니다.</p>
   </div>
-  <figure class="hx-hero__photo">
-    <img src="assets/img/hero-finish.jpg" alt="토르소에서 시술한 완성 모습. 텍스처컷과 다운펌" width="1080" height="1080" fetchpriority="high" decoding="async">
-    <figcaption>토르소 실제 시술 · 텍스처컷 + 다운펌 완성</figcaption>
+  <figure class="hx-hero__photo hx-hero__film">
+    <video id="hero-style-film" src="assets/home-film/hero-style-film.mp4" poster="assets/home-film/hero-poster.jpg" width="720" height="720" muted loop playsinline preload="metadata" controls aria-label="토르소 실제 시술 완성 스타일 모음 영상"></video>
+    <button class="home-film-toggle" type="button" aria-controls="hero-style-film" hidden>영상 재생</button>
+    <figcaption>토르소 실제 시술 · 나에게 맞는 다양한 완성 스타일</figcaption>
   </figure>
   <div class="hx-hero__actions">
     <a class="hx-btn hx-btn--fill" href="https://booking.naver.com/booking/13/bizes/242540" target="_blank" rel="noopener">네이버 예약 <span aria-hidden="true">↗</span></a>
@@ -350,9 +352,9 @@
  <div class="j-heading consulting-film film-surface"><video class="cinema-video" data-bg-film data-mobile-src="assets/video/editorial-jo.mp4" data-desktop-src="assets/video/editorial-jo-wide.mp4" data-mobile-poster="assets/img/editorial-jo.jpg" data-desktop-poster="assets/img/editorial-jo-wide.jpg" poster="assets/img/editorial-jo-wide.jpg" muted loop playsinline webkit-playsinline preload="none" aria-hidden="true"></video><div class="cinema-scrim" aria-hidden="true"></div><div class="consulting-film__copy"><p class="j-kicker">04 / THE TORSO WAY</p><h2>상담에서 찾은 방향을,<br>시술과 손질로 이어갑니다.</h2><p>고객님께 맞춘 테크닉과 그 이유를 설명하고,<br>평소 생활에서 이어갈 손질법까지 함께 알려드립니다.</p></div></div>
 
  <p class="swipe-hint" aria-hidden="true">옆으로 넘겨 보기 →</p><div class="j-process-grid">
-  <article><video data-lazy-src="assets/video/process/consult.mp4" autoplay muted loop playsinline preload="none" controls aria-label="토르소 실제 상담 과정"></video><span class="j-step">01 / 듣고 살피기</span><h3>고객님을 먼저 이해합니다.</h3><p>얼굴형과 두상·모질, 원하는 이미지를 살핍니다. 전체적인 균형과 라이프스타일도 함께 고려합니다. 평소 손질이 어려운 점과 습관, 손질에 쓸 수 있는 시간을 먼저 확인합니다.</p></article>
-  <article><video data-lazy-src="assets/video/process/design.mp4?v=web20261009" poster="assets/img/process_design.webp?v=4k20261001" autoplay muted loop playsinline preload="none" controls aria-label="거울 앞 디자인 상담 과정"></video><span class="j-step">02 / 나에게 맞춘 테크닉</span><h3>지금의 테크닉, 고객님께 맞게.</h3><p>같은 기술도 모질과 원하는 인상에 맞춰 다르게 적용합니다. 지금 어떤 과정을 진행하는지, 이 테크닉으로 어떤 변화가 생기는지 시술 중간중간 설명해드립니다.</p></article>
-  <article><video data-lazy-src="assets/video/process/finish.mp4?v=web20261009" poster="assets/img/process_finish.webp?v=4k20261001" autoplay muted loop playsinline preload="none" controls aria-label="마무리 스타일링 안내 과정"></video><span class="j-step">03 / 집에서 이어가기</span><h3>내 생활에 맞는 손질법을 알려드립니다.</h3><p>처음 확인한 고객님의 라이프스타일과 손질 눈높이에 맞춰, 집에서 따라 할 수 있는 드라이 방향과 제품 사용 방법을 알려드립니다.</p></article>
+  <article><video data-lazy-src="assets/home-film/consult-framed.mp4" poster="assets/home-film/consult-poster.jpg" muted loop playsinline preload="none" controls aria-label="토르소 실제 상담 과정"></video><span class="j-step">01 / 듣고 살피기</span><h3>고객님을 먼저 이해합니다.</h3><p>얼굴형과 두상·모질, 원하는 이미지를 살핍니다. 전체적인 균형과 라이프스타일도 함께 고려합니다. 평소 손질이 어려운 점과 습관, 손질에 쓸 수 있는 시간을 먼저 확인합니다.</p></article>
+  <article><video data-lazy-src="assets/home-film/design-framed.mp4" poster="assets/home-film/design-poster.jpg" muted loop playsinline preload="none" controls aria-label="토르소 실제 디자인 과정"></video><span class="j-step">02 / 나에게 맞춘 테크닉</span><h3>지금의 테크닉, 고객님께 맞게.</h3><p>같은 기술도 모질과 원하는 인상에 맞춰 다르게 적용합니다. 지금 어떤 과정을 진행하는지, 이 테크닉으로 어떤 변화가 생기는지 시술 중간중간 설명해드립니다.</p></article>
+  <article><video data-lazy-src="assets/home-film/finish-framed.mp4" poster="assets/home-film/finish-poster.jpg" muted loop playsinline preload="none" controls aria-label="토르소 완성 스타일과 손질 안내 과정"></video><span class="j-step">03 / 집에서 이어가기</span><h3>내 생활에 맞는 손질법을 알려드립니다.</h3><p>처음 확인한 고객님의 라이프스타일과 손질 눈높이에 맞춰, 집에서 따라 할 수 있는 드라이 방향과 제품 사용 방법을 알려드립니다.</p></article>
  </div><details class="journey-more"><summary>옷차림과 라이프스타일도 함께 살펴보나요?<span aria-hidden="true">+</span></summary><div class="consult-questions__grid">
 <details class="consult-question" id="consult-style" name="consultation-questions"><summary>원하는 스타일이 있어도, 아직 몰라도 괜찮을까요?<span aria-hidden="true">+</span></summary><p>원하는 스타일이 있다면 고객님의 분위기와 얼굴·두상, 모질에 맞게 조정합니다. 아직 정하지 못했다면 평소 취향과 불편한 점부터 듣고, 어울리는 방향을 이유와 함께 제안합니다.</p></details>
 <details class="consult-question" id="consult-work" name="consultation-questions"><summary>평소 생활과 손질 습관에도 맞춰주나요?<span aria-hidden="true">+</span></summary><p>평소 원하는 이미지와 아침 손질에 쓸 수 있는 시간을 먼저 여쭙습니다. 단정한 모습이 좋은지, 개성을 더 표현하고 싶은지에 따라 길이·볼륨·질감과 손질 방법을 함께 제안합니다.</p></details>
@@ -442,17 +444,18 @@
     </div>
   </div>
 </footer><script src="assets/js/october-offer.js?v=firstvisit20261011"></script>
-<script src="assets/js/main.js?v=firstvisit20261011"></script><script src="assets/js/style-fit-captions.js?v=evening20261001"></script><script src="assets/js/style-fit-ui.js?v=designer20261008"></script><script src="assets/js/home-core-rotation.js?v=photo20261018"></script><script src="assets/js/home-process-framing.js?v=autoplay20261001"></script>
+<script src="assets/js/main.js?v=motion20261018"></script><script src="assets/js/style-fit-captions.js?v=evening20261001"></script><script src="assets/js/style-fit-ui.js?v=designer20261008"></script><script src="assets/js/home-core-rotation.js?v=motion20261018b"></script><script src="assets/js/home-process-framing.js?v=motion20261018"></script>
 <script src="assets/js/home-designer-rotation.js?v=designer20261018"></script>
 <script src="assets/js/background-film.js?v=journey20261001"></script>
 <script src="assets/js/brand-links.js?v=talk20261002"></script>
 <script src="assets/js/product-story.js?v=motion20261001"></script>
 <script src="assets/js/compare-highlights.js?v=photo20261001r2"></script>
 <script src="assets/js/editorial-navigation.js?v=brand20261018"></script>
-<script src="assets/js/verified-reviews.js?v=focus20261002"></script>
+<script src="assets/js/verified-reviews.js?v=motion20261018b"></script>
 <script src="assets/js/consultation-lab.js?v=real20261002"></script>
 <script src="assets/js/consultation-experience.js?v=reason20261010"></script>
 <script src="assets/js/style-check.js?v=20261003"></script>
-<script>(function(){var v=[].slice.call(document.querySelectorAll("video[data-lazy-src]"));function go(x){if(!x.dataset.lazySrc)return;x.src=x.dataset.lazySrc;delete x.dataset.lazySrc;x.muted=true;var p=x.play();if(p&&p.catch)p.catch(function(){});}if(!("IntersectionObserver" in window)){v.forEach(go);return;}var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){go(e.target);io.unobserve(e.target);}});},{rootMargin:"300px 0px"});v.forEach(function(x){io.observe(x);});})();</script>
+<script>(function(){var v=[].slice.call(document.querySelectorAll("video[data-lazy-src]"));function go(x){if(!x.dataset.lazySrc)return;x.src=x.dataset.lazySrc;delete x.dataset.lazySrc;x.muted=true;x.load();}if(!("IntersectionObserver" in window)){v.forEach(go);return;}var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){go(e.target);io.unobserve(e.target);}});},{rootMargin:"300px 0px"});v.forEach(function(x){io.observe(x);});})();</script>
 <script>(function(){function o(){var h=location.hash&&document.querySelector(location.hash);if(!h)return;var d=h.closest&&h.closest("details.hx-fold");if(d)d.open=true;}window.addEventListener("hashchange",o);o();document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("a[href^=\"#\"]");if(!a)return;var h=document.querySelector(a.getAttribute("href"));var d=h&&h.closest("details.hx-fold");if(d)d.open=true;});})();</script>
+<script src="assets/home-film/home-film.js?v=20261018"></script>
 </body></html>
