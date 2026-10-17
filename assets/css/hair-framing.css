@@ -1,0 +1,14 @@
+/* Original-photo framing: shared across recommendations and gallery.
+   Per-photo values describe source-space composition. No raster edits or AI fill. */
+.hair-frame{position:relative;display:block;width:100%;aspect-ratio:1/1;overflow:hidden;background:#e5e2da;isolation:isolate}
+.hair-frame img,.picks-card--story .hair-frame img,.thumb .hair-frame img{position:absolute;inset:auto;left:var(--hair-left,0%);top:var(--hair-top,0%);width:var(--hair-width,100%);max-width:none;height:auto;aspect-ratio:1/1;object-fit:contain;display:block;margin:0;transform:none;filter:none}
+.picks-card--story .hair-frame{margin-bottom:16px}
+/* Square sources stay square. Labels and the comparison indicator never cover hair. */
+.thumb{gap:8px;background:transparent;overflow:visible;border-radius:0;align-items:start}
+.thumb figure,.thumb.one figure{aspect-ratio:auto;overflow:visible}
+.thumb .hair-frame{border-radius:6px}
+.thumb figcaption{position:static;padding:8px 2px 0;background:none;font-family:inherit;font-size:12px;font-weight:600;letter-spacing:.04em;line-height:1.4}
+.thumb .arrow{display:none}
+/* Override legacy per-pair zooms; the original frame is the upper zoom limit. */
+.rev--ba .gallery-compare .hair-picture{background:#e5e2da}
+.rev--ba .gallery-compare .hair-picture img,.rev--ba .gallery-compare.is-enhanced .hair-picture img{position:absolute;inset:auto;left:var(--hair-left,0%);top:var(--hair-top,0%);width:var(--hair-width,100%);max-width:none;height:auto;aspect-ratio:1/1;object-fit:contain;transform:none;filter:none}
