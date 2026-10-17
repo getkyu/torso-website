@@ -1,0 +1,63 @@
+/* 2026-10-18 홈 리터치: 첫 화면 완성작 + 예약 입구, 모바일 길이 축소 */
+.hx-hero{max-width:1120px;margin:0 auto;padding:calc(var(--nav-h,64px) + 28px) 20px 8px;display:grid;gap:18px}
+.hx-kicker{font-size:11px;letter-spacing:.2em;color:var(--mut);font-weight:600}
+.hx-hero h1{font-size:clamp(30px,8.2vw,56px);line-height:1.22;letter-spacing:-.045em;margin-top:10px}
+.hx-hero h1 em{font-style:normal;display:block}
+.hx-hero__line{margin-top:14px;font-size:15px;line-height:1.75;color:var(--ink-soft);max-width:560px}
+.hx-hero__photo{margin:0;position:relative;background:#e4e2dc;border-radius:6px;overflow:hidden}
+.hx-hero__photo img{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover}
+.hx-hero__photo figcaption{position:absolute;left:0;right:0;bottom:0;padding:26px 14px 12px;color:#fff;font-size:12px;letter-spacing:.02em;background:linear-gradient(transparent,rgba(0,0,0,.55))}
+.hx-hero__actions{display:grid;grid-template-columns:1.25fr 1fr;gap:10px}
+.hx-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:50px;padding:0 16px;border:1px solid var(--ink);color:var(--ink);background:transparent;font-size:15px;font-weight:600;text-decoration:none;border-radius:2px}
+.hx-btn--fill{background:var(--ink);color:#fff}
+.hx-btn:focus-visible,.hx-anchors a:focus-visible,.hx-fold>summary:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.hx-hero .unassigned-hero-link{margin:0}
+.hx-anchors{max-width:1120px;margin:6px auto 0;padding:10px 20px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.hx-anchors::-webkit-scrollbar{display:none}
+.hx-anchors a{flex:0 0 auto;min-height:40px;display:inline-flex;align-items:center;padding:0 16px;border:1px solid var(--line);border-radius:999px;font-size:14px;color:var(--ink-soft);text-decoration:none;background:rgba(255,255,255,.6)}
+.hx-fold{max-width:1120px;margin:0 auto;padding:0 20px}
+.hx-fold>summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:1fr auto;gap:2px 12px;align-items:center;padding:18px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);min-height:64px}
+.hx-fold>summary::-webkit-details-marker{display:none}
+.hx-fold__t{font-size:18px;font-weight:700;letter-spacing:-.03em}
+.hx-fold__s{grid-column:1;font-size:13px;color:var(--mut)}
+.hx-fold>summary i{grid-row:1/3;grid-column:2;width:28px;height:28px;border:1px solid var(--line);border-radius:50%;position:relative}
+.hx-fold>summary i::before,.hx-fold>summary i::after{content:"";position:absolute;left:50%;top:50%;width:10px;height:1.5px;background:var(--ink);transform:translate(-50%,-50%)}
+.hx-fold>summary i::after{transform:translate(-50%,-50%) rotate(90deg);transition:.2s}
+.hx-fold[open]>summary i::after{transform:translate(-50%,-50%) rotate(0)}
+.hx-fold[open]>summary{margin-bottom:8px}
+.hx-fold>section{margin-left:-20px;margin-right:-20px}
+/* 항상 보이는 예약 도크 */
+.consult-dock{transform:none!important;visibility:visible!important}
+.consult-dock>a{min-height:46px;display:inline-flex;align-items:center;font-size:14px;padding:0 20px}
+@media(max-width:700px){
+  body.home-consult{padding-bottom:calc(76px + env(safe-area-inset-bottom))}
+  .consult-dock{padding:10px 16px calc(10px + env(safe-area-inset-bottom))}
+  .j-case-grid,.verified-reviews__grid{display:flex!important;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 4px 10px;-webkit-overflow-scrolling:touch}
+  .j-case-grid>.j-case,.verified-reviews__grid>.review-deck{flex:0 0 84%;scroll-snap-align:start;min-width:0}
+  .j-case__body p{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+  .j-section{padding-top:44px!important;padding-bottom:36px!important}
+  .j-heading p:not(.j-kicker){font-size:14px}
+  .foot{padding:32px 0 24px!important}
+  .foot__top{gap:22px!important;padding-bottom:20px!important}
+  .foot__cols{gap:18px!important;flex-direction:column}
+  .foot__col h4{margin-bottom:8px!important}
+  .foot__col a,.foot__col span{display:inline-block!important;margin:0 14px 6px 0!important;font-size:13px!important}
+}
+@media(min-width:900px){
+  .hx-hero{grid-template-columns:1fr 1fr;gap:28px 56px;align-items:center;padding-top:calc(var(--nav-h,72px) + 56px)}
+  .hx-hero__copy{grid-column:1;grid-row:1}.hx-hero__actions{grid-column:1;grid-row:2;align-self:start;max-width:420px}
+  .hx-hero__photo{grid-column:2;grid-row:1/4;max-width:560px;justify-self:end}
+  .hx-hero .unassigned-hero-link{grid-column:1;grid-row:3}
+  .consult-dock{display:none!important}
+}
+@media(prefers-reduced-motion:reduce){.hx-fold>summary i::after{transition:none}}
+.hx-more{margin:14px 0}.hx-more>summary{cursor:pointer;min-height:44px;display:flex;align-items:center;font-weight:600;border-bottom:1px solid var(--line)}
+@media(max-width:700px){
+  .j-core-grid,.j-process-grid,.designer-puzzle{display:flex!important;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 4px 10px;-webkit-overflow-scrolling:touch}
+  .j-core-grid>a,.j-process-grid>article,.designer-puzzle>.journey-designer{flex:0 0 78%;scroll-snap-align:start;min-width:0}
+  .j-core-grid p.j-core-note{display:none}
+  .consulting-film{min-height:0!important}
+  .j-closing{min-height:0!important;padding:40px 20px!important}
+  .j-closing video,.dongo-closing-credit{display:none}
+  .j-faq{padding-top:24px!important}
+}
