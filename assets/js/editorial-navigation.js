@@ -32,9 +32,9 @@
   document.querySelectorAll('a[href="philosophy.html"]').forEach(function (link) {
     if (link.textContent.trim() !== '브랜드 철학') return;
     link.classList.add('philosophy-wordmark');
-    link.setAttribute('aria-label', 'TORSO for MEN 철학');
+    link.setAttribute('aria-label', "TORSO MEN'S HAIR 철학");
     link.textContent = '';
-    [['torso', ''], ['for', 'for MEN'], ['label', '철학']].forEach(function (part) {
+    [['torso', ''], ['for', "MEN'S HAIR"], ['label', '철학']].forEach(function (part) {
       var span = document.createElement('span');
       span.className = 'philosophy-wordmark__' + part[0];
       span.setAttribute('aria-hidden', 'true');

@@ -72,7 +72,7 @@ function show(c,index){
   if(token!==c.token)return;
   if(!canRun(c)){stop(c);return;}
   clearTimeout(c.loadTimer);c.failures=0;c.abortRetries=0;c.gestureRetried=false;c.wrap.classList.add('has-active');
-  c.wrap.style.setProperty('--core-background','url("assets/img/core-previews/'+key.replace('.mp4','.jpg')+'")');
+  c.wrap.style.setProperty('--core-background','url("/assets/img/core-previews/'+key.replace('.mp4','.jpg')+'")');
   frameVideo(v,key);v.classList.remove('is-loading');v.classList.add('is-visible');
   c.fadeTimer=setTimeout(function(){if(token===c.token)c.hold.classList.remove('is-visible');},700);
   c.label.hidden=key!=='s1-2_02.mp4';c.label.textContent=c.label.hidden?'':'시술 전';
