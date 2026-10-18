@@ -63,3 +63,14 @@
  min-width:0;max-width:none;min-height:0;max-height:none;aspect-ratio:auto;
  left:var(--review-left,0%);top:var(--review-top,0%);object-fit:initial;margin:0;
 }
+
+/* Mobile Safari: paint only the active review, without nested paint containment.
+   Keep each photograph and its quotation together, including during auto rotation. */
+@media(max-width:760px){
+ #reviews .verified-reviews__grid,#reviews .review-deck{contain:none!important}
+ #reviews .review-deck__stage{display:block;isolation:auto}
+ #reviews .review-deck--ready .verified-review{display:none;visibility:visible;opacity:1;transition:none}
+ #reviews .review-deck--ready .verified-review.is-active{display:flex}
+ #reviews .verified-review__media{display:block;flex:none;aspect-ratio:1;min-height:1px;isolation:auto}
+ #reviews .review-deck__toggle{max-width:240px}
+}

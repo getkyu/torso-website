@@ -1,4 +1,4 @@
-// Preserve the full original frame so the designer and client remain visible together.
+// Client-focused edited clips retain the full hairstyle.
 // The source clips have different camera framing; no face or missing scene is generated.
 (function () {
   var mobile = window.matchMedia('(max-width:700px)');
@@ -16,8 +16,8 @@
     bar.appendChild(toggle);
     frame.insertAdjacentElement('afterend', bar);
     function updateButton() {
-      bar.hidden = mobile.matches;
-      toggle.hidden = mobile.matches;
+      bar.hidden = false;
+      toggle.hidden = false;
       toggle.textContent = video.dataset.autoplayBlocked === 'true' ? '▶ 영상 재생하기' : video.paused ? '▶ 재생하기' : 'Ⅱ 멈춰 보기';
       toggle.setAttribute('aria-pressed', String(video.paused));
       toggle.setAttribute('aria-label', video.getAttribute('aria-label') + (video.paused ? ' 재생하기' : ' 멈춰 보기'));
