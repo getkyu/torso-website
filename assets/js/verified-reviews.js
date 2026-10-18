@@ -81,7 +81,7 @@
     if (state.toggle) {
       state.toggle.disabled = total < 2 || reduced.matches;
       state.toggle.setAttribute('aria-pressed', String(!state.userPaused && !reduced.matches && total > 1));
-      state.toggle.textContent = reduced.matches || total < 2 ? '자동 넘김 꺼짐' : state.userPaused ? '자동 넘김 켜기' : '자동 넘김 끄기';
+      state.toggle.textContent = reduced.matches || total < 2 ? '자동 넘김 꺼짐' : state.userPaused ? '자동 넘김 재생' : '자동 넘김 중 · 일시정지';
       state.toggle.setAttribute('aria-label', '후기 ' + state.toggle.textContent);
     }
     [state.previous, state.next].forEach(function (button) { if (button) button.disabled = total < 2; });
@@ -137,7 +137,13 @@
       var ready = await reviewReady(state, candidate);
       if (request !== state.request) return;
       if (!manual && !canRotate(state)) break;
-      if (ready) { activate(state, candidate, manual); break; }
+      if (ready) {
+        var images=Array.from(state.slides[candidate].querySelectorAll('.verified-review__media img'));
+        await Promise.all(images.map(function(image){return image.decode ? image.decode().catch(function(){}) : Promise.resolve();}));
+        if(request!==state.request)return;
+        if(!manual&&!canRotate(state))break;
+        activate(state, candidate, manual); break;
+      }
       candidate = (candidate + step + state.slides.length) % state.slides.length;
     }
     if (request !== state.request) return;
@@ -183,6 +189,10 @@
     slides.forEach(function (slide, index) {
       slide.setAttribute('role', 'group');
       slide.setAttribute('aria-label', (index + 1) + ' / ' + slides.length + '번째 후기');
+      slide.querySelectorAll('.verified-review__media img').forEach(function(image){
+        // Safari may defer lazy images inside clipped, inactive cards indefinitely.
+        image.loading='eager';image.decoding='async';
+      });
       slide.querySelectorAll('video').forEach(function (video) {
         video.muted = true; video.defaultMuted = true; video.playsInline = true; video.loop = true;
         video.setAttribute('muted', ''); video.setAttribute('playsinline', '');
@@ -212,7 +222,11 @@
     });
     deck.addEventListener('mouseenter', function () { if (hover.matches) { state.hovered = true; state.explicitRun = false; sync(state); } });
     deck.addEventListener('mouseleave', function () { state.hovered = false; sync(state); });
-    deck.addEventListener('focusin', function () { state.focused = true; state.explicitRun = false; sync(state); });
+    deck.addEventListener('focusin', function (event) {
+      // Touch taps must not permanently stop the automatic slideshow.
+      state.focused = !!(event.target.matches && event.target.matches(':focus-visible'));
+      if (state.focused) state.explicitRun = false; sync(state);
+    });
     deck.addEventListener('focusout', function (event) {
       if (event.relatedTarget && deck.contains(event.relatedTarget)) return;
       state.focused = false; sync(state);

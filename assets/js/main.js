@@ -1064,7 +1064,7 @@ document.querySelectorAll('a[href]').forEach(a => {
   var mobile = window.matchMedia('(max-width:700px)');
   var visible = new Set(), pending = new WeakSet(), gestureRetried = new WeakSet();
   function allowed(video) {
-    return visible.has(video) && !document.hidden && (mobile.matches || video.dataset.userPaused !== 'true') && (mobile.matches || !reduced.matches || video.dataset.motionAllowed === 'true');
+    return visible.has(video) && !document.hidden && video.dataset.userPaused !== 'true' && (!reduced.matches || video.dataset.motionAllowed === 'true');
   }
   function silence(video) {
     video.muted = true; video.defaultMuted = true; video.playsInline = true;
